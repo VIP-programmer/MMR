@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 
 import com.example.mmr.R;
 
+import java.util.Date;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link HomeFragment#newInstance} factory method to
@@ -33,6 +35,7 @@ public class HomeFragment extends Fragment {
     // my variables
 
     private OnlineMeds onlineMeds;
+    private Notes notes;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -73,9 +76,19 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         // Lookup the recyclerview in activity layout
         RecyclerView rvMeds = (RecyclerView) view.findViewById(R.id.online_med_list);
+        RecyclerView rvNotes = (RecyclerView) view.findViewById(R.id.note_list);
 
         // Initialize contacts
         onlineMeds = new OnlineMeds();
+        notes =new Notes();
+        notes.addNote(new Notes.Note("Title","Dr Ahmed","this is note this is notethis is note this is note",1,new Date()));
+        notes.addNote(new Notes.Note("Title","Dr Ahmed","this is note this is notethis is note this is note",1,new Date()));
+        notes.addNote(new Notes.Note("Title","Dr Ahmed","this is note this is notethis is note this is note",1,new Date()));
+        notes.addNote(new Notes.Note("Title","Dr Ahmed","this is note this is notethis is note this is note",1,new Date()));
+        notes.addNote(new Notes.Note("Title","Dr Ahmed","this is note this is notethis is note this is note",1,new Date()));
+        notes.addNote(new Notes.Note("Title","Dr Ahmed","this is note this is notethis is note this is note",1,new Date()));
+        notes.addNote(new Notes.Note("Title","Dr Ahmed","this is note this is notethis is note this is note",1,new Date()));
+        notes.addNote(new Notes.Note("Title","Dr Ahmed","this is note this is notethis is note this is note",1,new Date()));
         onlineMeds.addOnlineMed(new OnlineMeds.OnlineMed(BitmapFactory.decodeResource(getContext().getResources(), R.drawable.profileholder),true));
         onlineMeds.addOnlineMed(new OnlineMeds.OnlineMed(BitmapFactory.decodeResource(getContext().getResources(), R.drawable.profileholder),true));
         onlineMeds.addOnlineMed(new OnlineMeds.OnlineMed(BitmapFactory.decodeResource(getContext().getResources(), R.drawable.profileholder),true));
@@ -86,13 +99,16 @@ public class HomeFragment extends Fragment {
         onlineMeds.addOnlineMed(new OnlineMeds.OnlineMed(BitmapFactory.decodeResource(getContext().getResources(), R.drawable.profileholder),true));
         onlineMeds.addOnlineMed(new OnlineMeds.OnlineMed(BitmapFactory.decodeResource(getContext().getResources(), R.drawable.profileholder),true));
         // Create adapter passing in the sample user data
-        OnlineMedListAdapter adapter = new OnlineMedListAdapter(onlineMeds.getMedList());
+        OnlineMedListAdapter medListAdapter = new OnlineMedListAdapter(onlineMeds.getMedList());
+        NoteListAdapter noteListAdapter = new NoteListAdapter(notes.getNotes());
         // Attach the adapter to the recyclerview to populate items
-        rvMeds.setAdapter(adapter);
+        rvMeds.setAdapter(medListAdapter);
+        rvNotes.setAdapter(noteListAdapter);
         // Set layout manager to position the items
         LinearLayoutManager linearLayout=new LinearLayoutManager(getContext());
         linearLayout.setOrientation(RecyclerView.HORIZONTAL);
         rvMeds.setLayoutManager(linearLayout);
+        rvNotes.setLayoutManager(new LinearLayoutManager(getContext()));
         return view;
     }
 }
