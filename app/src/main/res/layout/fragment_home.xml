@@ -8,7 +8,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".patient.Home">
+        tools:context=".patient.Home"
+        android:background="@android:color/white"
+        >
     <RelativeLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
