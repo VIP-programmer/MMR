@@ -1,14 +1,19 @@
 package com.example.mmr.patient;
 
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mmr.R;
+
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +30,7 @@ public class CalendarFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private int mParam1;
     private String mParam2;
+    private Meetings meetings;
 
     public CalendarFragment() {
         // Required empty public constructor
@@ -61,6 +67,27 @@ public class CalendarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_calendar, container, false);
+        View view = inflater.inflate(R.layout.fragment_calendar, container, false);
+        // Lookup the recyclerview in activity layout
+        RecyclerView rvMeets = (RecyclerView) view.findViewById(R.id.rend_list);
+        // Initialize data
+        meetings = new Meetings();
+        meetings.addmeeting(new Meetings.Meeting(BitmapFactory.decodeResource(getContext().getResources(),R.drawable.profileholder),new Date(),"This is a meeting for your interest","Dr. Ahmed"));
+        meetings.addmeeting(new Meetings.Meeting(BitmapFactory.decodeResource(getContext().getResources(),R.drawable.profileholder),new Date(),"This is a meeting for your interest","Dr. Ahmed"));
+        meetings.addmeeting(new Meetings.Meeting(BitmapFactory.decodeResource(getContext().getResources(),R.drawable.profileholder),new Date(),"This is a meeting for your interest","Dr. Ahmed"));
+        meetings.addmeeting(new Meetings.Meeting(BitmapFactory.decodeResource(getContext().getResources(),R.drawable.profileholder),new Date(),"This is a meeting for your interest","Dr. Ahmed"));
+        meetings.addmeeting(new Meetings.Meeting(BitmapFactory.decodeResource(getContext().getResources(),R.drawable.profileholder),new Date(),"This is a meeting for your interest","Dr. Ahmed"));
+        meetings.addmeeting(new Meetings.Meeting(BitmapFactory.decodeResource(getContext().getResources(),R.drawable.profileholder),new Date(),"This is a meeting for your interest","Dr. Ahmed"));
+        meetings.addmeeting(new Meetings.Meeting(BitmapFactory.decodeResource(getContext().getResources(),R.drawable.profileholder),new Date(),"This is a meeting for your interest","Dr. Ahmed"));
+        meetings.addmeeting(new Meetings.Meeting(BitmapFactory.decodeResource(getContext().getResources(),R.drawable.profileholder),new Date(),"This is a meeting for your interest","Dr. Ahmed"));
+        meetings.addmeeting(new Meetings.Meeting(BitmapFactory.decodeResource(getContext().getResources(),R.drawable.profileholder),new Date(),"This is a meeting for your interest","Dr. Ahmed"));
+        meetings.addmeeting(new Meetings.Meeting(BitmapFactory.decodeResource(getContext().getResources(),R.drawable.profileholder),new Date(),"This is a meeting for your interest","Dr. Ahmed"));
+        // Create adapter passing in the sample user data
+        MeetingListAdapter medListAdapter = new MeetingListAdapter(meetings.getMeeetList());
+        // Attach the adapter to the recyclerview to populate items
+        rvMeets.setAdapter(medListAdapter);
+        // Set layout manager to position the items
+        rvMeets.setLayoutManager(new LinearLayoutManager(getContext()));
+        return view;
     }
 }

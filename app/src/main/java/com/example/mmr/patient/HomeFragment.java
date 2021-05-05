@@ -78,7 +78,7 @@ public class HomeFragment extends Fragment {
         RecyclerView rvMeds = (RecyclerView) view.findViewById(R.id.online_med_list);
         RecyclerView rvNotes = (RecyclerView) view.findViewById(R.id.note_list);
 
-        // Initialize contacts
+        // Initialize data
         onlineMeds = new OnlineMeds();
         notes =new Notes();
         notes.addNote(new Notes.Note("Title","Dr Ahmed","this is note this is notethis is note this is note",1,new Date()));

@@ -10,8 +10,8 @@ public class OnlineMeds {
         medList=new Vector<>();
     }
     public OnlineMeds(Vector<OnlineMed> medList){
-        medList=new Vector<>();
-        medList.addAll(medList);
+        this.medList=new Vector<>();
+        this.medList.addAll(medList);
     }
 
     public void addOnlineMed(OnlineMed onlineMed){
