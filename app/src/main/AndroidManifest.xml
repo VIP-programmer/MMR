@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MMR">
-        <activity android:name=".patient.ProfileMed"></activity>
+        <activity android:name=".patient.ProfileMed"/>
         <activity android:name=".patient.Profile" />
         <activity android:name=".shared.SignUp" />
         <activity android:name=".shared.Login" />
