@@ -1,6 +1,7 @@
 package com.example.mmr.patient;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,6 +72,13 @@ public class OnlineMedListAdapter extends RecyclerView.Adapter<OnlineMedListAdap
 
             profileImg =  (CircleImageView) itemView.findViewById(R.id.profile_image);
             activeDot = (View) itemView.findViewById(R.id.active_dot);
+
+            profileImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    v.getContext().startActivity(new Intent(v.getContext(),ProfileMed.class));
+                }
+            });
         }
     }
 }
