@@ -11,15 +11,23 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.3"
+            android:layout_weight="0.2"
+            android:orientation="vertical"
+            android:gravity="center_horizontal |bottom"
             >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.1"
+                />
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_img"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
                 android:src="@drawable/profileholder"
                 app:civ_border_color="@color/blank"
                 app:civ_border_width="5dp"
@@ -44,12 +52,10 @@
                 android:layout_height="wrap_content"
                 android:text="DAHMAN iliass"
                 android:fontFamily="@font/fredoka"
-                android:textSize="30dp"
+                android:textSize="25dp"
                 android:textColor="@android:color/black"
-                android:layout_alignParentBottom="true"
-                android:layout_centerInParent="true"
                 />
-        </RelativeLayout>
+        </LinearLayout>
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"

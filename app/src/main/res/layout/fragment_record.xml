@@ -4,23 +4,75 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".patient.ProfileFragment">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.2"
-        />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.8"
-        android:background="@drawable/back_login"
-        android:backgroundTint="@android:color/holo_blue_dark"
-        />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:id="@+id/rend_add_to_cal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vos enrigestrement"
+                android:textColor="#a30000"
+                android:fontFamily="@font/lusitana_bold"
+                android:background="@android:color/transparent"
+                android:textSize="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.9"
+            android:orientation="vertical"
+            >
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:elevation="10dp"
+                    android:layout_margin="10dp"
+                    android:foreground="@drawable/record_item_shape"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="20dp"
+                    >
+
+                    <ImageView
+                        android:id="@+id/background_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="170dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/bg_profile_doc"
+                        />
+
+                    <TextView
+                        android:id="@+id/percent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="string"
+                        android:textColor="@android:color/black"
+                        android:textSize="17sp"
+                        android:background="@drawable/active_dot"
+                        android:paddingHorizontal="15dp"
+                        android:paddingVertical="5dp"
+                        android:backgroundTint="@color/white"
+                        />
+
+                </RelativeLayout>
+            </ScrollView>
+        </LinearLayout>
     </LinearLayout>
 </FrameLayout>
