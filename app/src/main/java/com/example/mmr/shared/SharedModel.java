@@ -114,9 +114,10 @@ public class SharedModel {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                if (error instanceof NetworkError)
+                if (error instanceof NetworkError) {
+                    Log.d("TAG", "onErrorResponse: " + error.getMessage());
                     callBack.onErr("Impoussible de se connecter");
-                else if (error instanceof VolleyError)
+                }else if (error instanceof VolleyError)
                     callBack.onErr("Une erreur s'est produite");
 
             }
