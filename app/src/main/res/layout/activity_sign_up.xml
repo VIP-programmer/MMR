@@ -5,19 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingHorizontal="10dp"
     tools:context=".patient.SignUp">
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        >
      <TextView
-         android:layout_width="match_parent"
+         android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:text="CIN            :"
-         android:textSize="20sp"
+         android:text="CIN:"
+         android:textSize="15sp"
          android:fontFamily="@font/lusitana_bold"
          android:textColor="@color/black"
-         android:layout_marginTop="10dp"
+         android:layout_centerVertical="true"
        />
     <EditText
         android:id="@+id/cin"
@@ -28,22 +31,24 @@
         android:textColor="@android:color/white"
         android:textSize="15sp"
         android:padding="15dp"
-        android:layout_margin="15dp"
+        android:layout_alignParentRight="true"
         />
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="15dp"
+        >
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="NOM         :"
-            android:textSize="20sp"
+            android:text="NOM:"
+            android:textSize="15sp"
             android:fontFamily="@font/lusitana_bold"
             android:textColor="@color/black"
-            android:layout_marginTop="10dp"
             />
         <EditText
             android:id="@+id/nom"
@@ -54,21 +59,21 @@
             android:textColor="@android:color/white"
             android:textSize="15sp"
             android:padding="15dp"
-            android:layout_margin="15dp"
             />
     </LinearLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="15dp">
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PRENOM :"
-            android:textSize="20sp"
+            android:text="PRENOM:"
+            android:textSize="15sp"
             android:fontFamily="@font/lusitana_bold"
             android:textColor="@color/black"
-            android:layout_marginTop="10dp"
             />
         <EditText
             android:id="@+id/prenom"
@@ -79,7 +84,6 @@
             android:textColor="@android:color/white"
             android:textSize="15sp"
             android:padding="15dp"
-            android:layout_margin="15dp"
             />
     </LinearLayout>
     <EditText
