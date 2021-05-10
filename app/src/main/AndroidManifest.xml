@@ -13,7 +13,7 @@
         <activity android:name=".patient.Map"></activity>
         <activity android:name=".patient.ProfileMed" />
         <activity android:name=".patient.Profile" />
-        <activity android:name=".shared.SignUp" />
+        <activity android:name=".patient.SignUp" />
         <activity android:name=".shared.Login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

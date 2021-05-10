@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.example.mmr.R;
 import com.example.mmr.patient.Home;
+import com.example.mmr.patient.SignUp;
 
 public class Login extends AppCompatActivity {
     Button login;
@@ -28,7 +29,7 @@ public class Login extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),SignUp.class));
+                startActivity(new Intent(getApplicationContext(), SignUp.class));
             }
         });
     }
