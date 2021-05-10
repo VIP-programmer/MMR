@@ -19,7 +19,7 @@
             android:layout_height="0dp"
             android:layout_weight="0.35"
             android:orientation="vertical"
-           >
+            >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -51,7 +51,7 @@
             android:layout_weight="0.5"
             android:orientation="vertical"
             android:foreground="@drawable/bg_body_shape"
-           >
+            >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -119,10 +119,7 @@
                     android:background="#199"
                     />
             </LinearLayout>
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                />
+
         </RelativeLayout>
     </LinearLayout>
     <LinearLayout
@@ -135,7 +132,16 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.35"
-            />
+            android:padding="25dp"
+            >
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/doctors_image"
+
+                />
+
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -154,32 +160,62 @@
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
                 android:paddingHorizontal="15dp"
+                android:layout_margin="15dp"
                 />
             <EditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:hint="password"
                 android:inputType="textPassword"
+                android:background="@drawable/active_dot"
+                android:backgroundTint="@android:color/darker_gray"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:padding="15dp"
+                android:layout_margin="15dp"
                 />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 >
                 <android.widget.Button
                     android:id="@+id/submit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Valider"
+                    android:background="@drawable/active_dot"
+                    android:backgroundTint="@color/white"
+                    android:textAllCaps="false"
+                    android:textSize="20sp"
+                    android:paddingHorizontal="30dp"
                     />
-                <android.widget.Button
-                    android:id="@+id/sign_up"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    >
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Créer un compte"
+                    android:text="Vous n'avez pas de compte? "
+                    android:textSize="14dp"
+                    android:fontFamily="@font/lusitana_regular"
                     />
+                <TextView
+                    android:id="@+id/register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Registre "
+                    android:textSize="15dp"
+                    android:fontFamily="@font/lusitana_bold"
+                    android:textColor="@color/white"
+                    />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
