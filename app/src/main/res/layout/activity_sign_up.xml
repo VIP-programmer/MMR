@@ -6,26 +6,82 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".patient.SignUp">
-
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+     <TextView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:text="CIN            :"
+         android:textSize="20sp"
+         android:fontFamily="@font/lusitana_bold"
+         android:textColor="@color/black"
+         android:layout_marginTop="10dp"
+       />
     <EditText
         android:id="@+id/cin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="CIN"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:background="@drawable/active_dot"
+        android:backgroundTint="@android:color/darker_gray"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"
+        android:padding="15dp"
+        android:layout_margin="15dp"
         />
+    </LinearLayout>
 
-    <EditText
-        android:id="@+id/nom"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="nom"
-        />
-    <EditText
-        android:id="@+id/prenom"
-        android:layout_width="match_parent"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="NOM         :"
+            android:textSize="20sp"
+            android:fontFamily="@font/lusitana_bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            />
+        <EditText
+            android:id="@+id/nom"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:background="@drawable/active_dot"
+            android:backgroundTint="@android:color/darker_gray"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"
+            android:padding="15dp"
+            android:layout_margin="15dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="prenom"
-        />
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PRENOM :"
+            android:textSize="20sp"
+            android:fontFamily="@font/lusitana_bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            />
+        <EditText
+            android:id="@+id/prenom"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:background="@drawable/active_dot"
+            android:backgroundTint="@android:color/darker_gray"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"
+            android:padding="15dp"
+            android:layout_margin="15dp"
+            />
+    </LinearLayout>
     <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"
