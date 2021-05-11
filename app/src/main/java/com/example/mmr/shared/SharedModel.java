@@ -50,15 +50,9 @@ public class SharedModel {
                     if (!error){
                         Patient patient=new Patient();
                         patient.setCin(json.getString("cin"));
-                        patient.setAdresse(json.getString("adresse"));
-                        patient.setEmail(json.getString("email"));
                         patient.setNom(json.getString("nom"));
                         patient.setPrenom(json.getString("prenom"));
                         patient.setPhoto(json.getString("photo"));
-                        patient.setTele(json.getString("tele"));
-                        patient.setVille(json.getString("ville"));
-                        patient.setAge(json.getInt("age"));
-                        patient.setGender((char)json.get("gender"));
                         callBack.onSuccess(patient);
                     }else{
                         Log.i("tagconvertstr", "["+response+"]");

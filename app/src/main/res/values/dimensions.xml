@@ -2,5 +2,5 @@
 <resources>
     <dimen name="bg_shape_raduis">100dp</dimen>
     <dimen name="reg_edit_text">15dp</dimen>
-    <dimen name="width_edit_text">200dp</dimen>
+    <dimen name="width_edit_text">250dp</dimen>
 </resources>
