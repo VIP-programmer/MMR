@@ -14,4 +14,10 @@
         <item>AB-</item>
         <item>AB+</item>
     </string-array>
+    <string-array name="assurance">
+        <item>RIEN</item>
+        <item>RAMED</item>
+        <item>CNSS</item>
+        <item>CNOPS</item>
+    </string-array>
 </resources>

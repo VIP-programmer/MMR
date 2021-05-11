@@ -1,4 +1,4 @@
-package com.example.mmr.shared;
+package com.example.mmr.patient;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,9 +12,7 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.example.mmr.R;
 import com.example.mmr.VolleySingleton;
-import com.example.mmr.patient.Home;
-import com.example.mmr.patient.Patient;
-import com.example.mmr.patient.SignUp;
+import com.example.mmr.shared.SharedModel;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.example.mmr.shared;
+package com.example.mmr.patient;
 
 import android.content.Context;
 import android.content.SharedPreferences;

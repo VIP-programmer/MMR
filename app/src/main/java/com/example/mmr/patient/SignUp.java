@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -15,7 +14,6 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.example.mmr.R;
 import com.example.mmr.VolleySingleton;
-import com.example.mmr.shared.Login;
 import com.example.mmr.shared.SharedModel;
 
 import java.util.HashMap;
