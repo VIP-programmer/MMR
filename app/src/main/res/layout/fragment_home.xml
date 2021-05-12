@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".patient.HomeFragment">
 
     <LinearLayout
@@ -17,22 +18,39 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
-        android:background="@drawable/header_welcome"
-        android:paddingHorizontal="30dp"
         >
+        <com.rishabhharit.roundedimageview.RoundedImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/layout_bg"
+            android:scaleType="fitXY"
+            app:cornerRadius="30dp"
+            app:roundedCorners="bottomRight|bottomLeft"
+            />
+        <!--
+        <com.rishabhharit.roundedimageview.RoundedImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/layout_bg"
+            android:scaleType="centerCrop"
+            app:cornerRadius="20dp"
+            app:roundedCorners="bottomLeft|bottomRight"
+            />
+            -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
             >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Welcome"
+                android:text="Bienvenu"
                 android:fontFamily="@font/fredoka"
                 android:textSize="30dp"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="@color/gray_dark"
 
                 />
             <TextView
@@ -44,7 +62,7 @@
                 android:text="DAHMAN iliass"
                 android:fontFamily="@font/fredoka"
                 android:textSize="20dp"
-                android:textColor="@android:color/black"
+                android:textColor="@color/blue_dark"
                 />
         </LinearLayout>
         <de.hdodenhof.circleimageview.CircleImageView
@@ -53,9 +71,10 @@
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:src="@drawable/profileholder"
-            app:civ_border_width="2dp"
+            app:civ_border_width="5dp"
             android:layout_alignParentEnd="true"
-            app:civ_border_color="#FF000000"
+            app:civ_border_color="@color/blue_dark"
+            android:layout_marginRight="15dp"
             android:layout_centerVertical="true"/>
     </RelativeLayout>
         <LinearLayout
