@@ -12,8 +12,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.mmr.Config;
+import com.example.mmr.medic.Medcin;
+import com.example.mmr.patient.Notes;
+import com.example.mmr.patient.OnlineMeds;
 import com.example.mmr.patient.Patient;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,6 +25,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Vector;
 
 public class SharedModel {
     private Context context;
@@ -34,6 +39,10 @@ public class SharedModel {
         void onSuccess(Patient patient);
         void onErr(String message);
     }
+    public interface LoadHomeInfoCallBack{
+        void onSuccess(Vector<Object> vector);
+        void onErr(String message);
+    }
     public SharedModel(Context context, RequestQueue queue) {
         this.context = context;
         this.queue = queue;
@@ -45,6 +54,7 @@ public class SharedModel {
             @Override
             public void onResponse(String response) {
                 try {
+                    Log.i("TAG", "onResponse: "+response);
                     JSONObject json = new JSONObject(response);
                     Boolean error = json.getBoolean("error");
                     if (!error){
@@ -56,8 +66,7 @@ public class SharedModel {
                         callBack.onSuccess(patient);
                     }else{
                         Log.i("tagconvertstr", "["+response+"]");
-                        JSONObject messages = (JSONObject) json.getJSONObject("messages");
-                        callBack.onErr(messages.getString("messages"));
+                        callBack.onErr(json.getString("messages"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -91,14 +100,15 @@ public class SharedModel {
             @Override
             public void onResponse(String response) {
                 try {
+                    Log.i("TAG", "onResponse: "+response);
                     JSONObject json = new JSONObject(response);
                     Boolean error = json.getBoolean("error");
                     if (!error){
                         callBack.onSuccess("vous étes bien enregestrer !");
                     }else{
                         Log.i("tagconvertstr", "["+response+"]");
-                        JSONObject messages = (JSONObject) json.getJSONObject("messages");
-                        callBack.onErr(messages.getString("messages"));
+                        String messages = json.getString("messages");
+                        callBack.onErr(messages);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -120,6 +130,66 @@ public class SharedModel {
             protected Map<String, String> getParams() throws AuthFailureError {
 
                 return infos;
+            }
+        };
+        request.setTag("TAG");
+        queue.add(request);
+    }
+    public void getOnlineMedAndNote(String cin, LoadHomeInfoCallBack callBack){
+
+        String url = Config.URL+"/Model/patient/home_data.php";
+
+        request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    Log.i("TAG", "onResponse: "+response);
+                    Vector<Object> vector = new Vector<>();
+                    OnlineMeds medcins = new OnlineMeds();
+                    //Vector<Notes.Note> notes = new Vector<>();
+                    Notes notes = new Notes();
+                    JSONObject json = new JSONObject(response);
+                    JSONArray medsArray= json.getJSONArray("medics");
+                    JSONArray notesArray= json.getJSONArray("notes");
+                    for (int i = 0; i < medsArray.length(); i++) {
+                        medcins.addOnlineMed(new OnlineMeds.OnlineMed(medsArray.getJSONObject(i).getString("photo"),
+                                medsArray.getJSONObject(i).getString("cin"),
+                                true
+                        ));
+                    }
+                    vector.add(medcins);
+                    for (int i = 0; i < notesArray.length(); i++) {
+                        notes.addNote(new Notes.Note(notesArray.getJSONObject(i).getString("titre"),
+                                notesArray.getJSONObject(i).getString("nom")+" "+notesArray.getJSONObject(i).getString("prenom"),
+                                notesArray.getJSONObject(i).getString("courps_note"),
+                                notesArray.getJSONObject(i).getInt("priorite"),
+                                notesArray.getJSONObject(i).getString("date_note")
+                                ));
+                        //notes.add(note);
+                    }
+                    vector.add(notes);
+                    callBack.onSuccess(vector);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error instanceof NetworkError) {
+                    Log.d("TAG", "onErrorResponse: " + error.getMessage());
+                    callBack.onErr("Impoussible de se connecter");
+                }else if (error instanceof VolleyError)
+                    callBack.onErr("Une erreur s'est produite");
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map= new HashMap<String, String>();
+                map.put("cin",cin);
+                return map;
             }
         };
         request.setTag("TAG");

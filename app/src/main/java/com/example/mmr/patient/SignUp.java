@@ -29,6 +29,7 @@ public class SignUp extends AppCompatActivity {
     private EditText tele;
     private EditText ville;
     private Spinner sang;
+    private Spinner assurance;
     private RadioGroup gender;
     private EditText age;
     private EditText password;
@@ -51,6 +52,7 @@ public class SignUp extends AppCompatActivity {
         tele=findViewById(R.id.tele);
         ville=findViewById(R.id.ville);
         sang=findViewById(R.id.spinner);
+        assurance=findViewById(R.id.assurance);
         gender=findViewById(R.id.gender);
         password=findViewById(R.id.password);
         confPassword=findViewById(R.id.confirm_password);
@@ -95,6 +97,7 @@ public class SignUp extends AppCompatActivity {
                             infos.put("age",age.getText().toString());
                             infos.put("gender",convertGender(gender.getCheckedRadioButtonId()));
                             infos.put("sang",convertSang(sang.getSelectedItemPosition()));
+                            infos.put("assur",convertAssurance(assurance.getSelectedItemPosition()));
                             infos.put("email",email.getText().toString());
                             infos.put("tele",tele.getText().toString());
                             infos.put("pass",password.getText().toString());
@@ -127,6 +130,17 @@ public class SignUp extends AppCompatActivity {
             case 6:s= "O+";break;
             case 7:s= "AB-";break;
             case 8:s= "AB+";break;
+        }
+        return s;
+    }
+    //converting sang from position in spinner to a name
+    public String convertAssurance(int pos){
+        String s="";
+        switch (pos){
+            case 0:s= "RIEN";break;
+            case 1:s= "RAMED";break;
+            case 2:s= "CNSS";break;
+            case 3:s= "CNOPS";break;
         }
         return s;
     }

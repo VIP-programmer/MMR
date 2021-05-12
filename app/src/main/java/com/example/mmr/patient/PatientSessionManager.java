@@ -17,6 +17,7 @@ public class PatientSessionManager {
     private static final String NOM_PATIENT="nom_pat";
     private static final String PRENOM_PATIENT="prenom_pat";
     private static final String EMAIL_PATIENT="email_pat";
+    private static final String IMG_PATIENT="img_pat";
 
     private Context context;
     private Gson gson;
@@ -33,6 +34,7 @@ public class PatientSessionManager {
         editor.putString(NOM_PATIENT,patient.getNom());
         editor.putString(PRENOM_PATIENT,patient.getPrenom());
         editor.putString(EMAIL_PATIENT,patient.getEmail());
+        editor.putString(IMG_PATIENT,patient.getPhoto());
         editor.apply();
 
     }
@@ -50,5 +52,23 @@ public class PatientSessionManager {
         editor.clear().commit();
     }
 
+    public String getCinPatient() {
+        gson=new Gson();
+        return preferences.getString(CIN_PATIENT, "");
+    }
 
+    public String getImgPatient() {
+        gson=new Gson();
+        return preferences.getString(IMG_PATIENT, "");
+    }
+
+    public String getNomPatient() {
+        gson=new Gson();
+        return preferences.getString(NOM_PATIENT, "");
+    }
+
+    public String getPrenomPatient() {
+        gson=new Gson();
+        return preferences.getString(PRENOM_PATIENT, "");
+    }
 }

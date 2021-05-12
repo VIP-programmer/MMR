@@ -2,6 +2,7 @@ package com.example.mmr.patient;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mmr.R;
+import com.example.mmr.shared.LoadImage;
 
 import java.util.Vector;
 
@@ -18,10 +20,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class OnlineMedListAdapter extends RecyclerView.Adapter<OnlineMedListAdapter.ViewHolder> {
     // Store a member variable for the contacts
     private Vector<OnlineMeds.OnlineMed> mList;
+    Context context;
 
     // Pass in the contact array into the constructor
-    public OnlineMedListAdapter(Vector<OnlineMeds.OnlineMed> mList) {
+    public OnlineMedListAdapter(Context context,Vector<OnlineMeds.OnlineMed> mList) {
         this.mList = mList;
+        this.context = context;
     }
 
     @NonNull
@@ -45,7 +49,11 @@ public class OnlineMedListAdapter extends RecyclerView.Adapter<OnlineMedListAdap
 
         // Set item views based on your views and data model
         CircleImageView profileImg = holder.profileImg;
-        profileImg.setImageBitmap(med.getProfile());
+        if (med.getProfile().equals("local")){
+            profileImg.setImageBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.profileholder));
+        }else {
+            new LoadImage(profileImg, context).execute(med.getProfile());
+        }
         View activeDot= holder.activeDot;
         //activeDot.setBackground();
     }

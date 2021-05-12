@@ -27,9 +27,9 @@ public class Notes {
         private String author;
         private String body;
         private int priority;
-        private Date date;
+        private String date;
 
-        public Note(String title,String author, String body, int priority, Date date) {
+        public Note(String title,String author, String body, int priority, String date) {
             this.title=title;
             this.author = author;
             this.body = body;
@@ -53,12 +53,20 @@ public class Notes {
             return priority;
         }
 
-        public Date getDate() {
+        public String getDate() {
             return date;
         }
 
-        public String getDateAsString(){
-            return "";
+        public String convertPriority(){
+            String s="";
+            switch (priority){
+                case 1:s="URGENT";break;
+                case 2:s="ATTENTION";break;
+                case 3:s="INFORAMTION";break;
+            }
+            return s;
         }
+
+
     }
 }

@@ -42,8 +42,8 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.ViewHo
         Notes.Note note=mList.get(position);
         // Set item views based on your views and data model
         holder.title.setText(note.getTitle());
-        holder.date.setText(note.getDateAsString());
-        holder.priority.setText(note.getPriority()+"");
+        holder.date.setText(note.getDate());
+        holder.priority.setText(note.convertPriority());
         holder.body.setText(note.getBody());
         holder.author.setText(note.getAuthor());
     }

@@ -13,18 +13,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MMR">
-        <activity android:name=".shared.TypeUser"></activity>
-        <activity android:name=".patient.Map" />
-        <activity android:name=".patient.ProfileMed" />
-        <activity android:name=".patient.Profile" />
-        <activity android:name=".patient.SignUp" />
-        <activity android:name=".patient.Login">
+        <activity android:name=".shared.TypeUser">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".patient.Map" />
+        <activity android:name=".patient.ProfileMed" />
+        <activity android:name=".patient.Profile" />
+        <activity android:name=".patient.SignUp" />
+        <activity android:name=".patient.Login"/>
         <activity android:name=".patient.Home" />
 
         <uses-library

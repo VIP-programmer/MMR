@@ -22,6 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.mmr.R;
+import com.example.mmr.shared.SharedModel;
 import com.fxn.BubbleTabBar;
 import com.fxn.OnBubbleClickListener;
 
@@ -32,15 +33,16 @@ public class Home extends AppCompatActivity {
 
     BubbleTabBar bubbleTabBar;
     FragmentPagerAdapter adapterViewPager;
+    PatientSessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+        sessionManager=new PatientSessionManager(this);
         //loadFragment(new HomeFragment());
         ViewPager vpPager = (ViewPager) findViewById(R.id.vpPager);
-        adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
+        adapterViewPager = new MyPagerAdapter(getSupportFragmentManager(),sessionManager);
         vpPager.setAdapter(adapterViewPager);
         bubbleTabBar = (BubbleTabBar) findViewById(R.id.bubbleTabBar);
         bubbleTabBar.getChildAt(0).setActivated(true);
@@ -83,9 +85,11 @@ public class Home extends AppCompatActivity {
      */
     public static class MyPagerAdapter extends FragmentPagerAdapter {
         private static int NUM_ITEMS = 4;
+        private PatientSessionManager sessionManager;
 
-        public MyPagerAdapter(FragmentManager fragmentManager) {
+        public MyPagerAdapter(FragmentManager fragmentManager,PatientSessionManager sessionManager) {
             super(fragmentManager);
+            this.sessionManager=sessionManager;
         }
 
         // Returns total number of pages
@@ -99,7 +103,10 @@ public class Home extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0: // Fragment # 0 - This will show FirstFragment
-                    return HomeFragment.newInstance(0, "Page # 1");
+                    return HomeFragment.newInstance(sessionManager.getCinPatient(),
+                            sessionManager.getNomPatient(),
+                            sessionManager.getPrenomPatient(),
+                            sessionManager.getImgPatient());
                 case 1: // Fragment # 0 - This will show FirstFragment different title
                     return RecordFragment.newInstance(1, "Page # 2");
                 case 2: // Fragment # 1 - This will show SecondFragment

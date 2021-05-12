@@ -22,16 +22,40 @@ public class OnlineMeds {
     }
 
     public static class OnlineMed {
-        private Bitmap profile;
+        private String profile;
+        private String cin;
         private boolean isActive;
 
-        public OnlineMed(Bitmap profile, boolean isActive) {
+        public OnlineMed(String profile, String cin, boolean isActive) {
             this.profile = profile;
+            this.cin = cin;
             this.isActive = isActive;
         }
 
-        public Bitmap getProfile() {
+        public String getProfile() {
             return profile;
+        }
+
+        public String getCin() {
+            return cin;
+        }
+
+
+        public boolean isActive() {
+            return isActive;
+        }
+
+        public void setProfile(String profile) {
+            this.profile = profile;
+        }
+
+        public void setCin(String cin) {
+            this.cin = cin;
+        }
+
+
+        public void setActive(boolean active) {
+            isActive = active;
         }
     }
 }
