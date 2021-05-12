@@ -10,9 +10,27 @@ public class Medcin {
     private String tele;
     private String ville;
     private String sang;
+    private String about;
+    private String dateJoin;
     private String speciality;
     private char gender;
     private boolean isOnline;
+
+    public void setAbout(String about) {
+        this.about = about;
+    }
+
+    public void setDateJoin(String dateJoin) {
+        this.dateJoin = dateJoin;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public String getDateJoin() {
+        return dateJoin;
+    }
 
     public String getCin() {
         return cin;

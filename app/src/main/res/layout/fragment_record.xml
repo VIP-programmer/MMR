@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_simple"
     tools:context=".patient.ProfileFragment">
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Vos enrigestrement"
-                android:textColor="#a30000"
+                android:textColor="@color/blue_dark"
                 android:fontFamily="@font/lusitana_bold"
                 android:background="@android:color/transparent"
                 android:textSize="30dp"

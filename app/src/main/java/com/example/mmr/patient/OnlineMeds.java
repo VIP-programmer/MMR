@@ -24,12 +24,28 @@ public class OnlineMeds {
     public static class OnlineMed {
         private String profile;
         private String cin;
+        private String name;
         private boolean isActive;
 
         public OnlineMed(String profile, String cin, boolean isActive) {
             this.profile = profile;
             this.cin = cin;
             this.isActive = isActive;
+        }
+
+        public OnlineMed(String profile, String cin, String name, boolean isActive) {
+            this.profile = profile;
+            this.cin = cin;
+            this.name = name;
+            this.isActive = isActive;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
         }
 
         public String getProfile() {

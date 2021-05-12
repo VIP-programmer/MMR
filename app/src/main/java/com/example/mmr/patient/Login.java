@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +30,10 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //make it fullscreen
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_login);
         sessionManager=new PatientSessionManager(this);
         if (sessionManager.isLogged()){
@@ -65,6 +71,7 @@ public class Login extends AppCompatActivity {
                                 sessionManager.login();
                                 sessionManager.setPatient(patient);
                                 startActivity(new Intent(getApplicationContext(), Home.class));
+                                finish();
                             }
 
                             @Override

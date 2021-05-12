@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mmr"
-    android:usesCleartextTraffic="true">
+    android:usesCleartextTraffic="true" >
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -12,8 +12,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MMR">
-        <activity android:name=".shared.TypeUser">
+        android:theme="@style/Theme.MMR" >
+        <activity android:name=".patient.MyMedcins" >
+        </activity>
+        <activity android:name=".shared.TypeUser" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,7 +26,7 @@
         <activity android:name=".patient.ProfileMed" />
         <activity android:name=".patient.Profile" />
         <activity android:name=".patient.SignUp" />
-        <activity android:name=".patient.Login"/>
+        <activity android:name=".patient.Login" />
         <activity android:name=".patient.Home" />
 
         <uses-library

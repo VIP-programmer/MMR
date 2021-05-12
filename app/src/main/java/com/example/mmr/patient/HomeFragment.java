@@ -1,6 +1,7 @@
 package com.example.mmr.patient;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -65,6 +66,7 @@ public class HomeFragment extends Fragment {
     private TextView name;
     private CircleImageView profile;
     private RequestQueue queue;
+    private TextView more;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -107,11 +109,19 @@ public class HomeFragment extends Fragment {
         RecyclerView rvMeds = (RecyclerView) view.findViewById(R.id.online_med_list);
         RecyclerView rvNotes = (RecyclerView) view.findViewById(R.id.note_list);
         name=view.findViewById(R.id.name);
+        more=view.findViewById(R.id.more);
         profile=view.findViewById(R.id.profile_image);
         //loading profile image
         new LoadImage(profile,getActivity()).execute(img);
         queue = VolleySingleton.getInstance(getActivity()).getRequestQueue();
         name.setText(nom+" "+prenom);
+
+        more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),MyMedcins.class));
+            }
+        });
         /*
         onlineMeds = new OnlineMeds();
         notes =new Notes();

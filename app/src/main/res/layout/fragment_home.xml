@@ -80,15 +80,16 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Online medics"
+                        android:text="Vos medcins en ligne"
                         android:fontFamily="@font/lusitana_bold"
                         android:textSize="20dp"
                         android:textColor="@android:color/black"
                         />
                     <TextView
+                        android:id="@+id/more"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="more ->"
+                        android:text="plus >"
                         android:fontFamily="@font/lusitana_regular"
                         android:textSize="20dp"
                         android:textColor="@android:color/darker_gray"
@@ -103,6 +104,14 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     />
+                <TextView
+                    android:id="@+id/empty_view_med"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:fontFamily="@font/lusitana_bold"
+                    android:text="Pas d'active medcins pour le moment" />
             </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="10dp"
@@ -119,20 +128,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Your notes"
+                        android:text="Vos notes"
                         android:fontFamily="@font/lusitana_bold"
                         android:textSize="20dp"
                         android:textColor="@android:color/black"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="more ->"
-                        android:fontFamily="@font/lusitana_regular"
-                        android:textSize="20dp"
-                        android:textColor="@android:color/darker_gray"
-                        android:layout_alignParentRight="true"
-                        android:layout_gravity="right"
                         />
                 </RelativeLayout>
 
@@ -142,6 +141,15 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     />
+
+                <TextView
+                    android:id="@+id/empty_view_note"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:fontFamily="@font/lusitana_bold"
+                    android:text="Pas d'active medcins pour le moment" />
             </LinearLayout>
         </LinearLayout>
 
