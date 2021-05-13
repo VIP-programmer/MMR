@@ -1,6 +1,7 @@
 package com.example.mmr.patient;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,14 +39,40 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull NoteListAdapter.ViewHolder holder, int position) {
+
+        String shortBody;
+        String fullBody;
+        final Boolean[] isShort = {false};
         // Get the data model based on position
         Notes.Note note=mList.get(position);
         // Set item views based on your views and data model
         holder.title.setText(note.getTitle());
         holder.date.setText(note.getDate());
         holder.priority.setText(note.convertPriority());
-        holder.body.setText(note.getBody());
+        //holder.body.setText(note.getBody());
         holder.author.setText(note.getAuthor());
+        fullBody=note.getBody();
+        //adding see more
+        if(fullBody.length() > 105){
+
+            shortBody=fullBody.substring(0,106)+"...<b>Voir plus</b>";
+            holder.body.setText(Html.fromHtml(shortBody));
+            isShort[0] =true;
+            holder.body.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (isShort[0]){
+                        holder.body.setText(fullBody);
+                        isShort[0] =false;
+                    }else{
+                        holder.body.setText(Html.fromHtml(shortBody));
+                        isShort[0] =true;
+                    }
+                }
+            });
+        }else{
+            holder.body.setText(fullBody);
+        }
     }
 
     @Override
@@ -76,6 +103,8 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.ViewHo
             priority =  (TextView) itemView.findViewById(R.id.note_priority);
             body =  (TextView) itemView.findViewById(R.id.note_body);
             author =  (TextView) itemView.findViewById(R.id.note_author);
+
+
         }
     }
 }

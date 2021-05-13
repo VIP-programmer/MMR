@@ -57,7 +57,6 @@ public class HomeFragment extends Fragment {
     private String prenom;
     private String img;
     private String cin;
-    private PatientSessionManager sessionManager;
 
     // my variables
 

@@ -19,8 +19,9 @@
             android:layout_height="wrap_content"
             android:src="@drawable/medic_shoose"
             android:scaleType="centerInside"
-            android:layout_marginVertical="80dp"
+            android:layout_marginVertical="70dp"
             android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -29,9 +30,8 @@
             android:textSize="30sp"
             android:textColor="@color/gray_dark"
             android:fontFamily="@font/fredoka"
-            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
             />
 
     </RelativeLayout>
@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.02"
-        android:background="@color/blue_dark"
+        android:background="@color/blue_light"
         />
     <RelativeLayout
         android:id="@+id/patient"

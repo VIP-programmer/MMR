@@ -2,6 +2,9 @@ package com.example.mmr.patient;
 
 import android.graphics.Bitmap;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Vector;
 
@@ -23,40 +26,77 @@ public class Meetings {
     }
 
     public static class Meeting {
-        private Bitmap profile;
-        private Date date;
-        private String body;
+        private String day;
+        private String hour;
+        private int month;
+        private String year;
         private String docName;
 
-        public Meeting(Bitmap profile, Date date, String body, String docName) {
-            this.profile = profile;
-            this.date = date;
-            this.body = body;
+        public Meeting(String date, String hour, String docName) {
+            day=extractDay(date);
+            month=extractMonth(date);
+            year = extractYear(date);
+            this.hour = hour;
             this.docName = docName;
         }
 
-        public Bitmap getProfile() {
-            return profile;
+        private String extractYear(String date) {
+            return date.substring(0,4);
         }
 
-        public Date getDate() {
-            return date;
+        private int extractMonth(String date) {
+            return Integer.parseInt(date.substring(5,7));
         }
-
-        public String getBody() {
-            return body;
+        private String extractDay(String date){
+            return date.substring(8);
         }
-
         public String getDocName() {
             return docName;
         }
 
-        public String getDayOfMeeting(){
-            return "Wed";
+        public int getDayOfMeeting(){
+            return Integer.parseInt(day);
         }
 
-        public String getHourOfMeeting(){
-            return "09:00";
+        public int getHourOfMeeting(){
+            return Integer.parseInt(hour.substring(0,2));
+        }
+        public int getMinuteOfMeeting(){
+            return Integer.parseInt(hour.substring(3));
+        }
+
+        public String getMonthName() {
+            String s="";
+            switch (month){
+                case 1:s="Janvier";break;
+                case 2:s="Février";break;
+                case 3:s="Mars";break;
+                case 4:s="Avril";break;
+                case 5:s="Mai";break;
+                case 6:s="Juin";break;
+                case 7:s="Juillet";break;
+                case 8:s="Août";break;
+                case 9:s="Septembre";break;
+                case 10:s="Octobre";break;
+                case 11:s="Novembre";break;
+                case 12:s="Décembre";break;
+            }
+            return s;
+        }
+        public int getMonth() {
+            return (month);
+        }
+
+        public int getYear() {
+            return Integer.parseInt(year);
+        }
+
+        public String getDay() {
+            return day;
+        }
+
+        public String getHour() {
+            return hour;
         }
     }
 }

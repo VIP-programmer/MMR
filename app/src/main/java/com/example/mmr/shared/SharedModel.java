@@ -13,6 +13,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.mmr.Config;
 import com.example.mmr.medic.Medcin;
+import com.example.mmr.patient.Meetings;
 import com.example.mmr.patient.Notes;
 import com.example.mmr.patient.OnlineMeds;
 import com.example.mmr.patient.Patient;
@@ -262,11 +263,12 @@ public class SharedModel {
                     medcin.setAdresse(json.getString("adresse"));
                     medcin.setEmail(json.getString("email"));
                     medcin.setPhoto(json.getString("photo"));
-                    medcin.setSpeciality(json.getString(""));
                     medcin.setTele(json.getString("tele"));
                     medcin.setSpeciality(json.getString("intitule_spec"));
                     medcin.setAbout(json.getString("about"));
                     medcin.setDateJoin(json.getString("date_sing_in"));
+                    medcin.setNbPatients(json.getString("nb"));
+                    medcin.setOnline(json.getInt("is_active") == 1);
                     vector.add(medcin);
                     callBack.onSuccess(vector);
                 } catch (JSONException e) {
@@ -295,7 +297,53 @@ public class SharedModel {
         request.setTag("TAG");
         queue.add(request);
     }
+    public void getMeetings(String cin, LoadHomeInfoCallBack callBack){
 
+        String url = Config.URL+"/Model/patient/my_meets.php";
+
+        request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    Log.i("TAG", "onResponse: "+response);
+                    Vector<Object> vector = new Vector<>();
+                    Meetings meetings = new Meetings();
+                    //Vector<Notes.Note> notes = new Vector<>();
+                    JSONArray meetArray = new JSONArray(response);
+                    for (int i = 0; i < meetArray.length(); i++) {
+                        meetings.addmeeting(new Meetings.Meeting(meetArray.getJSONObject(i).getString("date_rend"),
+                                meetArray.getJSONObject(i).getString("heur"),
+                                meetArray.getJSONObject(i).getString("nom")+" "+meetArray.getJSONObject(i).getString("prenom")
+                        ));
+                    }
+                    vector.add(meetings);
+                    callBack.onSuccess(vector);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error instanceof NetworkError) {
+                    Log.d("TAG", "onErrorResponse: " + error.getMessage());
+                    callBack.onErr("Impoussible de se connecter");
+                }else if (error instanceof VolleyError)
+                    callBack.onErr("Une erreur s'est produite");
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map= new HashMap<String, String>();
+                map.put("cin",cin);
+                return map;
+            }
+        };
+        request.setTag("TAG");
+        queue.add(request);
+    }
     public void kill(){
         if (queue!=null){
             queue.cancelAll("TAG");

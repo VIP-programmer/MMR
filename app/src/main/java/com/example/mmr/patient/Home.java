@@ -115,7 +115,7 @@ public class Home extends AppCompatActivity {
                 case 1: // Fragment # 0 - This will show FirstFragment different title
                     return RecordFragment.newInstance(1, "Page # 2");
                 case 2: // Fragment # 1 - This will show SecondFragment
-                    return CalendarFragment.newInstance(2, "Page # 3");
+                    return CalendarFragment.newInstance(2, sessionManager.getCinPatient());
                 default:
                     return ProfileFragment.newInstance(3, "Page # 4");
             }

@@ -22,6 +22,7 @@ public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.ViewHold
     // Store a member variable for the contacts
     private Vector<OnlineMeds.OnlineMed> mList;
     Context context;
+    String cin;
 
     // Pass in the contact array into the constructor
     public MedListAdapter(Context context, Vector<OnlineMeds.OnlineMed> mList) {
@@ -49,6 +50,7 @@ public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.ViewHold
         OnlineMeds.OnlineMed med = mList.get(position);
 
         // Set item views based on your views and data model
+        holder.cin=med.getCin();
         CircleImageView profileImg = holder.profileImg;
         if (med.getProfile().equals("local")) {
             profileImg.setImageBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.profileholder));
@@ -72,6 +74,8 @@ public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.ViewHold
         public CircleImageView profileImg;
         public TextView name;
 
+        public String cin;
+
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
         public ViewHolder(View itemView) {
@@ -85,7 +89,9 @@ public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.ViewHold
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    v.getContext().startActivity(new Intent(v.getContext(), ProfileMed.class));
+                    Intent intent=new Intent(v.getContext(), ProfileMed.class);
+                    intent.putExtra("cin",cin);
+                    v.getContext().startActivity(intent);
                 }
             });
         }

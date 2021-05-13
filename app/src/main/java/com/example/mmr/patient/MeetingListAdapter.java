@@ -1,10 +1,15 @@
 package com.example.mmr.patient;
 
 import android.content.Context;
+import android.content.Intent;
+import android.provider.CalendarContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mmr.R;
 
+import java.util.Calendar;
 import java.util.Vector;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -45,13 +51,30 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
         Meetings.Meeting med = mList.get(position);
 
         // Set item views based on your views and data model
-        CircleImageView profileImg = holder.profileImg;
-        profileImg.setImageBitmap(med.getProfile());
-        holder.hour.setText(med.getHourOfMeeting());
-        holder.day.setText(med.getDayOfMeeting());
-        holder.body.setText(med.getBody());
+        holder.hour.setText(med.getHour());
+        holder.day.setText(med.getDay());
         holder.docName.setText(med.getDocName());
+        holder.month.setText(med.getMonthName());
         //activeDot.setBackground();
+        holder.add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                cal.set(Calendar.DAY_OF_MONTH, med.getDayOfMeeting());
+                cal.set(Calendar.MONTH, med.getMonth()-1);
+                cal.set(Calendar.YEAR, med.getYear());
+                Log.i("TAG", "onClick minutes: "+med.getMinuteOfMeeting());
+                cal.set(Calendar.HOUR_OF_DAY, med.getHourOfMeeting());
+                cal.set(Calendar.MINUTE, med.getMinuteOfMeeting());
+                Intent intent= new Intent(Intent.ACTION_INSERT);
+                intent.setType("vnd.android.cursor.item/event");
+                intent.putExtra(CalendarContract.Events.TITLE, "Visite");
+                intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,cal.getTimeInMillis());
+                intent.putExtra(CalendarContract.Events.ALL_DAY, false);// periodicity
+                intent.putExtra(CalendarContract.Events.DESCRIPTION,"Visite avec Dr."+med.getDocName());
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -64,11 +87,11 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
     public class ViewHolder extends RecyclerView.ViewHolder {
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
-        public CircleImageView profileImg;
         public TextView day;
         public TextView hour;
-        public TextView body;
         public TextView docName;
+        public TextView month;
+        public ImageButton add;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -77,11 +100,11 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
             // to access the context from any ViewHolder instance.
             super(itemView);
 
-            profileImg =  (CircleImageView) itemView.findViewById(R.id.rend_doc_image);
-            body =  (TextView) itemView.findViewById(R.id.rend_body);
-            docName =  (TextView) itemView.findViewById(R.id.rend_avec);
+            docName =  (TextView) itemView.findViewById(R.id.rend_doc_name);
+            month =  (TextView) itemView.findViewById(R.id.rend_month);
             day =  (TextView) itemView.findViewById(R.id.rend_day);
             hour =  (TextView) itemView.findViewById(R.id.rend_hour);
+            add =  itemView.findViewById(R.id.rend_add_to_cal);
         }
     }
 }

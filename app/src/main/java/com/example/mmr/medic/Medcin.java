@@ -13,6 +13,16 @@ public class Medcin {
     private String about;
     private String dateJoin;
     private String speciality;
+
+    public void setNbPatients(String nbPatients) {
+        this.nbPatients = nbPatients;
+    }
+
+    public String getNbPatients() {
+        return nbPatients;
+    }
+
+    private String nbPatients;
     private char gender;
     private boolean isOnline;
 
