@@ -7,12 +7,17 @@ import android.os.AsyncTask;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.mmr.R;
+import com.example.mmr.patient.PatientSessionManager;
+
 import java.io.IOException;
 import java.io.InputStream;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class LoadImage extends AsyncTask<String,Void, Bitmap> {
+public class LoadImage {
     CircleImageView imageView;
     Context context;
     public LoadImage(CircleImageView profile,Context context) {
@@ -20,39 +25,7 @@ public class LoadImage extends AsyncTask<String,Void, Bitmap> {
         this.context=context;
     }
 
-    @Override
-    protected Bitmap doInBackground(String... strings) {
-        String urlLink=strings[0];
-        Bitmap bitmap=null;
-        try {
-            InputStream inputStream=new java.net.URL(urlLink).openStream();
-            bitmap= BitmapFactory.decodeStream(inputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return bitmap;
-    }
-
-    @Override
-    protected void onPostExecute(Bitmap bitmap) {
-        int densityDpi = context.getResources().getDisplayMetrics().densityDpi;
-        Bitmap resizedBitmap=bitmap;
-        Log.i("TAG", "Image size before: "+ resizedBitmap.getWidth()+"X"+resizedBitmap.getHeight());
-        switch(densityDpi) {
-            case DisplayMetrics.DENSITY_LOW:
-                resizedBitmap=Bitmap.createScaledBitmap(bitmap, (int)(bitmap.getWidth()*0.25), (int)(bitmap.getHeight()*0.25), true);
-                break;
-
-            case DisplayMetrics.DENSITY_MEDIUM:
-                resizedBitmap=Bitmap.createScaledBitmap(bitmap, (int)(bitmap.getWidth()*0.5), (int)(bitmap.getHeight()*0.5), true);
-                break;
-            case DisplayMetrics.DENSITY_HIGH:
-                resizedBitmap=Bitmap.createScaledBitmap(bitmap, (int)(bitmap.getWidth()*0.75), (int)(bitmap.getHeight()*0.75), true);
-                break;
-
-        }
-
-        Log.i("TAG", "Image size after: "+ resizedBitmap.getWidth()+"X"+resizedBitmap.getHeight());
-        imageView.setImageBitmap(resizedBitmap);
+   public void execute(String url){
+        Glide.with(context).load(url).diskCacheStrategy(DiskCacheStrategy.NONE).placeholder(R.drawable.profileholder).skipMemoryCache(true).into(imageView);
     }
 }

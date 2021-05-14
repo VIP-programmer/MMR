@@ -18,6 +18,7 @@ public class PatientSessionManager {
     private static final String PRENOM_PATIENT="prenom_pat";
     private static final String EMAIL_PATIENT="email_pat";
     private static final String IMG_PATIENT="img_pat";
+    private static final String IS_NEW="img_new";
 
     private Context context;
     private Gson gson;
@@ -42,6 +43,14 @@ public class PatientSessionManager {
     public void login(){
         editor.putBoolean(IS_LOGGED,true);
         editor.apply();
+    }
+    public void newImg(boolean bool){
+        editor.putBoolean(IS_NEW,bool);
+        editor.apply();
+    }
+
+    public Boolean getIsNew() {
+        return preferences.getBoolean(IS_NEW,false);
     }
 
     public boolean isLogged(){

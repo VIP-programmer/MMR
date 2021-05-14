@@ -117,7 +117,10 @@ public class Home extends AppCompatActivity {
                 case 2: // Fragment # 1 - This will show SecondFragment
                     return CalendarFragment.newInstance(2, sessionManager.getCinPatient());
                 default:
-                    return ProfileFragment.newInstance(3, "Page # 4");
+                    return ProfileFragment.newInstance(sessionManager.getCinPatient(),
+                            sessionManager.getNomPatient(),
+                            sessionManager.getPrenomPatient(),
+                            sessionManager.getImgPatient());
             }
         }
 

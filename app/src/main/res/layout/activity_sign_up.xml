@@ -325,7 +325,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:fontFamily="@font/lusitana_bold"
-                    android:text="TYPE DE SANG:"
+                    android:text="ASSURANCE:"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 

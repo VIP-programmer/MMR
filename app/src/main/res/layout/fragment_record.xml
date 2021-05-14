@@ -45,17 +45,12 @@
                     android:layout_height="100dp"
                     android:elevation="10dp"
                     android:layout_margin="10dp"
-                    android:foreground="@drawable/record_item_shape"
-                    android:paddingHorizontal="20dp"
                     android:paddingVertical="20dp"
                     >
 
-                    <ImageView
-                        android:id="@+id/background_img"
+                    <com.rishabhharit.roundedimageview.RoundedImageView
                         android:layout_width="match_parent"
-                        android:layout_height="170dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/bg_profile_doc"
+                        android:layout_height="200dp"
                         />
 
                     <TextView

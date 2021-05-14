@@ -9,7 +9,8 @@ public class Patient {
     private String photo;
     private String tele;
     private String ville;
-    private String sang;
+    private int sang;
+    private int assurance;
     private char gender;
     private int age;
 
@@ -53,7 +54,7 @@ public class Patient {
         return age;
     }
 
-    public String getSang() {
+    public int getSang() {
         return sang;
     }
 
@@ -89,7 +90,7 @@ public class Patient {
         this.ville = ville;
     }
 
-    public void setSang(String sang) {
+    public void setSang(int sang) {
         this.sang = sang;
     }
 
@@ -99,5 +100,13 @@ public class Patient {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public int getAssurance() {
+        return assurance;
+    }
+
+    public void setAssurance(int assurance) {
+        this.assurance = assurance;
     }
 }

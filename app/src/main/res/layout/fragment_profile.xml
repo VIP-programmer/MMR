@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/fragment_profile"
     android:background="@drawable/bg_simple"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".patient.ProfileFragment">
@@ -35,6 +36,7 @@
                 android:layout_centerInParent="true"
                 />
             <android.widget.Button
+                android:id="@+id/change_img"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/active_dot"
@@ -61,6 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.6"
+            android:layout_marginBottom="55dp"
             >
             <LinearLayout
                 android:layout_width="match_parent"
@@ -95,6 +98,50 @@
                         android:layout_height="wrap_content"
                         android:singleLine="true"
                         android:inputType="textEmailAddress"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:id="@+id/profile_nom"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="Nom:"
+                        android:fontFamily="@font/lusitana_bold"
+                        android:textSize="15dp"
+                        android:textColor="@android:color/black"
+                        />
+                    <EditText
+                        android:id="@+id/profile_input_nom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:inputType="text"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:id="@+id/profile_prenom"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="Prénom:"
+                        android:fontFamily="@font/lusitana_bold"
+                        android:textSize="15dp"
+                        android:textColor="@android:color/black"
+                        />
+                    <EditText
+                        android:id="@+id/profile_input_prenom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:inputType="text"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -138,9 +185,153 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
+                        android:inputType="textPostalAddress"
                         />
                 </LinearLayout>
-
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:id="@+id/profile_ville"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="Ville:"
+                        android:fontFamily="@font/lusitana_bold"
+                        android:textSize="15dp"
+                        android:textColor="@android:color/black"
+                        />
+                    <EditText
+                        android:id="@+id/profile_input_ville"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:inputType="text"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:id="@+id/profile_age"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="Age:"
+                        android:fontFamily="@font/lusitana_bold"
+                        android:textSize="15dp"
+                        android:textColor="@android:color/black"
+                        />
+                    <EditText
+                        android:id="@+id/profile_input_age"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:inputType="numberDecimal"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:id="@+id/profile_sang"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="Sang:"
+                        android:fontFamily="@font/lusitana_bold"
+                        android:textSize="15dp"
+                        android:textColor="@android:color/black"
+                        />
+                    <Spinner
+                        android:id="@+id/profile_spinner_sang"
+                        android:layout_width="@dimen/width_edit_text"
+                        android:layout_height="wrap_content"
+                        android:drawSelectorOnTop="true"
+                        android:entries="@array/sang"
+                        android:padding="12dp"
+                        android:textAlignment="center"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:id="@+id/profile_assur"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="Assurance:"
+                        android:fontFamily="@font/lusitana_bold"
+                        android:textSize="15dp"
+                        android:textColor="@android:color/black"
+                        />
+                    <Spinner
+                        android:id="@+id/profile_spinner_assur"
+                        android:layout_width="@dimen/width_edit_text"
+                        android:layout_height="wrap_content"
+                        android:drawSelectorOnTop="true"
+                        android:entries="@array/assurance"
+                        android:padding="12dp"
+                        android:textAlignment="center"
+                        />
+                </LinearLayout>
+                <CheckBox
+                    android:id="@+id/profile_edit_pass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Changer le mot de passe"
+                    />
+                <LinearLayout
+                    android:id="@+id/layout_pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:id="@+id/profile_pass"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="mot de passe:"
+                        android:fontFamily="@font/lusitana_bold"
+                        android:textSize="15dp"
+                        android:textColor="@android:color/black"
+                        />
+                    <EditText
+                        android:id="@+id/profile_input_pass"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:inputType="textPassword"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout_pass_conf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:id="@+id/profile_passconf"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="Confirmation:"
+                        android:fontFamily="@font/lusitana_bold"
+                        android:textSize="15dp"
+                        android:textColor="@android:color/black"
+                        />
+                    <EditText
+                        android:id="@+id/profile_input_passconf"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:inputType="textPassword"
+                        />
+                </LinearLayout>
 
                 <android.widget.Button
                     android:id="@+id/profile_edit_save"
@@ -149,7 +340,6 @@
                     android:text="Sauvgarder"
                     android:textAllCaps="false"
                     android:layout_gravity="center_horizontal"
-                    android:visibility="gone"
                     />
             </LinearLayout>
         </ScrollView>
