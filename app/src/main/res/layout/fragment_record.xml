@@ -29,28 +29,33 @@
                 android:layout_centerHorizontal="true"
                 />
         </RelativeLayout>
-        <LinearLayout
+
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.9"
+            >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             >
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
 
                 <RelativeLayout
+                    android:id="@+id/rec_visit"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="wrap_content"
                     android:elevation="10dp"
                     android:layout_margin="10dp"
-                    android:paddingVertical="20dp"
+                    android:background="@drawable/icon_prof_med_shape"
+                    android:backgroundTint="@color/blue_light"
                     >
 
-                    <com.rishabhharit.roundedimageview.RoundedImageView
+                    <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
+                        android:src="@drawable/visite"
+                        android:scaleType="centerCrop"
                         />
 
                     <TextView
@@ -58,17 +63,115 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="string"
+                        android:text="Les visites"
                         android:textColor="@android:color/black"
                         android:textSize="17sp"
-                        android:background="@drawable/active_dot"
+                        android:background="@drawable/text_shape"
                         android:paddingHorizontal="15dp"
                         android:paddingVertical="5dp"
+                        android:fontFamily="@font/lusitana_bold"
                         android:backgroundTint="@color/white"
                         />
 
                 </RelativeLayout>
-            </ScrollView>
-        </LinearLayout>
+                <RelativeLayout
+                    android:id="@+id/rec_analyses"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:elevation="10dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/icon_prof_med_shape"
+                    android:backgroundTint="@color/blue_light"
+                    >
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/analyse"
+                        android:scaleType="centerCrop"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="Les analyses"
+                        android:textColor="@android:color/black"
+                        android:textSize="17sp"
+                        android:background="@drawable/text_shape"
+                        android:paddingHorizontal="15dp"
+                        android:paddingVertical="5dp"
+                        android:fontFamily="@font/lusitana_bold"
+                        android:backgroundTint="@color/white"
+                        />
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/rec_medicament"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:elevation="10dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/icon_prof_med_shape"
+                    android:backgroundTint="@color/blue_light"
+                    >
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/analyse"
+                        android:scaleType="centerCrop"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="Les medicaments"
+                        android:textColor="@android:color/black"
+                        android:textSize="17sp"
+                        android:background="@drawable/text_shape"
+                        android:paddingHorizontal="15dp"
+                        android:paddingVertical="5dp"
+                        android:fontFamily="@font/lusitana_bold"
+                        android:backgroundTint="@color/white"
+                        />
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/rec_alergie"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:elevation="10dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/icon_prof_med_shape"
+                    android:backgroundTint="@color/blue_light"
+                    >
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/analyse"
+                        android:scaleType="centerCrop"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="Les alergies"
+                        android:textColor="@android:color/black"
+                        android:textSize="17sp"
+                        android:background="@drawable/text_shape"
+                        android:paddingHorizontal="15dp"
+                        android:paddingVertical="5dp"
+                        android:fontFamily="@font/lusitana_bold"
+                        android:backgroundTint="@color/white"
+                        />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+        </ScrollView>
     </LinearLayout>
 </FrameLayout>

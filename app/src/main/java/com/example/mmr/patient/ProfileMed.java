@@ -130,7 +130,9 @@ public class ProfileMed extends AppCompatActivity {
         toMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),Map.class));
+                Intent intent=new Intent(getApplicationContext(),Map.class);
+                intent.putExtra("cin",cin);
+                startActivity(intent);
             }
         });
 

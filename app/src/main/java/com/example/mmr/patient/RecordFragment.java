@@ -1,5 +1,6 @@
 package com.example.mmr.patient;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.example.mmr.R;
 
@@ -25,6 +28,10 @@ public class RecordFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private int mParam1;
     private String mParam2;
+    private RelativeLayout visites;
+    private RelativeLayout allergies;
+    private RelativeLayout medicaments;
+    private RelativeLayout analyses;
 
     public RecordFragment() {
         // Required empty public constructor
@@ -61,6 +68,35 @@ public class RecordFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_record, container, false);
+        View view= inflater.inflate(R.layout.fragment_record, container, false);
+        visites=view.findViewById(R.id.rec_visit);
+        allergies=view.findViewById(R.id.rec_alergie);
+        analyses=view.findViewById(R.id.rec_analyses);
+        medicaments=view.findViewById(R.id.rec_medicament);
+        visites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),ActivityVisite.class));
+            }
+        });
+        allergies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),ActivityAllergie.class));
+            }
+        });
+        analyses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),ActivityAnalyse.class));
+            }
+        });
+        medicaments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),ActivityMedicament.class));
+            }
+        });
+        return view;
     }
 }

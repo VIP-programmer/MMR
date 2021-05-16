@@ -11,6 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.example.mmr.R;
+import com.example.mmr.medic.MedicLogin;
+import com.example.mmr.medic.MedicMap;
 import com.example.mmr.patient.Login;
 
 public class TypeUser extends AppCompatActivity {
@@ -36,7 +38,7 @@ public class TypeUser extends AppCompatActivity {
         medcin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), Login.class));
+                startActivity(new Intent(getApplicationContext(), MedicMap.class));
                 finish();
             }
         });

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginHorizontal="5dp"
+    android:layout_marginBottom="10dp"
+    android:background="@color/white_dark"
+    >
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.02"
+        android:background="@color/blue_mid"
+        />
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_weight="0.98"
+        android:layout_height="match_parent"
+        android:paddingVertical="10dp"
+        >
+        <LinearLayout
+            android:layout_toRightOf="@+id/date_rendez_vous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:layout_centerVertical="true"
+            >
+            <TextView
+                android:id="@+id/allergie_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nom allergie"
+                android:textColor="@color/gray_dark"
+                android:fontFamily="@font/lusitana_bold"
+                android:textSize="15dp"
+                android:paddingTop="5dp"
+                />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</LinearLayout>

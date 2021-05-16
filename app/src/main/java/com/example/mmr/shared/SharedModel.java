@@ -13,10 +13,15 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.mmr.Config;
 import com.example.mmr.medic.Medcin;
+import com.example.mmr.patient.Allergie;
+import com.example.mmr.patient.Analyse;
+import com.example.mmr.patient.Medicament;
 import com.example.mmr.patient.Meetings;
 import com.example.mmr.patient.Notes;
 import com.example.mmr.patient.OnlineMeds;
 import com.example.mmr.patient.Patient;
+import com.example.mmr.patient.Positions;
+import com.example.mmr.patient.Visite;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,12 +39,21 @@ public class SharedModel {
     private Context context;
     private RequestQueue queue;
     private StringRequest request;
+
+    public void registerMedic(Map<String, String> infos, SignUpCallBack signUpCallBack) {
+
+    }
+
     public interface SignUpCallBack{
         void onSuccess(String message);
         void onErr(String message);
     }
     public interface LoginCallBack{
         void onSuccess(Patient patient);
+        void onErr(String message);
+    }
+    public interface LoginCallBackMedic{
+        void onSuccess(Medcin medcin);
         void onErr(String message);
     }
     public interface LoadHomeInfoCallBack{
@@ -50,6 +64,52 @@ public class SharedModel {
         this.context = context;
         this.queue = queue;
     }
+    public void MedicConnexion(Map<String, String> infos, LoginCallBackMedic callBack) {
+        String url = Config.URL+"/Model/patient/login.php";
+
+        request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    Log.i("TAG", "onResponse: "+response);
+                    JSONObject json = new JSONObject(response);
+                    Boolean error = json.getBoolean("error");
+                    if (!error){
+                        Medcin medcin=new Medcin();
+                        medcin.setCin(json.getString("cin"));
+                        medcin.setNom(json.getString("nom"));
+                        medcin.setPrenom(json.getString("prenom"));
+                        medcin.setPhoto(json.getString("photo"));
+                        callBack.onSuccess(medcin);
+                    }else{
+                        Log.i("tagconvertstr", "["+response+"]");
+                        callBack.onErr(json.getString("messages"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error instanceof NetworkError)
+                    callBack.onErr("Impoussible de se connecter");
+                else if (error instanceof VolleyError)
+                    callBack.onErr("Une erreur s'est produite");
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                return infos;
+            }
+        };
+        request.setTag("TAG");
+        queue.add(request);
+    }
+
     public void connexion(Map<String,String> infos, LoginCallBack callBack){
         String url = Config.URL+"/Model/patient/login.php";
 
@@ -437,6 +497,194 @@ public class SharedModel {
         request.setTag("TAG");
         queue.add(request);
     }
+    public void getVisites(String cin, LoadHomeInfoCallBack callBack){
+
+        String url = Config.URL+"/Model/patient/my_visites.php";
+
+        request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    Log.i("TAG", "onResponse: "+response);
+                    Vector<Object> vector = new Vector<>();
+                    Vector<Visite> obj = new Vector<>();
+                    //Vector<Notes.Note> notes = new Vector<>();
+                    JSONArray jsonArray = new JSONArray(response);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        obj.add(new Visite(jsonArray.getJSONObject(i).getString("nom")+" "+jsonArray.getJSONObject(i).getString("prenom"),
+                                jsonArray.getJSONObject(i).getString("date_visit")
+                        ));
+                        vector.add(obj);
+                    }
+                    callBack.onSuccess(vector);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error instanceof NetworkError) {
+                    Log.d("TAG", "onErrorResponse: " + error.getMessage());
+                    callBack.onErr("Impoussible de se connecter");
+                }else if (error instanceof VolleyError)
+                    callBack.onErr("Une erreur s'est produite");
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map= new HashMap<String, String>();
+                map.put("cin",cin);
+                return map;
+            }
+        };
+        request.setTag("TAG");
+        queue.add(request);
+    }
+    public void getAllergies(String cin, LoadHomeInfoCallBack callBack){
+
+        String url = Config.URL+"/Model/patient/my_allergies.php";
+
+        request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    Log.i("TAG", "onResponse: "+response);
+                    Vector<Object> vector = new Vector<>();
+                    Vector<Allergie> obj = new Vector<>();
+                    //Vector<Notes.Note> notes = new Vector<>();
+                    JSONArray jsonArray = new JSONArray(response);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        obj.add(new Allergie(jsonArray.getJSONObject(i).getString("intitule_allergie")));
+                        vector.add(obj);
+                    }
+                    callBack.onSuccess(vector);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error instanceof NetworkError) {
+                    Log.d("TAG", "onErrorResponse: " + error.getMessage());
+                    callBack.onErr("Impoussible de se connecter");
+                }else if (error instanceof VolleyError)
+                    callBack.onErr("Une erreur s'est produite");
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map= new HashMap<String, String>();
+                map.put("cin",cin);
+                return map;
+            }
+        };
+        request.setTag("TAG");
+        queue.add(request);
+    }
+
+    public void getAnalyses(String cin, LoadHomeInfoCallBack callBack){
+
+        String url = Config.URL+"/Model/patient/my_analyses.php";
+
+        request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    Log.i("TAG", "onResponse: "+response);
+                    Vector<Object> vector = new Vector<>();
+                    Vector<Analyse> obj = new Vector<>();
+                    //Vector<Notes.Note> notes = new Vector<>();
+                    JSONArray jsonArray = new JSONArray(response);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        obj.add(new Analyse(jsonArray.getJSONObject(i).getString("intitule_analyse"),
+                                jsonArray.getJSONObject(i).getString("date_analyse"),
+                                jsonArray.getJSONObject(i).getString("fichier")
+                                ));
+                        vector.add(obj);
+                    }
+                    callBack.onSuccess(vector);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error instanceof NetworkError) {
+                    Log.d("TAG", "onErrorResponse: " + error.getMessage());
+                    callBack.onErr("Impoussible de se connecter");
+                }else if (error instanceof VolleyError)
+                    callBack.onErr("Une erreur s'est produite");
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map= new HashMap<String, String>();
+                map.put("cin",cin);
+                return map;
+            }
+        };
+        request.setTag("TAG");
+        queue.add(request);
+    }
+    public void getMedicaments(String cin, LoadHomeInfoCallBack callBack){
+
+        String url = Config.URL+"/Model/patient/my_medicaments.php";
+
+        request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    Log.i("TAG", "onResponse: "+response);
+                    Vector<Object> vector = new Vector<>();
+                    Vector<Medicament> obj = new Vector<>();
+                    //Vector<Notes.Note> notes = new Vector<>();
+                    JSONArray jsonArray = new JSONArray(response);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        obj.add(new Medicament(jsonArray.getJSONObject(i).getString("intitule_medicament"),
+                                jsonArray.getJSONObject(i).getString("nom")+" "+jsonArray.getJSONObject(i).getString("prenom"),
+                                jsonArray.getJSONObject(i).getString("qte"),
+                                jsonArray.getJSONObject(i).getString("date_ord"),
+                                jsonArray.getJSONObject(i).getInt("durée"),
+                                jsonArray.getJSONObject(i).getString("prix")
+                                ));
+                        vector.add(obj);
+                    }
+                    callBack.onSuccess(vector);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error instanceof NetworkError) {
+                    Log.d("TAG", "onErrorResponse: " + error.getMessage());
+                    callBack.onErr("Impoussible de se connecter");
+                }else if (error instanceof VolleyError)
+                    callBack.onErr("Une erreur s'est produite");
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map= new HashMap<String, String>();
+                map.put("cin",cin);
+                return map;
+            }
+        };
+        request.setTag("TAG");
+        queue.add(request);
+    }
 
     public void UploadProfileImg(Map<String,String> infos, final SignUpCallBack callBack){
 
@@ -483,6 +731,55 @@ public class SharedModel {
 
     }
 
+    public void getPositions(String cin, LoadHomeInfoCallBack callBack){
+
+        String url = Config.URL+"/Model/patient/get_map_locations.php";
+
+        request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    Log.i("TAG", "onResponse: "+response);
+                    Vector<Object> vector = new Vector<>();
+                    //Positions positions = new Positions();
+                    JSONObject json = new JSONObject(response);
+                    JSONArray jsonArray= json.getJSONArray("tab");
+                    Positions positions = new Positions(json.getString("type"));
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        positions.addPosition(new Positions.Position(Float.parseFloat(jsonArray.getJSONObject(i).getString("x")),
+                                Float.parseFloat(jsonArray.getJSONObject(i).getString("y")),
+                                jsonArray.getJSONObject(i).getString("name")
+                        ));
+                    }
+                    vector.add(positions);
+
+                    callBack.onSuccess(vector);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error instanceof NetworkError) {
+                    Log.d("TAG", "onErrorResponse: " + error.getMessage());
+                    callBack.onErr("Impoussible de se connecter");
+                }else if (error instanceof VolleyError)
+                    callBack.onErr("Une erreur s'est produite");
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map= new HashMap<String, String>();
+                map.put("cin",cin);
+                return map;
+            }
+        };
+        request.setTag("TAG");
+        queue.add(request);
+    }
     public void kill(){
         if (queue!=null){
             queue.cancelAll("TAG");

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mmr"
-    android:usesCleartextTraffic="true" >
+    android:usesCleartextTraffic="true">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -14,11 +16,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MMR">
-        <!--android:theme="@android:style/Theme.NoTitleBar.Fullscreen"-->
-        <!--android:theme="@style/Theme.MMR"-->
-        <activity android:name=".patient.MyMedcins" >
-        </activity>
-        <activity android:name=".shared.TypeUser" >
+        <activity android:name=".medic.MedicMap"></activity>
+        <activity android:name=".medic.MedicHome" />
+        <activity android:name=".medic.MedicSignUp" />
+        <activity android:name=".medic.MedicLogin" />
+        <activity android:name=".patient.ActivityAllergie" />
+        <activity android:name=".patient.ActivityVisite" />
+        <activity android:name=".patient.ActivityAnalyse" />
+        <activity android:name=".patient.ActivityMedicament" /> <!-- android:theme="@android:style/Theme.NoTitleBar.Fullscreen" -->
+        <!-- android:theme="@style/Theme.MMR" -->
+        <activity android:name=".patient.MyMedcins" />
+        <activity android:name=".shared.TypeUser">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,6 +43,7 @@
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />

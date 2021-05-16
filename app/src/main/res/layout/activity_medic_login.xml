@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".patient.Login"
-    android:gravity="center_vertical">
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+tools:context=".medic.MedicLogin"
+android:gravity="center_vertical">
 
     <LinearLayout
         android:id="@+id/background_layout"
@@ -202,23 +202,23 @@
                     android:layout_marginTop="10dp"
                     android:gravity="center"
                     >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Vous n'avez pas de compte? "
-                    android:textSize="14dp"
-                    android:textColor="@color/gray_dark"
-                    android:fontFamily="@font/lusitana_regular"
-                    />
-                <TextView
-                    android:id="@+id/register"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Registre "
-                    android:textSize="15dp"
-                    android:fontFamily="@font/lusitana_bold"
-                    android:textColor="@color/white"
-                    />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Vous n'avez pas de compte? "
+                        android:textSize="14dp"
+                        android:textColor="@color/gray_dark"
+                        android:fontFamily="@font/lusitana_regular"
+                        />
+                    <TextView
+                        android:id="@+id/register"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Registre "
+                        android:textSize="15dp"
+                        android:fontFamily="@font/lusitana_bold"
+                        android:textColor="@color/white"
+                        />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
