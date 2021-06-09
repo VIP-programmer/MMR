@@ -14,6 +14,15 @@ public class Patient {
     private char gender;
     private int age;
 
+    public Patient(String cin, String nom, String prenom) {
+        this.cin = cin;
+        this.nom = nom;
+        this.prenom = prenom;
+    }
+
+    public Patient() {
+    }
+
     public String getCin() {
         return cin;
     }

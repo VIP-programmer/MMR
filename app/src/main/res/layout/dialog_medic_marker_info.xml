@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/about_shape"
+    android:gravity="center"
+    >
+    <TextView
+        android:id="@+id/titre_marker"
+        android:layout_width="@dimen/width_edit_text"
+        android:layout_height="50dp"
+        android:background="@drawable/input_shape"
+        android:textSize="@dimen/reg_edit_text"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:paddingHorizontal="10dp"
+        android:layout_marginHorizontal="15dp"
+        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        >
+        <android.widget.Button
+            android:id="@+id/cancel_deletion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="annuler"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/active_dot"
+            android:backgroundTint="@color/white_dark"
+            android:textAllCaps="false"
+            android:textSize="15sp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="20dp"
+            android:paddingHorizontal="20dp"/>
+        <android.widget.Button
+            android:id="@+id/validate_deletion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Supprimer"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/active_dot"
+            android:backgroundTint="@color/blue_light"
+            android:textAllCaps="false"
+            android:textSize="15sp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="10dp"
+            android:paddingHorizontal="20dp"/>
+    </LinearLayout>
+</LinearLayout>

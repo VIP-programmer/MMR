@@ -8,7 +8,6 @@ public class Medcin {
     private String prenom;
     private String photo;
     private String tele;
-    private String ville;
     private String sang;
     private String about;
     private String dateJoin;
@@ -70,9 +69,6 @@ public class Medcin {
         return tele;
     }
 
-    public String getVille() {
-        return ville;
-    }
 
     public char getGender() {
         return gender;
@@ -108,10 +104,6 @@ public class Medcin {
 
     public void setTele(String tele) {
         this.tele = tele;
-    }
-
-    public void setVille(String ville) {
-        this.ville = ville;
     }
 
     public void setSang(String sang) {

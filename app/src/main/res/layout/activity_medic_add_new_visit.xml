@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".medic.MedicAddNewVisit"
+    android:background="@drawable/bg_simple"
+    android:paddingVertical="10dp"
+    >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginHorizontal="40dp"
+        android:background="@drawable/text_shape"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:id="@+id/doc_visit_pat_list"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/input_shape"
+                android:paddingHorizontal="20dp"
+                android:textAlignment="center"
+                android:layout_marginHorizontal="20dp"
+                />
+
+            <CheckBox
+                android:id="@+id/check_ajout_medicament"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ajouter ordenance"
+                android:layout_marginTop="20dp"
+                />
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:id="@+id/ord_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                >
+                <android.widget.Button
+                    android:id="@+id/doc_btn_add_medicament"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/active_dot"
+                    android:backgroundTint="@color/blue_light"
+                    android:text="Ajouter medicament"
+                    android:textAllCaps="false"
+                    android:paddingHorizontal="20dp"
+                    />
+
+                <TextView
+                    android:id="@+id/doc_shaw_medicaments"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:layout_marginTop="10dp"
+                    />
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/check_ajout_allergie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ajouter une allergie"
+                android:layout_marginTop="20dp"
+                />
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:id="@+id/allergie_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                >
+                <EditText
+                    android:id="@+id/input_allergie_name"
+                    android:layout_width="@dimen/width_edit_text"
+                    android:layout_height="50dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/input_shape"
+                    android:paddingHorizontal="15dp"
+                    android:maxLines="1"
+                    android:hint="Nom d'allergie"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/reg_edit_text" />
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/check_ajout_analyse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ajouter analyse"
+                android:layout_marginTop="20dp"
+                />
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:id="@+id/analyse_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                >
+                <android.widget.Button
+                    android:id="@+id/doc_btn_add_file"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/active_dot"
+                    android:backgroundTint="@color/blue_light"
+                    android:text="Selectionner le fichier"
+                    android:textAllCaps="false"
+                    android:paddingHorizontal="20dp"
+                    />
+
+                <TextView
+                    android:id="@+id/doc_shaw_file"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:layout_marginTop="10dp"
+                    />
+            </LinearLayout>
+
+
+            <android.widget.Button
+                android:id="@+id/doc_visite_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/active_dot"
+                android:backgroundTint="@color/blue_dark"
+                android:text="Valider"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:paddingHorizontal="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:layout_gravity="center_horizontal"
+                />
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

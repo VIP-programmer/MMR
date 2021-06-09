@@ -16,7 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MMR">
-        <activity android:name=".medic.MedicMap"></activity>
+        <activity android:name=".medic.MedicInfoMap"></activity>
+        <activity android:name=".medic.MedicAddNewVisit" />
+        <activity android:name=".medic.MedicMap" />
         <activity android:name=".medic.MedicHome" />
         <activity android:name=".medic.MedicSignUp" />
         <activity android:name=".medic.MedicLogin" />

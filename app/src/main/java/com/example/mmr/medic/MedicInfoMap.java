@@ -20,10 +20,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
 import com.example.mmr.R;
+import com.example.mmr.VolleySingleton;
 import com.example.mmr.patient.Positions;
+import com.example.mmr.shared.SharedModel;
 import com.google.gson.Gson;
 import com.mapbox.android.core.location.LocationEngine;
 import com.mapbox.android.core.location.LocationEngineCallback;
@@ -37,6 +41,7 @@ import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
@@ -45,6 +50,7 @@ import com.mapbox.mapboxsdk.location.LocationComponent;
 import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions;
 import com.mapbox.mapboxsdk.location.modes.CameraMode;
 import com.mapbox.mapboxsdk.location.modes.RenderMode;
+import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
@@ -57,18 +63,16 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Vector;
 
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
-public class MedicMap extends AppCompatActivity  implements OnMapReadyCallback, PermissionsListener {
+
+public class MedicInfoMap extends AppCompatActivity implements OnMapReadyCallback, PermissionsListener {
+
     private long DEFAULT_INTERVAL_IN_MILLISECONDS = 1000L;
     private long DEFAULT_MAX_WAIT_TIME = DEFAULT_INTERVAL_IN_MILLISECONDS * 5;
     private static final String DROPPED_MARKER_LAYER_ID = "DROPPED_MARKER_LAYER_ID";
@@ -77,6 +81,9 @@ public class MedicMap extends AppCompatActivity  implements OnMapReadyCallback, 
     private static final String ICON_ID = "ICON_ID";
     private static final String LAYER_ID = "LAYER_ID";
     private MapboxMap mapboxMap;
+    Positions positions=new Positions();
+    private RequestQueue queue;
+    private String cin;
     private ImageButton selectLocationButton;
     private PermissionsManager permissionsManager;
     private ImageView hoveringMarker;
@@ -87,14 +94,18 @@ public class MedicMap extends AppCompatActivity  implements OnMapReadyCallback, 
     Positions coord=new Positions();
     private String geojsonSourceLayerId = "geojsonSourceLayerId";
     private String symbolIconId = "symbolIconId";
-    private MainActivityLocationCallback callback = new MainActivityLocationCallback(this);
+    private MedicInfoMap.MainActivityLocationCallback callback = new MedicInfoMap.MainActivityLocationCallback(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
-        setContentView(R.layout.activity_medic_map);
+        setContentView(R.layout.activity_medic_info_map);
+        if (getIntent().hasExtra("cin")){
+            cin=getIntent().getStringExtra("cin");
+        }
+        queue = VolleySingleton.getInstance(this).getRequestQueue();
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         context=this;
@@ -103,12 +114,59 @@ public class MedicMap extends AppCompatActivity  implements OnMapReadyCallback, 
 
     @Override
     public void onMapReady(@NonNull final MapboxMap mapboxMap) {
-        MedicMap.this.mapboxMap = mapboxMap;
+        MedicInfoMap.this.mapboxMap = mapboxMap;
         List<Feature> symbolLayerIconFeatureList = new ArrayList<>();
+
+        new SharedModel(getApplicationContext(),queue).getMyPositions(cin, new SharedModel.LoadHomeInfoCallBack() {
+            @Override
+            public void onSuccess(Vector<Object> vector) {
+                positions = (Positions) vector.get(0);
+                for (Positions.Position p : positions.getPositionVector()) {
+                    MarkerOptions options = new MarkerOptions();
+                    options.setPosition(new LatLng(p.getX(), p.getY()));
+                    options.setTitle(p.getName());
+                    mapboxMap.addMarker(options);
+
+                }
+            }
+            @Override
+            public void onErr(String message) {
+                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+            }
+        });
+        mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(@NonNull Marker marker) {
+                Dialog dialog = new Dialog(MedicInfoMap.this);
+                dialog.setContentView(R.layout.dialog_medic_marker_info);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                Button mActionOk = dialog.findViewById(R.id.validate_deletion);
+                Button mActionCancel = dialog.findViewById(R.id.cancel_deletion);
+                TextView mInput = dialog.findViewById(R.id.titre_marker);
+
+                mInput.setText(marker.getTitle());
+                dialog.show();
+                mActionCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                mActionOk.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mapboxMap.removeMarker(marker);
+                        dialog.dismiss();
+                    }
+                });
+                return true;
+            }
+        });
+
         mapboxMap.addOnMapClickListener(new MapboxMap.OnMapClickListener() {
             @Override
             public boolean onMapClick(@NonNull LatLng point) {
-                Dialog dialog = new Dialog(MedicMap.this);
+                Dialog dialog = new Dialog(MedicInfoMap.this);
                 dialog.setContentView(R.layout.dialog_medic_title);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 Button mActionOk = dialog.findViewById(R.id.validate);
@@ -125,9 +183,10 @@ public class MedicMap extends AppCompatActivity  implements OnMapReadyCallback, 
                     @Override
                     public void onClick(View v) {
                         if (mInput.getText().toString().matches(""))
-                            Toast.makeText(getApplicationContext(),"Titre est vide",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Titre est vide", Toast.LENGTH_LONG).show();
                         else {
                             mapboxMap.addMarker(new MarkerOptions()
+                                    .setTitle(mInput.getText().toString())
                                     .position(new LatLng(point.getLatitude(), point.getLongitude())));
                             coord.addPosition(new Positions.Position(point.getLatitude(), point.getLongitude(), mInput.getText().toString()));
                             dialog.dismiss();
@@ -147,7 +206,7 @@ public class MedicMap extends AppCompatActivity  implements OnMapReadyCallback, 
 
                         // Add the SymbolLayer icon image to the map style
                         .withImage(ICON_ID, BitmapFactory.decodeResource(
-                                MedicMap.this.getResources(), R.drawable.mapbox_marker_icon_default))
+                                MedicInfoMap.this.getResources(), R.drawable.mapbox_marker_icon_default))
                         // Adding a GeoJson source for the SymbolLayer icons.
                         .withSource(new GeoJsonSource(SOURCE_ID,
                                 FeatureCollection.fromFeatures(symbolLayerIconFeatureList)))
@@ -172,11 +231,11 @@ public class MedicMap extends AppCompatActivity  implements OnMapReadyCallback, 
                 selectLocationButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent=new Intent();
-                        Gson gson=new Gson();
-                        String data=gson.toJson(coord, Positions.class);
-                        intent.putExtra("list",data);
-                        setResult(2,intent);
+                        Intent intent = new Intent();
+                        Gson gson = new Gson();
+                        String data = gson.toJson(coord, Positions.class);
+                        intent.putExtra("list", data);
+                        setResult(3, intent);
                         finish();
                     }
                 });
@@ -184,7 +243,8 @@ public class MedicMap extends AppCompatActivity  implements OnMapReadyCallback, 
         });
     }
 
-    @SuppressWarnings( {"MissingPermission"})
+
+            @SuppressWarnings( {"MissingPermission"})
     private void enableLocationComponent(@NonNull Style loadedMapStyle) {
         if (PermissionsManager.areLocationPermissionsGranted(this)) {
 
@@ -239,15 +299,15 @@ public class MedicMap extends AppCompatActivity  implements OnMapReadyCallback, 
     private static class MainActivityLocationCallback
             implements LocationEngineCallback<LocationEngineResult> {
 
-        private final WeakReference<MedicMap> activityWeakReference;
+        private final WeakReference<MedicInfoMap> activityWeakReference;
 
-        MainActivityLocationCallback(MedicMap activity) {
+        MainActivityLocationCallback(MedicInfoMap activity) {
             this.activityWeakReference = new WeakReference<>(activity);
         }
 
         @Override
         public void onSuccess(LocationEngineResult result) {
-            MedicMap activity = activityWeakReference.get();
+            MedicInfoMap activity = activityWeakReference.get();
 
             if (activity != null) {
                 Location location = result.getLastLocation();
@@ -268,7 +328,7 @@ public class MedicMap extends AppCompatActivity  implements OnMapReadyCallback, 
         @Override
         public void onFailure(@NonNull Exception exception) {
             Log.d("LocationChangeActivity", exception.getLocalizedMessage());
-            MedicMap activity = activityWeakReference.get();
+            MedicInfoMap activity = activityWeakReference.get();
             if (activity != null) {
                 Toast.makeText(activity, exception.getLocalizedMessage(),
                         Toast.LENGTH_SHORT).show();
@@ -294,7 +354,7 @@ public class MedicMap extends AppCompatActivity  implements OnMapReadyCallback, 
                                 .backgroundColor(Color.parseColor("#EEEEEE"))
                                 .limit(10)
                                 .build(PlaceOptions.MODE_CARDS))
-                        .build(MedicMap.this);
+                        .build(MedicInfoMap.this);
                 startActivityForResult(intent, 1);
             }
         });
@@ -340,16 +400,16 @@ public class MedicMap extends AppCompatActivity  implements OnMapReadyCallback, 
             }
         }
     }
-/*
-    private void initDroppedMarker(@NonNull Style loadedMapStyle) {
-// Add the marker image to map
-        loadedMapStyle.addImage("dropped-icon-image", BitmapFactory.decodeResource(
-                getResources(), R.drawable.blue_marker));
-        loadedMapStyle.addSource(new GeoJsonSource("dropped-marker-source-id"));
-        setupLayer(loadedMapStyle);
+    /*
+        private void initDroppedMarker(@NonNull Style loadedMapStyle) {
+    // Add the marker image to map
+            loadedMapStyle.addImage("dropped-icon-image", BitmapFactory.decodeResource(
+                    getResources(), R.drawable.blue_marker));
+            loadedMapStyle.addSource(new GeoJsonSource("dropped-marker-source-id"));
+            setupLayer(loadedMapStyle);
 
-    }
-*/
+        }
+    */
     @Override
     public void onResume() {
         super.onResume();
@@ -406,7 +466,7 @@ public class MedicMap extends AppCompatActivity  implements OnMapReadyCallback, 
     @Override
     public void onBackPressed() {
         Intent intent=new Intent();
-        setResult(2,intent);
+        setResult(3,intent);
         finish();
         super.onBackPressed();
     }

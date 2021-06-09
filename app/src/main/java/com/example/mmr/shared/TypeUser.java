@@ -38,7 +38,7 @@ public class TypeUser extends AppCompatActivity {
         medcin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), MedicMap.class));
+                startActivity(new Intent(getApplicationContext(), MedicLogin.class));
                 finish();
             }
         });

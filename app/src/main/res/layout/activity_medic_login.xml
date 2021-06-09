@@ -152,25 +152,23 @@ android:gravity="center_vertical">
             android:paddingHorizontal="20dp"
             >
             <EditText
-                android:id="@+id/user_name"
+                android:id="@+id/doc_user_name"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:hint="email"
                 android:background="@drawable/input_shape"
-                android:textColor="@android:color/white"
                 android:textSize="20sp"
                 android:gravity="center"
                 android:maxLines="1"
                 android:paddingHorizontal="15dp"
                 />
             <EditText
-                android:id="@+id/password"
+                android:id="@+id/doc_password"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:hint="mot de pass"
                 android:inputType="textPassword"
                 android:background="@drawable/input_shape"
-                android:textColor="@android:color/white"
                 android:textSize="20sp"
                 android:paddingHorizontal="15dp"
                 android:gravity="center"
@@ -184,7 +182,7 @@ android:gravity="center_vertical">
                 android:orientation="vertical"
                 >
                 <android.widget.Button
-                    android:id="@+id/submit"
+                    android:id="@+id/doc_submit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Valider"
@@ -211,7 +209,7 @@ android:gravity="center_vertical">
                         android:fontFamily="@font/lusitana_regular"
                         />
                     <TextView
-                        android:id="@+id/register"
+                        android:id="@+id/doc_register"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Registre "

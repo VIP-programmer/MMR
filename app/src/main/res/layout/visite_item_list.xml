@@ -27,27 +27,132 @@
             android:layout_marginLeft="15dp"
             android:layout_centerVertical="true"
             >
-            <TextView
-                android:id="@+id/visite_doc_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nom d'analyse"
-                android:textColor="@color/gray_dark"
-                android:fontFamily="@font/lusitana_bold"
-                android:textSize="15dp"
-                android:paddingTop="5dp"
-                />
-            <TextView
-                android:id="@+id/visite_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="le xx/xx/xxxx"
-                android:textColor="@color/gray_light"
-                android:fontFamily="@font/lusitana_regular"
-                android:textSize="16dp"
-                android:paddingTop="5dp"
-                />
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+                >
+                <TextView
+                    android:id="@+id/visite_avec"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="avec Dr Hmed"
+                    android:textColor="@color/gray_dark"
+                    android:fontFamily="@font/lusitana_bold"
+                    android:textSize="15dp"
+                    android:paddingTop="5dp"
+                    />
+                <TextView
+                    android:id="@+id/visite_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="le xx/xx/xxxx"
+                    android:textColor="@color/gray_light"
+                    android:fontFamily="@font/lusitana_regular"
+                    android:textSize="16dp"
+                    android:layout_marginLeft="10dp"
+                    android:paddingTop="5dp"
+                    />
+            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Détails"
+                android:textColor="@color/blue_dark"
+                android:fontFamily="@font/lusitana_regular"
+                android:textSize="14dp"
+                android:paddingTop="5dp"
+                />
+            <LinearLayout
+                android:id="@+id/visit_ord_wrapper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="les medicaments enrigestrés"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/lusitana_bold"
+                    android:textSize="13dp"
+                    android:paddingTop="5dp"
+                    />
+                <TextView
+                    android:id="@+id/visit_medicaments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rien"
+                    android:textColor="@color/gray_dark"
+                    android:fontFamily="@font/lusitana_regular"
+                    android:textSize="12dp"
+                    android:layout_marginLeft="10dp"
+                    android:paddingTop="5dp"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/visit_analyse_wrapper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="les analyses enrigestrés"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/lusitana_bold"
+                    android:textSize="13dp"
+                    android:paddingTop="5dp"
+                    />
+                <TextView
+                    android:id="@+id/visite_analyse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rien"
+                    android:textColor="@color/gray_dark"
+                    android:fontFamily="@font/lusitana_regular"
+                    android:textSize="12dp"
+                    android:layout_marginLeft="10dp"
+                    android:paddingTop="5dp"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/visit_allergie_wrapper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="les allergies enrigestrés"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/lusitana_bold"
+                    android:textSize="13dp"
+                    android:paddingTop="5dp"
+                    />
+                <TextView
+                    android:id="@+id/visite_allergie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rien"
+                    android:textColor="@color/gray_dark"
+                    android:fontFamily="@font/lusitana_regular"
+                    android:textSize="12dp"
+                    android:layout_marginLeft="10dp"
+                    android:paddingTop="5dp"
+                    />
+            </LinearLayout>
         </LinearLayout>
 
 

@@ -33,13 +33,14 @@
                     android:textSize="15sp" />
 
                 <EditText
-                    android:id="@+id/cin"
+                    android:id="@+id/doc_cin"
                     android:layout_width="@dimen/width_edit_text"
                     android:layout_height="50dp"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
-                    android:textColor="@android:color/white"
+                    android:maxLines="1"
+                    android:text="ee"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
             <RelativeLayout
@@ -57,13 +58,14 @@
                     android:textSize="15sp" />
 
                 <EditText
-                    android:id="@+id/serie"
+                    android:id="@+id/doc_serie"
                     android:layout_width="@dimen/width_edit_text"
                     android:layout_height="50dp"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
-                    android:textColor="@android:color/white"
+                    android:maxLines="1"
+                    android:text="ee"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
 
@@ -82,13 +84,14 @@
                     android:textSize="15sp" />
 
                 <EditText
-                    android:id="@+id/nom"
+                    android:id="@+id/doc_nom"
                     android:layout_width="@dimen/width_edit_text"
                     android:layout_height="50dp"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
-                    android:textColor="@android:color/white"
+                    android:maxLines="1"
+                    android:text="ee"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
 
@@ -107,13 +110,14 @@
                     android:textSize="15sp" />
 
                 <EditText
-                    android:id="@+id/prenom"
+                    android:id="@+id/doc_prenom"
                     android:layout_width="@dimen/width_edit_text"
                     android:layout_height="50dp"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
-                    android:textColor="@android:color/white"
+                    android:text="ee"
+                    android:maxLines="1"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
 
@@ -132,13 +136,14 @@
                     android:textSize="15sp" />
 
                 <EditText
-                    android:id="@+id/email"
+                    android:id="@+id/doc_email"
                     android:layout_width="@dimen/width_edit_text"
                     android:layout_height="50dp"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
-                    android:textColor="@android:color/white"
+                    android:maxLines="1"
+                    android:text="ee"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
 
@@ -157,13 +162,14 @@
                     android:textSize="15sp" />
 
                 <EditText
-                    android:id="@+id/adrs"
+                    android:id="@+id/doc_adrs"
                     android:layout_width="@dimen/width_edit_text"
                     android:layout_height="50dp"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
-                    android:textColor="@android:color/white"
+                    android:maxLines="1"
+                    android:text="ee"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
 
@@ -182,13 +188,14 @@
                     android:textSize="15sp" />
 
                 <EditText
-                    android:id="@+id/ville"
+                    android:id="@+id/doc_ville"
                     android:layout_width="@dimen/width_edit_text"
                     android:layout_height="50dp"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
-                    android:textColor="@android:color/white"
+                    android:maxLines="1"
+                    android:text="ee"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
 
@@ -207,13 +214,15 @@
                     android:textSize="15sp" />
 
                 <EditText
-                    android:id="@+id/tele"
+                    android:id="@+id/doc_tele"
                     android:layout_width="@dimen/width_edit_text"
                     android:layout_height="50dp"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
-                    android:textColor="@android:color/white"
+                    android:inputType="phone"
+                    android:maxLines="1"
+                    android:text="22"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
 
@@ -270,18 +279,45 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:fontFamily="@font/lusitana_bold"
+                    android:text="SPECIALITÉ:"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <Spinner
+                    android:id="@+id/spinner_pecialite"
+                    android:layout_width="@dimen/width_edit_text"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/input_shape"
+                    android:drawSelectorOnTop="true"
+                    android:entries="@array/speciality"
+                    android:padding="12dp"
+                    android:textAlignment="center"
+                    />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/lusitana_bold"
                     android:text="MOT DE PASSE:"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
                 <EditText
-                    android:id="@+id/password"
+                    android:id="@+id/doc_password"
                     android:layout_width="@dimen/width_edit_text"
                     android:layout_height="50dp"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
-                    android:textColor="@android:color/white"
                     android:textSize="@dimen/reg_edit_text"
+                    android:maxLines="1"
+                    android:text="eeeeeeee"
                     android:inputType="textPassword" />
             </RelativeLayout>
             <RelativeLayout
@@ -313,14 +349,15 @@
                 </LinearLayout>
 
                 <EditText
-                    android:id="@+id/confirm_password"
+                    android:id="@+id/doc_confirm_password"
                     android:layout_width="@dimen/width_edit_text"
                     android:layout_height="50dp"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/input_shape"
                     android:padding="10dp"
-                    android:textColor="@android:color/white"
                     android:textSize="@dimen/reg_edit_text"
+                    android:maxLines="1"
+                    android:text="eeeeeeee"
                     android:inputType="textPassword"
                     />
             </RelativeLayout>
@@ -330,20 +367,20 @@
                 android:layout_marginTop="15dp">
 
                 <EditText
-                    android:id="@+id/about"
+                    android:id="@+id/doc_about"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:inputType="text|textMultiLine"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/about_shape"
                     android:hint="à propos"
-                    android:textColor="@android:color/white"
                     android:textSize="15dp"
                     android:padding="10dp"
+                    android:text="eeeeeeee"
                     android:gravity="top"/>
             </RelativeLayout>
             <android.widget.Button
-                android:id="@+id/submit"
+                android:id="@+id/doc_to_map"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

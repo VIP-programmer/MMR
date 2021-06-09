@@ -20,4 +20,15 @@
         <item>RAMED</item>
         <item>RIEN</item>
     </string-array>
+    <string-array name="speciality">
+        <item>Choisir</item>
+        <item>La médecine générale</item>
+        <item>L’anesthésiologie</item>
+        <item>L’endocrinologie</item>
+        <item>La radiologie</item>
+        <item>La pédiatrie</item>
+        <item>L’ophtalmologie</item>
+        <item>L’oncologie</item>
+        <item>La cardiologie</item>
+    </string-array>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.mmr.medic;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -17,7 +18,9 @@ import com.android.volley.RequestQueue;
 import com.example.mmr.R;
 import com.example.mmr.VolleySingleton;
 import com.example.mmr.patient.Login;
+import com.example.mmr.patient.Positions;
 import com.example.mmr.shared.SharedModel;
+import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,6 +35,7 @@ public class MedicSignUp extends AppCompatActivity {
     private EditText prenom;
     private EditText tele;
     private EditText ville;
+    private Spinner speciality;
     private RadioGroup type;
     private EditText password;
     private EditText confPassword;
@@ -40,7 +44,7 @@ public class MedicSignUp extends AppCompatActivity {
     private SharedModel sharedModel;
     private boolean positionMarked=false;
     private boolean isPublic=true;
-    private Map<String,String> infos;
+    private Map<String,String> infos=new HashMap<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,19 +55,20 @@ public class MedicSignUp extends AppCompatActivity {
 
         queue = VolleySingleton.getInstance(this).getRequestQueue();
         sharedModel = new SharedModel(this, queue);
-        submit=findViewById(R.id.submit);
-        cin=findViewById(R.id.cin);
-        serie=findViewById(R.id.serie);
-        adresse=findViewById(R.id.adrs);
-        email=findViewById(R.id.email);
-        nom=findViewById(R.id.nom);
-        prenom=findViewById(R.id.prenom);
-        about=findViewById(R.id.about);
+        submit=findViewById(R.id.doc_to_map);
+        cin=findViewById(R.id.doc_cin);
+        serie=findViewById(R.id.doc_serie);
+        adresse=findViewById(R.id.doc_adrs);
+        email=findViewById(R.id.doc_email);
+        speciality=findViewById(R.id.spinner_pecialite);
+        nom=findViewById(R.id.doc_nom);
+        prenom=findViewById(R.id.doc_prenom);
+        about=findViewById(R.id.doc_about);
         type=findViewById(R.id.type);
-        tele=findViewById(R.id.tele);
-        ville=findViewById(R.id.ville);
-        password=findViewById(R.id.password);
-        confPassword=findViewById(R.id.confirm_password);
+        tele=findViewById(R.id.doc_tele);
+        ville=findViewById(R.id.doc_ville);
+        password=findViewById(R.id.doc_password);
+        confPassword=findViewById(R.id.doc_confirm_password);
         type.check(R.id.public_med);
         type.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -82,7 +87,6 @@ public class MedicSignUp extends AppCompatActivity {
                     //needs select a position
                     //test if somme input is empty
                     if (cin.getText().toString().matches("") ||
-                            cin.getText().toString().matches("") ||
                             adresse.getText().toString().matches("") ||
                             email.getText().toString().matches("") ||
                             nom.getText().toString().matches("") ||
@@ -90,6 +94,7 @@ public class MedicSignUp extends AppCompatActivity {
                             tele.getText().toString().matches("") ||
                             ville.getText().toString().matches("") ||
                             type.getCheckedRadioButtonId() == -1 ||
+                            speciality.getSelectedItemPosition() == 0 ||
                             password.getText().toString().matches("") ||
                             confPassword.getText().toString().matches("") ||
                             about.getText().toString().matches("")
@@ -117,25 +122,56 @@ public class MedicSignUp extends AppCompatActivity {
                                 infos.put("ville",ville.getText().toString());
                                 infos.put("type",isPublic?"public":"privé");
                                 infos.put("email",email.getText().toString());
+                                infos.put("specialite",speciality.getSelectedItemPosition()+"");
                                 infos.put("tele",tele.getText().toString());
                                 infos.put("pass",password.getText().toString());
-                                /*
-                                sharedModel.registerMedic(infos, new SharedModel.SignUpCallBack() {
-                                    @Override
-                                    public void onSuccess(String message) {
-                                        startActivity(new Intent(getApplicationContext(), Login.class));
-                                    }
-
-                                    @Override
-                                    public void onErr(String message) {
-                                        Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
-                                    }
-                                });*/
+                                startActivityForResult(new Intent(getApplicationContext(),MedicMap.class), 2);
                             }
                         }
                     }
                 }
             }
         });
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==2){
+            if (data !=null) {
+                if (data.hasExtra("list")) {
+                    int taille=0;
+                    Gson gson=new Gson();
+                    Positions positions=gson.fromJson(data.getStringExtra("list"),Positions.class);
+                    for (Positions.Position position: positions.getPositionVector()) {
+                        infos.put(taille+"lat",position.getX()+"");
+                        infos.put(taille+"lon",position.getY()+"");
+                        infos.put(taille+"titre",position.getName());
+                        taille++;
+                    }
+                    infos.put("size",(taille-1)+"");
+                    new SharedModel(getApplicationContext(),queue).registerMedic(infos, new SharedModel.SignUpCallBack() {
+                        @Override
+                        public void onSuccess(String message) {
+                            Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(getApplicationContext(), MedicLogin.class));
+                        }
+
+                        @Override
+                        public void onErr(String message) {
+                            Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }else{
+                    //DONTDO NOTH
+                }
+            }
+        }
+        /*
+        Place place = PlacePicker.getPlace(data,this);
+        latitude=String.valueOf(place.getLatLng().latitude);
+        longitude=String.valueOf(place.getLatLng().longitude);
+        Log.i("TAG", "onActivityResult: "+latitude+", "+longitude);
+
+         */
     }
 }

@@ -39,7 +39,7 @@
                     android:layout_alignParentRight="true"
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
-                    android:textColor="@android:color/white"
+                    android:maxLines="1"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
 
@@ -64,7 +64,7 @@
                     android:layout_alignParentRight="true"
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
-                    android:textColor="@android:color/white"
+                    android:maxLines="1"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
 
@@ -89,7 +89,7 @@
                     android:layout_alignParentRight="true"
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
-                    android:textColor="@android:color/white"
+                    android:maxLines="1"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
 
@@ -114,7 +114,7 @@
                     android:layout_alignParentRight="true"
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
-                    android:textColor="@android:color/white"
+                    android:maxLines="1"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
 
@@ -139,7 +139,7 @@
                     android:layout_alignParentRight="true"
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
-                    android:textColor="@android:color/white"
+                    android:maxLines="1"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
 
@@ -164,7 +164,7 @@
                     android:layout_alignParentRight="true"
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
-                    android:textColor="@android:color/white"
+                    android:maxLines="1"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
 
@@ -189,7 +189,7 @@
                     android:layout_alignParentRight="true"
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
-                    android:textColor="@android:color/white"
+                    android:maxLines="1"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
 
@@ -214,7 +214,7 @@
                     android:layout_alignParentRight="true"
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
-                    android:textColor="@android:color/white"
+                    android:maxLines="1"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
 
@@ -352,8 +352,8 @@
                 android:layout_alignParentRight="true"
                 android:background="@drawable/input_shape"
                 android:padding="15dp"
-                android:textColor="@android:color/white"
                 android:textSize="@dimen/reg_edit_text"
+                android:maxLines="1"
                 android:inputType="textPassword" />
             </RelativeLayout>
             <RelativeLayout
@@ -391,8 +391,8 @@
                 android:layout_alignParentRight="true"
                 android:background="@drawable/input_shape"
                 android:padding="15dp"
-                android:textColor="@android:color/white"
                 android:textSize="@dimen/reg_edit_text"
+                android:maxLines="1"
                 android:inputType="textPassword" />
             </RelativeLayout>
             <android.widget.Button

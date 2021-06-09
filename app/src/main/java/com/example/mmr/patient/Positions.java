@@ -43,6 +43,12 @@ public class Positions {
             this.name = name;
         }
 
+        public Position(double latitude, double longitude,String name) {
+            x=(float) latitude;
+            y=(float) longitude;
+            this.name = name;
+        }
+
         public float getX() {
             return x;
         }

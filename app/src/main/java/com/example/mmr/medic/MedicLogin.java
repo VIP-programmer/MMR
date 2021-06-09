@@ -47,10 +47,10 @@ public class MedicLogin extends AppCompatActivity {
         }
         queue = VolleySingleton.getInstance(this).getRequestQueue();
         sharedModel = new SharedModel(this, queue);
-        login=findViewById(R.id.submit);
-        signUp=findViewById(R.id.register);
-        email =findViewById(R.id.user_name);
-        password=findViewById(R.id.password);
+        login=findViewById(R.id.doc_submit);
+        signUp=findViewById(R.id.doc_register);
+        email =findViewById(R.id.doc_user_name);
+        password=findViewById(R.id.doc_password);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

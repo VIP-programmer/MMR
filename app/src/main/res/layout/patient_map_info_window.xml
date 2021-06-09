@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mapbox.mapboxsdk.annotations.BubbleLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white_dark"
+    android:orientation="vertical"
+    android:paddingHorizontal="10dp"
+    android:paddingVertical="8dp"
+    >
+    <TextView
+        android:id="@+id/pos_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hopital molay ismail"
+        android:textColor="@color/gray_dark"
+        android:fontFamily="@font/lusitana_bold"
+        />
+</com.mapbox.mapboxsdk.annotations.BubbleLayout>
