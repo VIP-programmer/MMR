@@ -3,12 +3,195 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".medic.MedicHomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:context=".patient.Home"
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        >
+        <RelativeLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            >
+            <com.rishabhharit.roundedimageview.RoundedImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/layout_bg"
+                android:scaleType="fitXY"
+                app:cornerRadius="30dp"
+                app:roundedCorners="bottomRight|bottomLeft"
+                />
+            <!--
+            <com.rishabhharit.roundedimageview.RoundedImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/layout_bg"
+                android:scaleType="centerCrop"
+                app:cornerRadius="20dp"
+                app:roundedCorners="bottomLeft|bottomRight"
+                />
+                -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="30dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bienvenu"
+                    android:fontFamily="@font/fredoka"
+                    android:textSize="30dp"
+                    android:textColor="@color/gray_dark"
+
+                    />
+                <TextView
+                    android:id="@+id/medic_home_name"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DAHMAN iliass"
+                    android:fontFamily="@font/fredoka"
+                    android:textSize="20dp"
+                    android:textColor="@color/blue_dark"
+                    />
+            </LinearLayout>
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/medic_home_profile_image"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:src="@drawable/profileholder"
+                app:civ_border_width="5dp"
+                android:layout_alignParentEnd="true"
+                app:civ_border_color="@color/blue_dark"
+                android:layout_marginRight="15dp"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:layout_weight="7"
+            >
+            <RelativeLayout
+                android:id="@+id/voir_patients"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:elevation="10dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/icon_prof_med_shape"
+                android:backgroundTint="@color/blue_light"
+                >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/patients"
+                    android:scaleType="center"
+                    android:layout_centerInParent="true"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Consultez Les Patients"
+                    android:textColor="@color/blue_dark"
+                    android:textSize="20sp"
+                    android:background="@drawable/text_shape"
+                    android:paddingHorizontal="15dp"
+                    android:paddingVertical="5dp"
+                    android:fontFamily="@font/fredoka"
+                    android:backgroundTint="@color/white"
+                    />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/voir_notes"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:elevation="10dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/icon_prof_med_shape"
+                android:backgroundTint="@color/blue_light"
+                >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/record"
+                    android:layout_centerInParent="true"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Consultez l'enregistrement"
+                    android:textColor="@color/blue_dark"
+                    android:textSize="20sp"
+                    android:background="@drawable/text_shape"
+                    android:paddingHorizontal="15dp"
+                    android:paddingVertical="5dp"
+                    android:fontFamily="@font/fredoka"
+                    android:backgroundTint="@color/white"
+                    />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/voir_record"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:elevation="10dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/icon_prof_med_shape"
+                android:backgroundTint="@color/blue_light"
+                >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/notes"
+                    android:scaleType="centerCrop"
+                    android:layout_centerInParent="true"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Consultez les notes"
+                    android:textColor="@color/blue_dark"
+                    android:textSize="20sp"
+                    android:background="@drawable/text_shape"
+                    android:paddingHorizontal="15dp"
+                    android:paddingVertical="5dp"
+                    android:fontFamily="@font/fredoka"
+                    android:backgroundTint="@color/white"
+                    />
+
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:layout_weight=".6"
+            />
+
+    </LinearLayout>
 
 </FrameLayout>

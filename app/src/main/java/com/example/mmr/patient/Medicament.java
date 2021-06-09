@@ -6,21 +6,15 @@ public class Medicament {
     private String qnte;
     private String dateStart;
     private String dateEnd;
-    private int duree;
     private String prix;
 
-    public Medicament(String name, String doc, String qnte, String dateStart, int duree, String prix) {
+    public Medicament(String name, String doc, String qnte, String dateStart, String dateEnd, String prix) {
         this.name = name;
         this.doc = doc;
         this.qnte = qnte;
         this.dateStart = dateStart;
-        this.duree = duree;
+        this.dateEnd = dateEnd;
         this.prix = prix;
-        dateEnd=getDateAfterPeriod();
-    }
-
-    private String getDateAfterPeriod() {
-        return "null";
     }
 
     public String getPrix() {

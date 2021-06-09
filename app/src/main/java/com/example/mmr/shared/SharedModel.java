@@ -58,6 +58,18 @@ public class SharedModel {
         void onSuccess(Vector<Object> vector);
         void onErr(String message);
     }
+    public interface LoadAllergieCallBack{
+        void onSuccess(Vector<Allergie> vector);
+        void onErr(String message);
+    }
+    public interface LoadAnalyseCallBack{
+        void onSuccess(Vector<Analyse> vector);
+        void onErr(String message);
+    }
+    public interface LoadVisitCallBack{
+        void onSuccess(Vector<Visite> vector);
+        void onErr(String message);
+    }
     public SharedModel(Context context, RequestQueue queue) {
         this.context = context;
         this.queue = queue;
@@ -817,7 +829,7 @@ public class SharedModel {
         request.setTag("TAG");
         queue.add(request);
     }
-    public void getVisites(String cin, LoadHomeInfoCallBack callBack){
+    public void getVisites(String cin, LoadVisitCallBack callBack){
 
         String url = Config.URL+"/Model/patient/my_visites.php";
 
@@ -826,17 +838,29 @@ public class SharedModel {
             public void onResponse(String response) {
                 try {
                     Log.i("TAG", "onResponse: "+response);
-                    Vector<Object> vector = new Vector<>();
                     Vector<Visite> obj = new Vector<>();
                     //Vector<Notes.Note> notes = new Vector<>();
                     JSONArray jsonArray = new JSONArray(response);
+                    Log.i("TAG", "onResponse tani : "+jsonArray.length());
                     for (int i = 0; i < jsonArray.length(); i++) {
-                        obj.add(new Visite(jsonArray.getJSONObject(i).getString("nom")+" "+jsonArray.getJSONObject(i).getString("prenom"),
+                        Log.i("TAG", "onResponse tani tani: "+i);
+                        Visite visite= new Visite(jsonArray.getJSONObject(i).getString("nom")+" "+jsonArray.getJSONObject(i).getString("prenom"),
                                 jsonArray.getJSONObject(i).getString("date_visit")
-                        ));
-                        vector.add(obj);
+                        );
+                        if (jsonArray.getJSONObject(i).getBoolean("hasAnalyse"))
+                            visite.setAnalyse(jsonArray.getJSONObject(i).getString("intitule_analyse"));
+                        if (jsonArray.getJSONObject(i).getBoolean("hasAllergie"))
+                            visite.setAllergie(jsonArray.getJSONObject(i).getString("intitule_allergie"));
+                        if (jsonArray.getJSONObject(i).getBoolean("hasOrd")){
+                            JSONArray medicamentsArray = jsonArray.getJSONObject(i).getJSONArray("medicaments");
+                            for (int j = 0; j < medicamentsArray.length(); j++) {
+                                visite.addMedicament(medicamentsArray.getJSONObject(j).getString("intitule_medicament"));
+                            }
+                        }
+
+                        obj.add(visite);
                     }
-                    callBack.onSuccess(vector);
+                    callBack.onSuccess(obj);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -877,8 +901,8 @@ public class SharedModel {
                     //Vector<Notes.Note> notes = new Vector<>();
                     JSONArray jsonArray = new JSONArray(response);
                     for (int i = 0; i < jsonArray.length(); i++) {
-                        obj.add(new Allergie(jsonArray.getJSONObject(i).getString("intitule_allergie")));
-                        vector.add(obj);
+                        //obj.add();
+                        vector.add(new Allergie(jsonArray.getJSONObject(i).getString("intitule_allergie")));
                     }
                     callBack.onSuccess(vector);
                 } catch (JSONException e) {
@@ -922,11 +946,17 @@ public class SharedModel {
                     //Vector<Notes.Note> notes = new Vector<>();
                     JSONArray jsonArray = new JSONArray(response);
                     for (int i = 0; i < jsonArray.length(); i++) {
+                        /*
                         obj.add(new Analyse(jsonArray.getJSONObject(i).getString("intitule_analyse"),
                                 jsonArray.getJSONObject(i).getString("date_analyse"),
                                 jsonArray.getJSONObject(i).getString("fichier")
                                 ));
-                        vector.add(obj);
+
+                         */
+                        vector.add(new Analyse(jsonArray.getJSONObject(i).getString("intitule_analyse"),
+                                jsonArray.getJSONObject(i).getString("date_analyse"),
+                                jsonArray.getJSONObject(i).getString("fichier")
+                        ));
                     }
                     callBack.onSuccess(vector);
                 } catch (JSONException e) {
@@ -969,14 +999,23 @@ public class SharedModel {
                     //Vector<Notes.Note> notes = new Vector<>();
                     JSONArray jsonArray = new JSONArray(response);
                     for (int i = 0; i < jsonArray.length(); i++) {
+                        /*
                         obj.add(new Medicament(jsonArray.getJSONObject(i).getString("intitule_medicament"),
                                 jsonArray.getJSONObject(i).getString("nom")+" "+jsonArray.getJSONObject(i).getString("prenom"),
                                 jsonArray.getJSONObject(i).getString("qte"),
                                 jsonArray.getJSONObject(i).getString("date_ord"),
-                                jsonArray.getJSONObject(i).getInt("durée"),
+                                jsonArray.getJSONObject(i).getString("date_fin"),
                                 jsonArray.getJSONObject(i).getString("prix")
                                 ));
-                        vector.add(obj);
+
+                         */
+                        vector.add(new Medicament(jsonArray.getJSONObject(i).getString("intitule_medicament"),
+                                jsonArray.getJSONObject(i).getString("nom")+" "+jsonArray.getJSONObject(i).getString("prenom"),
+                                jsonArray.getJSONObject(i).getString("qte"),
+                                jsonArray.getJSONObject(i).getString("date_ord"),
+                                jsonArray.getJSONObject(i).getString("date_fin"),
+                                jsonArray.getJSONObject(i).getString("prix")
+                        ));
                     }
                     callBack.onSuccess(vector);
                 } catch (JSONException e) {

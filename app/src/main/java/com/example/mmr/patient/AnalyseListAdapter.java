@@ -1,9 +1,14 @@
 package com.example.mmr.patient;
 
+import android.app.DownloadManager;
 import android.content.Context;
+import android.net.Uri;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.CookieManager;
+import android.webkit.URLUtil;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,13 +20,19 @@ import com.example.mmr.R;
 
 import java.util.Vector;
 
+import okhttp3.Cookie;
+
+
 public class AnalyseListAdapter extends RecyclerView.Adapter<AnalyseListAdapter.ViewHolder>{
     // Store a member variable for the meetings
     private Vector<Analyse> mList;
+    private Context context;
 
     // Pass in the meeting array into the constructor
-    public AnalyseListAdapter(Vector<Analyse> mList) {
+    public AnalyseListAdapter(Vector<Analyse> mList,Context context) {
         this.mList = mList;
+        this.context = context;
+
     }
 
     @NonNull
@@ -49,7 +60,16 @@ public class AnalyseListAdapter extends RecyclerView.Adapter<AnalyseListAdapter.
         holder.download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                DownloadManager.Request request = new DownloadManager.Request(Uri.parse(med.getLien()));
+                String title= URLUtil.guessFileName(med.getLien(),null,null);
+                request.setTitle(title);
+                request.setDescription("veuillez patienter ...");
+                String cookie = CookieManager.getInstance().getCookie(med.getLien());
+                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,title);
 
+                DownloadManager downloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+                downloadManager.enqueue(request);
             }
         });
     }

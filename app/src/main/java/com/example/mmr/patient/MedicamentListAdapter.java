@@ -45,9 +45,9 @@ public class MedicamentListAdapter extends RecyclerView.Adapter<MedicamentListAd
         // Set item views based on your views and data model
         holder.docName.setText(med.getDoc());
         holder.titre.setText(med.getName());
-        holder.qnte.setText(med.getQnte()+"");
+        holder.qnte.setText(med.getQnte()+" fois");
         holder.prix.setText(med.getPrix());
-        holder.date.setText(med.getDateStart()+" à "+med.getDateEnd());
+        holder.date.setText("De "+med.getDateStart()+" à "+med.getDateEnd());
 
     }
 
@@ -76,8 +76,8 @@ public class MedicamentListAdapter extends RecyclerView.Adapter<MedicamentListAd
 
             docName =  (TextView) itemView.findViewById(R.id.medicament_name);
             titre =  (TextView) itemView.findViewById(R.id.med_medicament);
-            qnte =  (TextView) itemView.findViewById(R.id.date_medicament);
-            date =  (TextView) itemView.findViewById(R.id.qnt);
+            qnte =  (TextView) itemView.findViewById(R.id.qnt);
+            date =  (TextView) itemView.findViewById(R.id.date_medicament);
             prix =  (TextView) itemView.findViewById(R.id.medicament_prix);
         }
     }

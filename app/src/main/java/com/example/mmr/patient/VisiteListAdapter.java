@@ -3,6 +3,7 @@ package com.example.mmr.patient;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.CalendarContract;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +50,15 @@ public class VisiteListAdapter extends RecyclerView.Adapter<VisiteListAdapter.Vi
         // Set item views based on your views and data model
         holder.day.setText(med.getDate());
         holder.docName.setText(med.getDoc());
+        if (!med.getAnalyse().matches(""))
+            holder.analyses.setText(med.getAnalyse());
+        if (!med.getAllergie().matches(""))
+            holder.allergies.setText(med.getAllergie());
+        if (med.getMedicaments().size() > 0)
+            holder.medicaments.setText("");
+        for (String name: med.getMedicaments()) {
+            holder.medicaments.append(name+"\n");
+        }
     }
 
     @Override
@@ -63,6 +73,9 @@ public class VisiteListAdapter extends RecyclerView.Adapter<VisiteListAdapter.Vi
         // for any view that will be set as you render a row
         public TextView day;
         public TextView docName;
+        public TextView medicaments;
+        public TextView analyses;
+        public TextView allergies;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -71,8 +84,11 @@ public class VisiteListAdapter extends RecyclerView.Adapter<VisiteListAdapter.Vi
             // to access the context from any ViewHolder instance.
             super(itemView);
 
-            docName =  (TextView) itemView.findViewById(R.id.visite_date);
-            day =  (TextView) itemView.findViewById(R.id.visite_doc_name);
+            docName =  (TextView) itemView.findViewById(R.id.visite_avec);
+            day =  (TextView) itemView.findViewById(R.id.visite_date);
+            medicaments =  (TextView) itemView.findViewById(R.id.visit_medicaments);
+            analyses =  (TextView) itemView.findViewById(R.id.visite_analyse);
+            allergies =  (TextView) itemView.findViewById(R.id.visite_allergie);
         }
     }
 }

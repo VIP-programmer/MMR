@@ -139,6 +139,8 @@ public class MedicAddNewVisit extends AppCompatActivity {
                     infos.put("hasAnalyse","");
                 }else {
                     analyseContainer.setVisibility(View.GONE);
+                    if (infos.containsKey("hasAnalyse"))
+                        infos.remove("hasAnalyse");
                 }
             }
         });
@@ -148,7 +150,11 @@ public class MedicAddNewVisit extends AppCompatActivity {
                 if (isChecked) {
                     ordContainer.setVisibility(View.VISIBLE);
                     infos.put("hasOrd","");
-                }else ordContainer.setVisibility(View.GONE);
+                }else {
+                    ordContainer.setVisibility(View.GONE);
+                    if (infos.containsKey("hasOrd"))
+                        infos.remove("hasOrd");
+                }
             }
         });
         allergieCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -158,7 +164,11 @@ public class MedicAddNewVisit extends AppCompatActivity {
                     allergieContainer.setVisibility(View.VISIBLE);
                     infos.put("hasAllergie","");
                 }
-                else allergieContainer.setVisibility(View.GONE);
+                else {
+                    allergieContainer.setVisibility(View.GONE);
+                    if (infos.containsKey("hasAllergie"))
+                        infos.remove("hasAllergie");
+                }
             }
         });
 

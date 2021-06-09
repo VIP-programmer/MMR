@@ -31,12 +31,10 @@ public class ActivityVisite extends AppCompatActivity {
         recyclerView=findViewById(R.id.visit_list);
         sessionManager=new PatientSessionManager(this);
         queue = VolleySingleton.getInstance(this).getRequestQueue();
-        new SharedModel(this,queue).getVisites(sessionManager.getCinPatient(), new SharedModel.LoadHomeInfoCallBack() {
+        new SharedModel(this,queue).getVisites(sessionManager.getCinPatient(), new SharedModel.LoadVisitCallBack() {
             @Override
-            public void onSuccess(Vector<Object> vector) {
-                for (Object obj: vector) {
-                    visites.add((Visite) obj);
-                }
+            public void onSuccess(Vector<Visite> vector) {
+                visites.addAll(vector);
                 VisiteListAdapter medListAdapter = new VisiteListAdapter(visites);
                 recyclerView.setAdapter(medListAdapter);
                 // Attach the adapter to the recyclerview to populate items
