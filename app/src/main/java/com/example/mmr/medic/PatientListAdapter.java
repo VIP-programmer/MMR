@@ -1,4 +1,4 @@
-package com.example.mmr.patient;
+package com.example.mmr.medic;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,28 +12,27 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mmr.R;
-import com.example.mmr.medic.ProfilePatient;
+import com.example.mmr.patient.MedListAdapter;
+import com.example.mmr.patient.OnlineMeds;
+import com.example.mmr.patient.Patient;
+import com.example.mmr.patient.ProfileMed;
 import com.example.mmr.shared.LoadImage;
 
 import java.util.Vector;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.ViewHolder> {
-    // Store a member variable for the contacts
-    private Vector<OnlineMeds.OnlineMed> mList;
+public class PatientListAdapter extends RecyclerView.Adapter<PatientListAdapter.ViewHolder> {
     Context context;
-    String cin;
-
-    // Pass in the contact array into the constructor
-    public MedListAdapter(Context context, Vector<OnlineMeds.OnlineMed> mList) {
-        this.mList = mList;
-        this.context = context;
+    Vector<Patient> patients;
+    public PatientListAdapter(Context applicationContext, Vector<Patient> patients) {
+        this.context=applicationContext;
+        this.patients=patients;
     }
 
     @NonNull
     @Override
-    public MedListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PatientListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
@@ -41,34 +40,32 @@ public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.ViewHold
         View itemView = inflater.inflate(R.layout.med_item, parent, false);
 
         // Return a new holder instance
-        MedListAdapter.ViewHolder viewHolder = new MedListAdapter.ViewHolder(itemView);
+        PatientListAdapter.ViewHolder viewHolder = new PatientListAdapter.ViewHolder(itemView);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MedListAdapter.ViewHolder holder, int position) {
-        // Get the data model based on position
-        OnlineMeds.OnlineMed med = mList.get(position);
+    public void onBindViewHolder(@NonNull PatientListAdapter.ViewHolder holder, int position) {
+// Get the data model based on position
+        Patient med = patients.get(position);
 
         // Set item views based on your views and data model
         holder.cin=med.getCin();
         CircleImageView profileImg = holder.profileImg;
-        if (med.getProfile().equals("local")) {
+        if (med.getPhoto().equals("local")) {
             profileImg.setImageBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.profileholder));
         } else {
-            new LoadImage(profileImg, context).execute(med.getProfile());
+            new LoadImage(profileImg, context).execute(med.getPhoto());
         }
-        holder.name.setText("Dr. "+med.getName());
+        holder.name.setText(med.getNom()+" "+med.getPrenom());
         //activeDot.setBackground();
     }
 
     @Override
     public int getItemCount() {
-        return mList.size();
+        return patients.size();
     }
 
-    // Provide a direct reference to each of the views within a data item
-    // Used to cache the views within the item layout for fast access
     public class ViewHolder extends RecyclerView.ViewHolder {
         // Your holder should contain a member variable
         // for any view that will be set as you render a row

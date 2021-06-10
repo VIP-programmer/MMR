@@ -22,6 +22,7 @@ public class ActivityAllergie extends AppCompatActivity {
     private RequestQueue queue;
     PatientSessionManager sessionManager;
     Vector<Allergie> allergies=new Vector<>();
+    private String cin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,10 +30,17 @@ public class ActivityAllergie extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_alergie);
+
+        if (getIntent().hasExtra("cin"))
+            cin=getIntent().getStringExtra("cin");
+        else {
+            cin=sessionManager.getCinPatient();
+        }
+
         recyclerView=findViewById(R.id.alergie_list);
         sessionManager=new PatientSessionManager(this);
         queue = VolleySingleton.getInstance(this).getRequestQueue();
-        new SharedModel(this,queue).getAllergies(sessionManager.getCinPatient(), new SharedModel.LoadHomeInfoCallBack() {
+        new SharedModel(this,queue).getAllergies(cin, new SharedModel.LoadHomeInfoCallBack() {
             @Override
             public void onSuccess(Vector<Object> vector) {
                 for (Object obj: vector) {

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.example.mmr.R;
 
@@ -28,7 +29,8 @@ public class MedicRecordFragment extends Fragment {
     private int mParam1;
     private String mParam2;
 
-    private android.widget.Button addNew;
+    private RelativeLayout addNew;
+    private RelativeLayout seeAll;
     private RecyclerView visitList;
 
     public MedicRecordFragment() {
@@ -69,10 +71,17 @@ public class MedicRecordFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_medic_record, container, false);
 
         addNew = view.findViewById(R.id.doc_add_visit);
+        seeAll = view.findViewById(R.id.doc_see_visit);
         addNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(),MedicAddNewVisit.class));
+            }
+        });
+        seeAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),MedicVisitList.class));
             }
         });
 

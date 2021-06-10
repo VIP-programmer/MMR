@@ -1,5 +1,7 @@
 package com.example.mmr.patient;
 
+import android.graphics.Color;
+
 import java.util.Date;
 import java.util.Vector;
 
@@ -28,6 +30,9 @@ public class Notes {
         private String body;
         private int priority;
         private String date;
+        private String day;
+        private int month;
+        private String year;
 
         public Note(String title,String author, String body, int priority, String date) {
             this.title=title;
@@ -35,8 +40,20 @@ public class Notes {
             this.body = body;
             this.priority = priority;
             this.date = date;
+            day=extractDay(date);
+            month=extractMonth(date);
+            year = extractYear(date);
+        }
+        private String extractYear(String date) {
+            return date.substring(0,4);
         }
 
+        private int extractMonth(String date) {
+            return Integer.parseInt(date.substring(5,7));
+        }
+        private String extractDay(String date){
+            return date.substring(8);
+        }
         public String getTitle() {
             return title;
         }
@@ -57,16 +74,39 @@ public class Notes {
             return date;
         }
 
-        public String convertPriority(){
-            String s="";
+        public int convertPriority(){
+            int color=Color.parseColor("#388E3C");
             switch (priority){
-                case 1:s="URGENT";break;
-                case 2:s="ATTENTION";break;
-                case 3:s="INFORAMTION";break;
+                case 1:color= Color.parseColor("#D32F2F");break;
+                case 2:color=Color.parseColor("#FFC107");break;
+                case 3:color=Color.parseColor("#388E3C");break;
+            }
+            return color;
+        }
+        public int getDayOfNote(){
+            return Integer.parseInt(day);
+        }
+        public String getMonthName() {
+            String s="";
+            switch (month){
+                case 1:s="Janvier";break;
+                case 2:s="Février";break;
+                case 3:s="Mars";break;
+                case 4:s="Avril";break;
+                case 5:s="Mai";break;
+                case 6:s="Juin";break;
+                case 7:s="Juillet";break;
+                case 8:s="Août";break;
+                case 9:s="Septembre";break;
+                case 10:s="Octobre";break;
+                case 11:s="Novembre";break;
+                case 12:s="Décembre";break;
             }
             return s;
         }
 
-
+        public int getYear() {
+            return Integer.parseInt(year);
+        }
     }
 }

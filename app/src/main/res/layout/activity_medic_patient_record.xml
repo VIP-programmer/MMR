@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_simple"
-    tools:context=".patient.ProfileFragment">
+    tools:context=".medic.MedicPatientRecord">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,10 +17,9 @@
             android:orientation="vertical"
             >
             <TextView
-                android:id="@+id/rend_add_to_cal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Vos enregistrement"
+                android:text="Les enregistrement"
                 android:textColor="@color/blue_dark"
                 android:fontFamily="@font/lusitana_bold"
                 android:background="@android:color/transparent"
@@ -35,14 +34,14 @@
             android:layout_height="0dp"
             android:layout_weight="0.9"
             >
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
 
                 <RelativeLayout
-                    android:id="@+id/rec_visit"
+                    android:id="@+id/doc_rec_visit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:elevation="10dp"
@@ -75,7 +74,7 @@
 
                 </RelativeLayout>
                 <RelativeLayout
-                    android:id="@+id/rec_analyses"
+                    android:id="@+id/doc_rec_analyses"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:elevation="10dp"
@@ -107,7 +106,7 @@
 
                 </RelativeLayout>
                 <RelativeLayout
-                    android:id="@+id/rec_medicament"
+                    android:id="@+id/doc_rec_medicament"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:elevation="10dp"
@@ -139,7 +138,7 @@
 
                 </RelativeLayout>
                 <RelativeLayout
-                    android:id="@+id/rec_alergie"
+                    android:id="@+id/doc_rec_alergie"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:elevation="10dp"
@@ -174,4 +173,4 @@
 
         </ScrollView>
     </LinearLayout>
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

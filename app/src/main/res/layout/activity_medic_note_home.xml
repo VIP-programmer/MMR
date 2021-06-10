@@ -1,17 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".medic.MedicRecordFragment">
-
+    tools:context=".medic.MedicNoteHome">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:gravity="center"
         >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:layout_marginTop="10dp"
+            android:text="Choisir le patient"
+            android:textColor="@color/blue_dark"
+            android:fontFamily="@font/fredoka"
+            />
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/doc_list_patients"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/input_shape"
+            android:paddingHorizontal="20dp"
+            android:textAlignment="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="20dp"
+            />
         <RelativeLayout
-            android:id="@+id/doc_see_visit"
+            android:id="@+id/see_notes"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:elevation="10dp"
@@ -24,18 +46,18 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@drawable/visite"
+                android:src="@drawable/touch"
                 android:scaleType="fitEnd"
-                android:padding="10dp"
+                android:padding="20dp"
                 />
 
             <TextView
                 android:id="@+id/percent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Consultez les visites"
+                android:text="Consultez les notes"
                 android:textColor="@android:color/black"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:paddingHorizontal="15dp"
                 android:paddingVertical="5dp"
                 android:fontFamily="@font/lusitana_bold"
@@ -45,7 +67,7 @@
 
         </RelativeLayout>
         <RelativeLayout
-            android:id="@+id/doc_add_visit"
+            android:id="@+id/write_note"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:elevation="10dp"
@@ -57,17 +79,17 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@drawable/add_visite"
+                android:src="@drawable/edit"
                 android:scaleType="fitEnd"
-                android:padding="10dp"
+                android:padding="20dp"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Enregistrez une viste"
+                android:text="Ecrire une note"
                 android:textColor="@android:color/black"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:paddingHorizontal="15dp"
                 android:paddingVertical="5dp"
                 android:fontFamily="@font/lusitana_bold"
@@ -76,47 +98,5 @@
                 />
 
         </RelativeLayout>
-        <!--
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.1"
-            android:orientation="vertical"
-            >
-            <TextView
-                android:id="@+id/rend_add_to_cal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Vos Visitess"
-                android:textColor="@color/blue_dark"
-                android:fontFamily="@font/lusitana_bold"
-                android:background="@android:color/transparent"
-                android:textSize="30dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                />
-        </RelativeLayout>
-        <android.widget.Button
-            android:id="@+id/doc_add_visit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Enregistrer une visite"
-            android:background="@drawable/input_shape"
-            android:backgroundTint="@color/blue_dark"
-            android:paddingHorizontal="20dp"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="18dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginVertical="10dp"
-            />
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/dec_visit_list"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.9"
-            />
-            -->
     </LinearLayout>
-
-</FrameLayout>
+</RelativeLayout>

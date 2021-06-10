@@ -1,5 +1,6 @@
 package com.example.mmr.medic;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.example.mmr.R;
 
@@ -29,6 +32,9 @@ public class MedicHomeFragment extends Fragment {
     private String prenom;
     private String img;
     private String cin;
+    private LinearLayout patients;
+    private LinearLayout records;
+    private LinearLayout notes;
 
     public MedicHomeFragment() {
         // Required empty public constructor
@@ -66,6 +72,31 @@ public class MedicHomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_medic_home, container, false);
+        View view= inflater.inflate(R.layout.fragment_medic_home, container, false);
+
+        patients=view.findViewById(R.id.voir_patients);
+        records=view.findViewById(R.id.voir_record);
+        notes=view.findViewById(R.id.voir_notes);
+
+        patients.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(),MedicPatients.class));
+            }
+        });
+        records.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(),MedicEnregistrement.class));
+            }
+        });
+        notes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(),MedicNoteHome.class));
+            }
+        });
+
+        return view;
     }
 }

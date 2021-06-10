@@ -77,119 +77,192 @@
                 android:layout_marginRight="15dp"
                 android:layout_centerVertical="true"/>
         </RelativeLayout>
-        <LinearLayout
+<!--
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="vertical"
             android:layout_weight="7"
-            >
-            <RelativeLayout
-                android:id="@+id/voir_patients"
+            android:layout_height="0dp"
+            >-->
+            <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_weight="7"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                android:elevation="10dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/icon_prof_med_shape"
-                android:backgroundTint="@color/blue_light"
+                android:orientation="vertical"
+                android:paddingVertical="10dp"
+                android:paddingHorizontal="5dp"
                 >
-
-                <ImageView
+                <!--
+                <RelativeLayout
+                    android:id="@+id/voir_patients"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:src="@drawable/patients"
-                    android:scaleType="center"
-                    android:layout_centerInParent="true"
-                    />
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:elevation="10dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/icon_prof_med_shape"
+                    android:backgroundTint="@color/blue_light"
+                    >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="Consultez Les Patients"
-                    android:textColor="@color/blue_dark"
-                    android:textSize="20sp"
-                    android:background="@drawable/text_shape"
-                    android:paddingHorizontal="15dp"
-                    android:paddingVertical="5dp"
-                    android:fontFamily="@font/fredoka"
-                    android:backgroundTint="@color/white"
-                    />
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:src="@drawable/patients"
+                        android:scaleType="center"
+                        android:layout_centerInParent="true"
+                        />
 
-            </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/voir_notes"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:elevation="10dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/icon_prof_med_shape"
-                android:backgroundTint="@color/blue_light"
-                >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="Consultez Les Patients"
+                        android:textColor="@color/blue_dark"
+                        android:textSize="20sp"
+                        android:background="@drawable/text_shape"
+                        android:paddingHorizontal="15dp"
+                        android:paddingVertical="5dp"
+                        android:fontFamily="@font/fredoka"
+                        android:backgroundTint="@color/white"
+                        />
 
-                <ImageView
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/voir_record"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:src="@drawable/record"
-                    android:layout_centerInParent="true"
-                    />
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:elevation="10dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/icon_prof_med_shape"
+                    android:backgroundTint="@color/blue_light"
+                    >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="Consultez l'enregistrement"
-                    android:textColor="@color/blue_dark"
-                    android:textSize="20sp"
-                    android:background="@drawable/text_shape"
-                    android:paddingHorizontal="15dp"
-                    android:paddingVertical="5dp"
-                    android:fontFamily="@font/fredoka"
-                    android:backgroundTint="@color/white"
-                    />
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:src="@drawable/record"
+                        android:layout_centerInParent="true"
+                        />
 
-            </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/voir_record"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:elevation="10dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/icon_prof_med_shape"
-                android:backgroundTint="@color/blue_light"
-                >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="Consultez l'enregistrement"
+                        android:textColor="@color/blue_dark"
+                        android:textSize="20sp"
+                        android:background="@drawable/text_shape"
+                        android:paddingHorizontal="15dp"
+                        android:paddingVertical="5dp"
+                        android:fontFamily="@font/fredoka"
+                        android:backgroundTint="@color/white"
+                        />
 
-                <ImageView
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/voir_notes"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:src="@drawable/notes"
-                    android:scaleType="centerCrop"
-                    android:layout_centerInParent="true"
-                    />
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:elevation="10dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/icon_prof_med_shape"
+                    android:backgroundTint="@color/blue_light"
+                    >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="Consultez les notes"
-                    android:textColor="@color/blue_dark"
-                    android:textSize="20sp"
-                    android:background="@drawable/text_shape"
-                    android:paddingHorizontal="15dp"
-                    android:paddingVertical="5dp"
-                    android:fontFamily="@font/fredoka"
-                    android:backgroundTint="@color/white"
-                    />
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:src="@drawable/notes"
+                        android:scaleType="centerCrop"
+                        android:layout_centerInParent="true"
+                        />
 
-            </RelativeLayout>
-        </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="Consultez les notes"
+                        android:textColor="@color/blue_dark"
+                        android:textSize="20sp"
+                        android:background="@drawable/text_shape"
+                        android:paddingHorizontal="15dp"
+                        android:paddingVertical="5dp"
+                        android:fontFamily="@font/fredoka"
+                        android:backgroundTint="@color/white"
+                        />
+
+                </RelativeLayout>
+                -->
+                <LinearLayout
+                    android:id="@+id/voir_patients"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:background="@drawable/option_item"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/blue_dark"
+                        android:text="Consultez Les Patients"
+                        android:textSize="20dp"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/lusitana_bold"
+                        android:layout_marginVertical="10dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/voir_record"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:background="@drawable/option_item"
+                    android:layout_marginVertical="5dp"
+                    android:gravity="center"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/blue_dark"
+                        android:text="Consultez l'enregistrement"
+                        android:textSize="20dp"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/lusitana_bold"
+                        android:layout_marginVertical="10dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/voir_notes"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:background="@drawable/option_item"
+                    android:gravity="center"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/blue_dark"
+                        android:text="Consultez les notes"
+                        android:textSize="20dp"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/lusitana_bold"
+                        android:layout_marginVertical="10dp"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+        <!--</ScrollView>-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="vertical"
-            android:layout_weight=".6"
+            android:layout_weight=".8"
             />
 
     </LinearLayout>

@@ -21,6 +21,7 @@ public class ActivityVisite extends AppCompatActivity {
     private RequestQueue queue;
     PatientSessionManager sessionManager;
     Vector<Visite> visites=new Vector<>();
+    String cin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,10 +29,16 @@ public class ActivityVisite extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_visite);
-        recyclerView=findViewById(R.id.visit_list);
+
         sessionManager=new PatientSessionManager(this);
+        if (getIntent().hasExtra("cin"))
+            cin=getIntent().getStringExtra("cin");
+        else {
+            cin=sessionManager.getCinPatient();
+        }
+        recyclerView=findViewById(R.id.visit_list);
         queue = VolleySingleton.getInstance(this).getRequestQueue();
-        new SharedModel(this,queue).getVisites(sessionManager.getCinPatient(), new SharedModel.LoadVisitCallBack() {
+        new SharedModel(this,queue).getVisites(cin, new SharedModel.LoadVisitCallBack() {
             @Override
             public void onSuccess(Vector<Visite> vector) {
                 visites.addAll(vector);

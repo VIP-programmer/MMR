@@ -5,6 +5,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -47,8 +48,10 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.ViewHo
         Notes.Note note=mList.get(position);
         // Set item views based on your views and data model
         holder.title.setText(note.getTitle());
-        holder.date.setText(note.getDate());
-        holder.priority.setText(note.convertPriority());
+        holder.day.setText(note.getDayOfNote()+"");
+        holder.month.setText(note.getMonthName());
+        holder.year.setText(note.getYear()+"");
+        holder.priority.setBackgroundColor(note.convertPriority());
         //holder.body.setText(note.getBody());
         holder.author.setText(note.getAuthor());
         fullBody=note.getBody();
@@ -86,8 +89,10 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.ViewHo
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
         public TextView title;
-        public TextView date;
-        public TextView priority;
+        public TextView day;
+        public TextView month;
+        public TextView year;
+        public LinearLayout priority;
         public TextView body;
         public TextView author;
 
@@ -99,8 +104,10 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.ViewHo
             super(itemView);
 
             title =  (TextView) itemView.findViewById(R.id.note_title);
-            date =  (TextView) itemView.findViewById(R.id.note_date);
-            priority =  (TextView) itemView.findViewById(R.id.note_priority);
+            day =  (TextView) itemView.findViewById(R.id.note_day);
+            month =  (TextView) itemView.findViewById(R.id.note_month);
+            year =  (TextView) itemView.findViewById(R.id.note_year);
+            priority =  (LinearLayout) itemView.findViewById(R.id.note_priority);
             body =  (TextView) itemView.findViewById(R.id.note_body);
             author =  (TextView) itemView.findViewById(R.id.note_author);
 

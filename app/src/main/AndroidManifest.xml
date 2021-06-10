@@ -17,7 +17,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MMR">
-        <activity android:name=".medic.MedicInfoMap"></activity>
+        <activity android:name=".medic.MedicVisitList"></activity>
+        <activity android:name=".medic.MedicMeetsList" />
+        <activity android:name=".medic.MedicNoteList" />
+        <activity android:name=".medic.MedicNoteHome" />
+        <activity android:name=".medic.ProfilePatient" />
+        <activity android:name=".medic.MedicPatientRecord" />
+        <activity android:name=".medic.MedicPatients" />
+        <activity android:name=".medic.MedicEnregistrement" />
+        <activity android:name=".medic.MedicInfoMap" />
         <activity android:name=".medic.MedicAddNewVisit" />
         <activity android:name=".medic.MedicMap" />
         <activity android:name=".medic.MedicHome" />

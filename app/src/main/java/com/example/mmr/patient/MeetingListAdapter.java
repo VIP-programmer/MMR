@@ -53,8 +53,9 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
         // Set item views based on your views and data model
         holder.hour.setText(med.getHour());
         holder.day.setText(med.getDay());
-        holder.docName.setText(med.getDocName());
+        holder.docName.setText("Visite avec "+med.getDocName());
         holder.month.setText(med.getMonthName());
+        holder.year.setText(med.getYear()+"");
         //activeDot.setBackground();
         holder.add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +92,7 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
         public TextView hour;
         public TextView docName;
         public TextView month;
+        public TextView year;
         public ImageButton add;
 
         // We also create a constructor that accepts the entire item row
@@ -104,6 +106,7 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
             month =  (TextView) itemView.findViewById(R.id.rend_month);
             day =  (TextView) itemView.findViewById(R.id.rend_day);
             hour =  (TextView) itemView.findViewById(R.id.rend_hour);
+            year =  (TextView) itemView.findViewById(R.id.rend_year);
             add =  itemView.findViewById(R.id.rend_add_to_cal);
         }
     }

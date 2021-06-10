@@ -29,6 +29,7 @@ public class ActivityAnalyse extends AppCompatActivity {
     private RequestQueue queue;
     PatientSessionManager sessionManager;
     Vector<Analyse> analyses=new Vector<>();
+    String cin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +37,12 @@ public class ActivityAnalyse extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_analyse);
+
+        if (getIntent().hasExtra("cin"))
+            cin=getIntent().getStringExtra("cin");
+        else {
+            cin=sessionManager.getCinPatient();
+        }
         mRequestPermissionHandler = new RequestPermissionHandler();
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -57,7 +64,7 @@ public class ActivityAnalyse extends AppCompatActivity {
         recyclerView=findViewById(R.id.analyse_list);
         sessionManager=new PatientSessionManager(this);
         queue = VolleySingleton.getInstance(this).getRequestQueue();
-        new SharedModel(this,queue).getAnalyses(sessionManager.getCinPatient(), new SharedModel.LoadHomeInfoCallBack() {
+        new SharedModel(this,queue).getAnalyses(cin, new SharedModel.LoadHomeInfoCallBack() {
             @Override
             public void onSuccess(Vector<Object> vector) {
                 for (Object obj: vector) {
