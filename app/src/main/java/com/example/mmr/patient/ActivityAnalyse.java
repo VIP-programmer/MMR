@@ -38,6 +38,7 @@ public class ActivityAnalyse extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_analyse);
 
+        sessionManager=new PatientSessionManager(this);
         if (getIntent().hasExtra("cin"))
             cin=getIntent().getStringExtra("cin");
         else {
@@ -62,7 +63,6 @@ public class ActivityAnalyse extends AppCompatActivity {
         }
 
         recyclerView=findViewById(R.id.analyse_list);
-        sessionManager=new PatientSessionManager(this);
         queue = VolleySingleton.getInstance(this).getRequestQueue();
         new SharedModel(this,queue).getAnalyses(cin, new SharedModel.LoadHomeInfoCallBack() {
             @Override

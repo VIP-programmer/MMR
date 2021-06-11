@@ -33,7 +33,7 @@ public class ActivityMedicament extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_medicament);
-
+        sessionManager=new PatientSessionManager(this);
         if (getIntent().hasExtra("cin"))
             cin=getIntent().getStringExtra("cin");
         else {
@@ -45,7 +45,7 @@ public class ActivityMedicament extends AppCompatActivity {
         recyclerView.setVisibility(View.GONE);
         emplty.setVisibility(View.VISIBLE);
 
-        sessionManager=new PatientSessionManager(this);
+
         queue = VolleySingleton.getInstance(this).getRequestQueue();
         new SharedModel(this,queue).getMedicaments(cin, new SharedModel.LoadHomeInfoCallBack() {
             @Override

@@ -62,7 +62,7 @@ public class Meetings {
             return Integer.parseInt(hour.substring(0,2));
         }
         public int getMinuteOfMeeting(){
-            return Integer.parseInt(hour.substring(3));
+            return Integer.parseInt(hour.substring(hour.lastIndexOf(":"+1)));
         }
 
         public String getMonthName() {

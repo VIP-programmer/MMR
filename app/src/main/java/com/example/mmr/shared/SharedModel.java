@@ -1012,7 +1012,7 @@ public class SharedModel {
         request.setTag("TAG");
         queue.add(request);
     }
-    public void getMedicMeetings(String cin, LoadHomeInfoCallBack callBack){
+    public void getMedicMeetings(Map<String, String> infos, LoadHomeInfoCallBack callBack){
 
         String url = Config.URL+"/Model/medcin/my_meets.php";
 
@@ -1020,7 +1020,7 @@ public class SharedModel {
             @Override
             public void onResponse(String response) {
                 try {
-                    Log.i("TAG", "onResponse: "+response);
+                    Log.i("TAGM", "onResponse: "+response);
                     Vector<Object> vector = new Vector<>();
                     Meetings meetings = new Meetings();
                     //Vector<Notes.Note> notes = new Vector<>();
@@ -1051,9 +1051,7 @@ public class SharedModel {
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> map= new HashMap<String, String>();
-                map.put("cin",cin);
-                return map;
+                return infos;
             }
         };
         request.setTag("TAG");

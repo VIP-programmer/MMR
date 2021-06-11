@@ -19,6 +19,8 @@ import com.example.mmr.patient.MeetingListAdapter;
 import com.example.mmr.patient.Meetings;
 import com.example.mmr.shared.SharedModel;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 
 public class MedicMeetsList extends AppCompatActivity {
@@ -27,6 +29,7 @@ public class MedicMeetsList extends AppCompatActivity {
     TextView emplty;
     private RequestQueue queue;
     private MedicSessionManager sessionManager;
+    Map<String,String> infos = new HashMap<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,11 +42,15 @@ public class MedicMeetsList extends AppCompatActivity {
         emplty=findViewById(R.id.empty_view_meet_list);
         rvMeets.setVisibility(View.GONE);
         emplty.setVisibility(View.VISIBLE);
-
         queue = VolleySingleton.getInstance(this).getRequestQueue();
         sessionManager=new MedicSessionManager(this);
+
+        if (getIntent().hasExtra("cin"))
+            infos.put("patient",getIntent().getStringExtra("cin"));
+        infos.put("medic",sessionManager.getCinMedcin());
+
         meetings = new Meetings();
-        new SharedModel(this,queue).getMedicMeetings(cin, new SharedModel.LoadHomeInfoCallBack() {
+        new SharedModel(this,queue).getMedicMeetings(infos, new SharedModel.LoadHomeInfoCallBack() {
             @Override
             public void onSuccess(Vector<Object> vector) {
                 meetings=(Meetings) vector.get(0);
