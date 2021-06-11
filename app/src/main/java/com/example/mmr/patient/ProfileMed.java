@@ -139,7 +139,6 @@ public class ProfileMed extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),Home.class));
                 finish();
             }
         });

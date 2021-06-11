@@ -8,6 +8,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,13 +41,16 @@ public class MedicNoteHome extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //make it fullscreen
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_medic_note_home);
 
         queue = VolleySingleton.getInstance(this).getRequestQueue();
         sessionManager = new MedicSessionManager(this);
         searchableSpinner=findViewById(R.id.doc_list_patients);
-        write=findViewById(R.id.see_notes);
-        read=findViewById(R.id.write_note);
+        write=findViewById(R.id.write_note);
+        read=findViewById(R.id.see_notes);
         Vector<String> stringPastients =new Vector<>();
         patients =new Vector<>();
         new SharedModel(this,queue).getPatients(sessionManager.getCinMedcin(), new SharedModel.LoadHomeInfoCallBack() {

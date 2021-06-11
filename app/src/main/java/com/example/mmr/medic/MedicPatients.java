@@ -5,6 +5,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -21,15 +25,21 @@ public class MedicPatients extends AppCompatActivity {
 
     private RequestQueue queue;
     private MedicSessionManager sessionManager;
+    TextView emplty;
     Vector<Patient> patients=new Vector<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //make it fullscreen
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_medic_patients);
         queue = VolleySingleton.getInstance(this).getRequestQueue();
         sessionManager = new MedicSessionManager(this);
         RecyclerView rvMeds = (RecyclerView) findViewById(R.id.patients_list);
-
+        emplty=findViewById(R.id.empty_view_pat);
+        rvMeds.setVisibility(View.GONE);
+        emplty.setVisibility(View.VISIBLE);
         new SharedModel(this,queue).getMyPatients(sessionManager.getCinMedcin(), new SharedModel.LoadHomeInfoCallBack() {
             @Override
             public void onSuccess(Vector<Object> vector) {
@@ -40,6 +50,14 @@ public class MedicPatients extends AppCompatActivity {
                 rvMeds.setAdapter(listAdapter);
                 // Attach the adapter to the recyclerview to populate items
                 rvMeds.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
+                if (patients.isEmpty()) {
+                    rvMeds.setVisibility(View.GONE);
+                    emplty.setVisibility(View.VISIBLE);
+                }
+                else {
+                    rvMeds.setVisibility(View.VISIBLE);
+                    emplty.setVisibility(View.GONE);
+                }
             }
 
             @Override

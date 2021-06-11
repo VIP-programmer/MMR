@@ -3,8 +3,13 @@ package com.example.mmr.medic;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -12,13 +17,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.example.mmr.R;
 import com.example.mmr.VolleySingleton;
+import com.example.mmr.patient.Home;
 import com.example.mmr.patient.Login;
 import com.example.mmr.patient.Positions;
+import com.example.mmr.patient.SignUp;
+import com.example.mmr.shared.LoadingDialogBuilder;
+import com.example.mmr.shared.MailSender;
 import com.example.mmr.shared.SharedModel;
 import com.google.gson.Gson;
 
@@ -111,21 +121,56 @@ public class MedicSignUp extends AppCompatActivity {
                             if (! password.getText().toString().equals(confPassword.getText().toString()))
                                 Toast.makeText(getApplicationContext(),"Erreur le mots de passes sont différents",Toast.LENGTH_LONG).show();
                             else{
-                                //everything is okey sending request
-                                //preparing infos
-                                infos.put("lname",nom.getText().toString());
-                                infos.put("cin",cin.getText().toString());
-                                infos.put("serie",serie.getText().toString());
-                                infos.put("about",about.getText().toString());
-                                infos.put("fname",prenom.getText().toString());
-                                infos.put("adrr",adresse.getText().toString());
-                                infos.put("ville",ville.getText().toString());
-                                infos.put("type",isPublic?"public":"privé");
-                                infos.put("email",email.getText().toString());
-                                infos.put("specialite",speciality.getSelectedItemPosition()+"");
-                                infos.put("tele",tele.getText().toString());
-                                infos.put("pass",password.getText().toString());
-                                startActivityForResult(new Intent(getApplicationContext(),MedicMap.class), 2);
+                                if (!MailSender.isValid(email.getText().toString()))
+                                    Toast.makeText(getApplicationContext(),"Email non valide",Toast.LENGTH_LONG).show();
+                                else{
+                                    Dialog dialog=new Dialog(MedicSignUp.this);
+                                    dialog.setContentView(R.layout.dialog_confirm_email);
+                                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                    EditText code=(EditText) dialog.findViewById(R.id.code);
+                                    Button validate=(Button) dialog.findViewById(R.id.validate);
+                                    TextView errorText=(TextView) dialog.findViewById(R.id.erreur);
+                                    validate.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            String currentCode= code.getText().toString().trim();
+                                            if (MailSender.codeValid(currentCode)){
+                                                errorText.setVisibility(View.GONE);
+                                                dialog.dismiss();
+                                            }else{
+                                                errorText.setVisibility(View.VISIBLE);
+                                            }
+                                        }
+                                    });
+                                    MailSender.sendVerificationEmail(MedicSignUp.this,nom.getText().toString()+" "+prenom.getText().toString(),email.getText().toString());
+                                    dialog.show();
+                                    DisplayMetrics metrics = getResources().getDisplayMetrics();
+                                    int width = metrics.widthPixels;
+                                    dialog.getWindow().setLayout((6*width)/7, WindowManager.LayoutParams.WRAP_CONTENT);
+                                    dialog.setCancelable(false);
+                                    dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                        @Override
+                                        public void onDismiss(DialogInterface dialog) {
+                                            //everything is okey sending request
+                                            //preparing infos
+                                            infos.put("lname",nom.getText().toString());
+                                            infos.put("cin",cin.getText().toString());
+                                            infos.put("serie",serie.getText().toString());
+                                            infos.put("about",about.getText().toString());
+                                            infos.put("fname",prenom.getText().toString());
+                                            infos.put("adrr",adresse.getText().toString());
+                                            infos.put("ville",ville.getText().toString());
+                                            infos.put("type",isPublic?"public":"privé");
+                                            infos.put("email",email.getText().toString());
+                                            infos.put("specialite",speciality.getSelectedItemPosition()+"");
+                                            infos.put("tele",tele.getText().toString());
+                                            infos.put("pass",password.getText().toString());
+                                            startActivityForResult(new Intent(getApplicationContext(),MedicMap.class), 2);
+                                        }
+                                    });
+
+                                }
+
                             }
                         }
                     }
@@ -139,6 +184,7 @@ public class MedicSignUp extends AppCompatActivity {
         if (requestCode==2){
             if (data !=null) {
                 if (data.hasExtra("list")) {
+                    LoadingDialogBuilder.startDialog(MedicSignUp.this);
                     int taille=0;
                     Gson gson=new Gson();
                     Positions positions=gson.fromJson(data.getStringExtra("list"),Positions.class);
@@ -152,12 +198,14 @@ public class MedicSignUp extends AppCompatActivity {
                     new SharedModel(getApplicationContext(),queue).registerMedic(infos, new SharedModel.SignUpCallBack() {
                         @Override
                         public void onSuccess(String message) {
+                            LoadingDialogBuilder.closeDialog();
                             Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(getApplicationContext(), MedicLogin.class));
+                            finish();
                         }
 
                         @Override
                         public void onErr(String message) {
+                            LoadingDialogBuilder.closeDialog();
                             Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
                         }
                     });

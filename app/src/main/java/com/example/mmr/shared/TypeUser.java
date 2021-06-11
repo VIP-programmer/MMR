@@ -11,13 +11,19 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.example.mmr.R;
+import com.example.mmr.medic.MedicHome;
 import com.example.mmr.medic.MedicLogin;
 import com.example.mmr.medic.MedicMap;
+import com.example.mmr.medic.MedicSessionManager;
+import com.example.mmr.patient.Home;
 import com.example.mmr.patient.Login;
+import com.example.mmr.patient.PatientSessionManager;
 
 public class TypeUser extends AppCompatActivity {
     RelativeLayout patient;
     RelativeLayout medcin;
+    PatientSessionManager patientSessionManager;
+    MedicSessionManager medicSessionManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,18 +34,27 @@ public class TypeUser extends AppCompatActivity {
         patient=findViewById(R.id.patient);
         medcin=findViewById(R.id.medic);
 
+        medicSessionManager=new MedicSessionManager(this);
+        patientSessionManager=new PatientSessionManager(this);
+
+        if (patientSessionManager.isLogged()){
+            startActivity(new Intent(this, Home.class));
+            finish();
+        }else if (medicSessionManager.isLogged()){
+                startActivity(new Intent(this, MedicHome.class));
+                finish();
+        }
+
         patient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), Login.class));
-                finish();
             }
         });
         medcin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), MedicLogin.class));
-                finish();
             }
         });
     }

@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
+import com.example.mmr.Config;
 import com.example.mmr.R;
 import com.example.mmr.VolleySingleton;
 import com.example.mmr.shared.LoadImage;
@@ -304,6 +305,8 @@ public class ProfileFragment extends Fragment {
                 }
                 uploadImage(ImageToString(bitmap),cin);
                 profile.setImageBitmap(bitmap);
+
+                sessionManager.setImgPatient(Config.URL+"/Data/images/profile/"+sessionManager.getCinPatient()+".jpg");
             }
         }
     }

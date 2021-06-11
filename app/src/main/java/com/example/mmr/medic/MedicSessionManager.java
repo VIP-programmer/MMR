@@ -19,6 +19,7 @@ public class MedicSessionManager {
     private static final String EMAIL_PATIENT="email_med";
     private static final String IMG_PATIENT="img_med";
     private static final String IS_NEW="new_med";
+    private static final String IS_ONLINE="online_med";
 
     private Context context;
     private Gson gson;
@@ -52,6 +53,13 @@ public class MedicSessionManager {
     public Boolean getIsNew() {
         return preferences.getBoolean(IS_NEW,false);
     }
+    public Boolean getIsOnline() {
+        return preferences.getBoolean(IS_ONLINE,false);
+    }
+    public void setOnline(Boolean bool) {
+        editor.putBoolean(IS_ONLINE,bool);
+        editor.apply();
+    }
 
     public boolean isLogged(){
         return preferences.getBoolean(IS_LOGGED,false);
@@ -69,6 +77,10 @@ public class MedicSessionManager {
     public String getImgMedcin() {
         gson=new Gson();
         return preferences.getString(IMG_PATIENT, "");
+    }
+    public void setImgMedcin(String img) {
+        editor.putString(IMG_PATIENT,img);
+        editor.apply();
     }
 
     public String getNomMedcin() {

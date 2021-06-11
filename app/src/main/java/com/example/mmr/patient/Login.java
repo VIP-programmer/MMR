@@ -70,6 +70,7 @@ public class Login extends AppCompatActivity {
                             public void onSuccess(Patient patient) {
                                 sessionManager.login();
                                 sessionManager.setPatient(patient);
+                                sessionManager.setImgPatient(patient.getPhoto());
                                 startActivity(new Intent(getApplicationContext(), Home.class));
                                 finish();
                             }

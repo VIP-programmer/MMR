@@ -66,6 +66,8 @@ public class HomeFragment extends Fragment {
     private CircleImageView profile;
     private RequestQueue queue;
     private TextView more;
+    TextView empltyNotes;
+    TextView empltyMeds;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -107,11 +109,20 @@ public class HomeFragment extends Fragment {
         // Lookup the recyclerview in activity layout
         RecyclerView rvMeds = (RecyclerView) view.findViewById(R.id.online_med_list);
         RecyclerView rvNotes = (RecyclerView) view.findViewById(R.id.note_list);
+
+        empltyMeds=view.findViewById(R.id.empty_view_med);
+        empltyNotes=view.findViewById(R.id.empty_view_note);
+        rvMeds.setVisibility(View.GONE);
+        rvNotes.setVisibility(View.GONE);
+        empltyMeds.setVisibility(View.VISIBLE);
+        empltyNotes.setVisibility(View.VISIBLE);
+
         name=view.findViewById(R.id.name);
         more=view.findViewById(R.id.more);
         profile=view.findViewById(R.id.profile_image);
         //loading profile image
-        new LoadImage(profile,getActivity()).execute(img);
+        if (!img.equals("local"))
+            new LoadImage(profile,getContext()).execute(img);
         queue = VolleySingleton.getInstance(getActivity()).getRequestQueue();
         name.setText(nom+" "+prenom);
 
@@ -155,6 +166,23 @@ public class HomeFragment extends Fragment {
                 // Attach the adapter to the recyclerview to populate items
                 rvMeds.setAdapter(medListAdapter);
                 rvNotes.setAdapter(noteListAdapter);
+
+                if (meds.getMedList().isEmpty()) {
+                    rvMeds.setVisibility(View.GONE);
+                    empltyMeds.setVisibility(View.VISIBLE);
+                }
+                else {
+                    rvMeds.setVisibility(View.VISIBLE);
+                    empltyMeds.setVisibility(View.GONE);
+                }
+                if (notes.getNotes().isEmpty()) {
+                    rvNotes.setVisibility(View.GONE);
+                    empltyNotes.setVisibility(View.VISIBLE);
+                }
+                else {
+                    rvNotes.setVisibility(View.VISIBLE);
+                    empltyNotes.setVisibility(View.GONE);
+                }
             }
 
             @Override

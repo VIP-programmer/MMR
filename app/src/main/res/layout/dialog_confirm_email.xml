@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/about_shape"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tappez le code que vous avez recu dans votre boite email"
+            android:textColor="@color/blue_dark"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_marginHorizontal="10sp"
+            android:layout_marginTop="15sp"
+            />
+        <EditText
+            android:id="@+id/code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="XXXX"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:background="@drawable/input_shape"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10sp"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="5dp"
+            />
+        <TextView
+            android:id="@+id/erreur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Code n'est pas correct"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="15sp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="10sp"
+            android:layout_marginTop="10sp"
+            android:fontFamily="@font/lusitana_bold"
+            android:visibility="gone"
+            />
+        <android.widget.Button
+            android:id="@+id/validate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Valider"
+            android:background="@drawable/active_dot"
+            android:backgroundTint="@color/blue_light"
+            android:layout_marginTop="15sp"
+            android:layout_marginBottom="15sp"
+            />
+
+    </LinearLayout>
+</RelativeLayout>

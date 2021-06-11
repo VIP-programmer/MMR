@@ -13,4 +13,15 @@
         android:layout_marginHorizontal="10dp"
         android:paddingTop="10dp"
         />
+
+    <TextView
+        android:id="@+id/empty_view_meet_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/no_data_available"
+        android:textColor="@color/gray_dark"
+        android:textSize="20dp"
+        android:visibility="gone"
+        />
 </RelativeLayout>

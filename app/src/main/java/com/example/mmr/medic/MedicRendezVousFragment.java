@@ -121,13 +121,6 @@ public class MedicRendezVousFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        read.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),MedicMeetsList.class);
-                startActivity(intent);
-            }
-        });
         write.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -10,8 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.mmr.R;
+import com.example.mmr.shared.LoadImage;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,6 +39,8 @@ public class MedicHomeFragment extends Fragment {
     private LinearLayout patients;
     private LinearLayout records;
     private LinearLayout notes;
+    private TextView name;
+    private CircleImageView profile;
 
     public MedicHomeFragment() {
         // Required empty public constructor
@@ -77,7 +83,13 @@ public class MedicHomeFragment extends Fragment {
         patients=view.findViewById(R.id.voir_patients);
         records=view.findViewById(R.id.voir_record);
         notes=view.findViewById(R.id.voir_notes);
+        profile=view.findViewById(R.id.medic_home_profile_image);
+        name=view.findViewById(R.id.medic_home_name);
 
+        //loading profile image
+        if (!img.equals("local"))
+            new LoadImage(profile,getContext()).execute(img);
+        name.setText(nom+" "+prenom);
         patients.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

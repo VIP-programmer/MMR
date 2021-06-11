@@ -10,8 +10,11 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,6 +27,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.mmr.R;
+import com.example.mmr.medic.MedicHome;
+import com.example.mmr.medic.MedicInfoMap;
 import com.example.mmr.shared.SharedModel;
 import com.fxn.BubbleTabBar;
 import com.fxn.OnBubbleClickListener;
@@ -130,5 +135,30 @@ public class Home extends AppCompatActivity {
             return "Page " + position;
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Dialog dialog = new Dialog(Home.this);
+        dialog.setContentView(R.layout.dialog_logout);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Button logout = dialog.findViewById(R.id.logout);
+        Button stay = dialog.findViewById(R.id.stay_connected);
+        dialog.show();
+        stay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                Home.this.finishAffinity();
+            }
+        });
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                sessionManager.logout();
+                Home.this.finishAffinity();
+            }
+        });
     }
 }

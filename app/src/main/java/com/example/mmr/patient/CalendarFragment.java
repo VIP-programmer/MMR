@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.example.mmr.R;
@@ -35,6 +36,7 @@ public class CalendarFragment extends Fragment {
     private int mParam1;
     private Meetings meetings;
     private String cin;
+    TextView emplty;
 
     private RequestQueue queue;
     public CalendarFragment() {
@@ -74,6 +76,11 @@ public class CalendarFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_calendar, container, false);
         // Lookup the recyclerview in activity layout
         RecyclerView rvMeets = (RecyclerView) view.findViewById(R.id.rend_list);
+
+        emplty=view.findViewById(R.id.empty_view_my_rends);
+        rvMeets.setVisibility(View.GONE);
+        emplty.setVisibility(View.VISIBLE);
+
         queue = VolleySingleton.getInstance(getActivity()).getRequestQueue();
         // Initialize data
         meetings = new Meetings();
@@ -87,6 +94,14 @@ public class CalendarFragment extends Fragment {
                 rvMeets.setAdapter(medListAdapter);
                 // Set layout manager to position the items
                 rvMeets.setLayoutManager(new LinearLayoutManager(getContext()));
+                if (meetings.getMeeetList().isEmpty()) {
+                    rvMeets.setVisibility(View.GONE);
+                    emplty.setVisibility(View.VISIBLE);
+                }
+                else {
+                    rvMeets.setVisibility(View.VISIBLE);
+                    emplty.setVisibility(View.GONE);
+                }
             }
 
             @Override

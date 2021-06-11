@@ -5,6 +5,10 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -17,7 +21,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MMR">
-        <activity android:name=".medic.MedicVisitList"></activity>
+        <activity android:name=".shared.TypeUser"></activity>
+        <activity android:name=".medic.MedicVisitList" />
         <activity android:name=".medic.MedicMeetsList" />
         <activity android:name=".medic.MedicNoteList" />
         <activity android:name=".medic.MedicNoteHome" />
@@ -37,7 +42,7 @@
         <activity android:name=".patient.ActivityMedicament" /> <!-- android:theme="@android:style/Theme.NoTitleBar.Fullscreen" -->
         <!-- android:theme="@style/Theme.MMR" -->
         <activity android:name=".patient.MyMedcins" />
-        <activity android:name=".shared.TypeUser">
+        <activity android:name=".shared.Welcome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

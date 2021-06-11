@@ -5,6 +5,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.bumptech.glide.request.target.ThumbnailImageViewTarget;
@@ -19,14 +24,22 @@ import java.util.Vector;
 public class MedicMeetsList extends AppCompatActivity {
     private Meetings meetings;
     private String cin;
+    TextView emplty;
     private RequestQueue queue;
     private MedicSessionManager sessionManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //make it fullscreen
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_medic_meets_list);
 
-        RecyclerView rvMeets = (RecyclerView) findViewById(R.id.rend_list);
+        RecyclerView rvMeets = (RecyclerView) findViewById(R.id.doc_meet_list);
+        emplty=findViewById(R.id.empty_view_meet_list);
+        rvMeets.setVisibility(View.GONE);
+        emplty.setVisibility(View.VISIBLE);
+
         queue = VolleySingleton.getInstance(this).getRequestQueue();
         sessionManager=new MedicSessionManager(this);
         meetings = new Meetings();
@@ -40,11 +53,19 @@ public class MedicMeetsList extends AppCompatActivity {
                 rvMeets.setAdapter(medListAdapter);
                 // Set layout manager to position the items
                 rvMeets.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                if (meetings.getMeeetList().isEmpty()) {
+                    rvMeets.setVisibility(View.GONE);
+                    emplty.setVisibility(View.VISIBLE);
+                }
+                else {
+                    rvMeets.setVisibility(View.VISIBLE);
+                    emplty.setVisibility(View.GONE);
+                }
             }
 
             @Override
             public void onErr(String message) {
-
+                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
             }
         });
     }

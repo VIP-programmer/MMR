@@ -12,6 +12,7 @@ import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
@@ -46,6 +47,7 @@ public class ProfilePatient extends AppCompatActivity {
     private LinearLayout setMeet;
     private String cin;
     private Patient patient;
+    ImageButton back;
     MedicSessionManager sessionManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,7 @@ public class ProfilePatient extends AppCompatActivity {
         writeNote = findViewById(R.id.to_notes);
         seeRecord = findViewById(R.id.to_record);
         setMeet = findViewById(R.id.to_calandar);
+        back = findViewById(R.id.patient_btn_back);
         cin=getIntent().getStringExtra("cin");
         new SharedModel(this,queue).getPatientInfos(cin, new SharedModel.LoadHomeInfoCallBack() {
             @Override
@@ -216,5 +219,11 @@ public class ProfilePatient extends AppCompatActivity {
             }
         });
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 }

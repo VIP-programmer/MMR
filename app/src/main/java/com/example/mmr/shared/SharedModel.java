@@ -319,6 +319,7 @@ public class SharedModel {
                     medcin.setPrenom(json.getString("prenom"));
                     medcin.setAbout(json.getString("about"));
                     medcin.setNom(json.getString("nom"));
+                    medcin.setOnline(json.getInt("is_active") == 1);
                     vector.add(medcin);
                     callBack.onSuccess(vector);
                 } catch (JSONException e) {
@@ -1053,6 +1054,48 @@ public class SharedModel {
                 Map<String,String> map= new HashMap<String, String>();
                 map.put("cin",cin);
                 return map;
+            }
+        };
+        request.setTag("TAG");
+        queue.add(request);
+    }
+    public void updateStatut(Map<String, String> infos, SignUpCallBack callBack){
+
+        String url = Config.URL+"/Model/medcin/update_statut.php";
+
+        request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    Log.i("TAG", "onResponse: "+response);
+                    JSONObject json = new JSONObject(response);
+                    Boolean error = json.getBoolean("error");
+                    if (!error){
+                        callBack.onSuccess("vous étes "+((infos.get("isOnline")=="1")?"online":"offline"));
+                    }else{
+                        Log.i("tagconvertstr", "["+response+"]");
+                        String messages = json.getString("messages");
+                        callBack.onErr(messages);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error instanceof NetworkError) {
+                    Log.d("TAG", "onErrorResponse: " + error.getMessage());
+                    callBack.onErr("Impoussible de se connecter");
+                }else if (error instanceof VolleyError)
+                    callBack.onErr("Une erreur s'est produite");
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                return infos;
             }
         };
         request.setTag("TAG");

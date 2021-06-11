@@ -6,9 +6,12 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
+import com.example.mmr.Config;
 import com.example.mmr.R;
 import com.example.mmr.VolleySingleton;
 import com.example.mmr.patient.Patient;
@@ -35,12 +39,14 @@ import com.yalantis.ucrop.UCrop;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static android.app.Activity.RESULT_OK;
 import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
 
 /**
@@ -68,6 +74,7 @@ public class MedicProfileFragment extends Fragment {
     private Button submit;
     private Button editCoord;
     private Button changeImg;
+    private Button status;
     private Button modify;
     private EditText adresse;
     private EditText email;
@@ -128,6 +135,7 @@ public class MedicProfileFragment extends Fragment {
         name=view.findViewById(R.id.doc_profile_name);
         submit=view.findViewById(R.id.doc_profile_edit_save);
         changeImg=view.findViewById(R.id.doc_profile_change_img);
+        status=view.findViewById(R.id.statut);
         modify=view.findViewById(R.id.doc_profile_edit_btn);
         adresse=view.findViewById(R.id.doc_profile_input_adrs);
         email=view.findViewById(R.id.doc_profile_input_email);
@@ -160,6 +168,12 @@ public class MedicProfileFragment extends Fragment {
                 email.setText(medcin.getEmail());
                 tele.setText(medcin.getTele());
                 about.setText(medcin.getAbout());
+                sessionManager.setOnline(medcin.isOnline());
+                if (medcin.isOnline()) {
+                    status.setBackgroundTintList(ContextCompat.getColorStateList(getActivity(), R.color.green));
+                }else {
+                    status.setBackgroundTintList(ContextCompat.getColorStateList(getActivity(), R.color.gray_light));
+                }
             }
 
             @Override
@@ -171,6 +185,36 @@ public class MedicProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 setModeModify(true);
+            }
+        });
+
+        status.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Boolean isOnline=false;
+                if (sessionManager.getIsOnline()) {
+                    isOnline = false;
+                    status.setBackgroundTintList(ContextCompat.getColorStateList(getActivity(), R.color.gray_light));
+                }else {
+                    isOnline = true;
+                    status.setBackgroundTintList(ContextCompat.getColorStateList(getActivity(), R.color.green));
+                }
+                sessionManager.setOnline(isOnline);
+                Map<String,String> infos = new HashMap<>();
+                infos.put("cin",sessionManager.getCinMedcin());
+                infos.put("isOnline",(isOnline ? "1" : "0"));
+                new SharedModel(getActivity(),queue).updateStatut(infos, new SharedModel.SignUpCallBack() {
+                    @Override
+                    public void onSuccess(String message) {
+                        Toast.makeText(getActivity(),message,Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onErr(String message) {
+                        Toast.makeText(getActivity(),message,Toast.LENGTH_LONG).show();
+
+                    }
+                });
             }
         });
 
@@ -253,6 +297,14 @@ public class MedicProfileFragment extends Fragment {
                 }
             }
         });
+        changeImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(new Intent()
+                        .setAction(Intent.ACTION_GET_CONTENT)
+                        .setType("image/*"),CODE_IMG_GALERY);
+            }
+        });
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -270,6 +322,26 @@ public class MedicProfileFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CODE_IMG_GALERY && resultCode == RESULT_OK){
+            Uri imageUri=data.getData();
+            if (imageUri != null) {
+                startCrop(imageUri);
+            }
+        }else if(requestCode == UCrop.REQUEST_CROP && resultCode == RESULT_OK){
+            Uri imageResultCrop = UCrop.getOutput(data);
+
+            if (imageResultCrop != null){
+                try {
+                    bitmap= MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(),imageResultCrop);
+                    Log.i("TAG", "onActivityResult: Bitmap:"+ImageToString(bitmap));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                uploadImage(ImageToString(bitmap),cin);
+                profile.setImageBitmap(bitmap);
+                sessionManager.setImgMedcin(Config.URL+"/Data/images/profile/"+sessionManager.getCinMedcin()+".jpg");
+            }
+        }
         if (requestCode == 3) {
             if (data != null) {
                 if (data.hasExtra("list")) {

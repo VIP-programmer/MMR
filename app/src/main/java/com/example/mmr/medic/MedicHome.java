@@ -6,9 +6,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 
 import com.example.mmr.R;
 import com.example.mmr.patient.CalendarFragment;
@@ -117,6 +123,33 @@ public class MedicHome extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             return "Page " + position;
         }
+
+    }
+    @Override
+    public void onBackPressed() {
+        Activity activity=this;
+        Dialog dialog = new Dialog(MedicHome.this);
+        dialog.setContentView(R.layout.dialog_logout);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Button logout = dialog.findViewById(R.id.logout);
+        Button stay = dialog.findViewById(R.id.stay_connected);
+        dialog.show();
+        stay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                MedicHome.this.finishAffinity();
+            }
+        });
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                sessionManager.logout();
+                MedicHome.this.finishAffinity();
+            }
+        });
+
 
     }
 }

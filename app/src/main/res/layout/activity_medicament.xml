@@ -35,5 +35,16 @@
             android:layout_height="0dp"
             android:layout_weight="0.9"
             />
+
+        <TextView
+            android:id="@+id/empty_view_medicament"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/no_data_available"
+            android:textColor="@color/gray_dark"
+            android:textSize="20dp"
+            android:visibility="gone"
+            />
     </LinearLayout>
 </RelativeLayout>

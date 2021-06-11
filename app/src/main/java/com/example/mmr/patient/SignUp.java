@@ -2,8 +2,13 @@ package com.example.mmr.patient;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -11,11 +16,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.example.mmr.R;
 import com.example.mmr.VolleySingleton;
+import com.example.mmr.shared.LoadingDialogBuilder;
+import com.example.mmr.shared.MailSender;
 import com.example.mmr.shared.SharedModel;
 
 import java.util.HashMap;
@@ -91,32 +99,72 @@ public class SignUp extends AppCompatActivity {
                         if (! password.getText().toString().equals(confPassword.getText().toString()))
                             Toast.makeText(getApplicationContext(),"Erreur le mots de passes sont différents",Toast.LENGTH_LONG).show();
                         else{
-                            //everything is okey sending request
-                            //preparing infos
-                            Map<String,String> infos=new HashMap<>();
-                            infos.put("lname",nom.getText().toString());
-                            infos.put("cin",cin.getText().toString());
-                            infos.put("fname",prenom.getText().toString());
-                            infos.put("adrr",adresse.getText().toString());
-                            infos.put("ville",ville.getText().toString());
-                            infos.put("age",age.getText().toString());
-                            infos.put("gender",convertGender(gender.getCheckedRadioButtonId()));
-                            infos.put("sang",convertSang(sang.getSelectedItemPosition()));
-                            infos.put("assur",convertAssurance(assurance.getSelectedItemPosition()));
-                            infos.put("email",email.getText().toString());
-                            infos.put("tele",tele.getText().toString());
-                            infos.put("pass",password.getText().toString());
-                            sharedModel.register(infos, new SharedModel.SignUpCallBack() {
-                                @Override
-                                public void onSuccess(String message) {
-                                    startActivity(new Intent(getApplicationContext(), Login.class));
-                                }
+                            if (!MailSender.isValid(email.getText().toString()))
+                                Toast.makeText(getApplicationContext(),"Email non valide",Toast.LENGTH_LONG).show();
+                            else{
+                                Dialog dialog=new Dialog(SignUp.this);
+                                dialog.setContentView(R.layout.dialog_confirm_email);
+                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                EditText code=(EditText) dialog.findViewById(R.id.code);
+                                Button validate=(Button) dialog.findViewById(R.id.validate);
+                                TextView errorText=(TextView) dialog.findViewById(R.id.erreur);
+                                validate.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        String currentCode= code.getText().toString().trim();
+                                        if (MailSender.codeValid(currentCode)){
+                                            errorText.setVisibility(View.GONE);
+                                            dialog.dismiss();
+                                        }else{
+                                            errorText.setVisibility(View.VISIBLE);
+                                        }
+                                    }
+                                });
+                                MailSender.sendVerificationEmail(SignUp.this,nom.getText().toString()+" "+prenom.getText().toString(),email.getText().toString());
+                                dialog.show();
+                                DisplayMetrics metrics = getResources().getDisplayMetrics();
+                                int width = metrics.widthPixels;
+                                dialog.getWindow().setLayout((6*width)/7, WindowManager.LayoutParams.WRAP_CONTENT);
+                                dialog.setCancelable(false);
+                                dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                    @Override
+                                    public void onDismiss(DialogInterface dialog) {
 
-                                @Override
-                                public void onErr(String message) {
-                                    Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
-                                }
-                            });
+                                        LoadingDialogBuilder.startDialog(SignUp.this);
+                                        //everything is okey sending request
+                                        //preparing infos
+                                        Map<String,String> infos=new HashMap<>();
+                                        infos.put("lname",nom.getText().toString());
+                                        infos.put("cin",cin.getText().toString());
+                                        infos.put("fname",prenom.getText().toString());
+                                        infos.put("adrr",adresse.getText().toString());
+                                        infos.put("ville",ville.getText().toString());
+                                        infos.put("age",age.getText().toString());
+                                        infos.put("gender",convertGender(gender.getCheckedRadioButtonId()));
+                                        infos.put("sang",convertSang(sang.getSelectedItemPosition()));
+                                        infos.put("assur",convertAssurance(assurance.getSelectedItemPosition()));
+                                        infos.put("email",email.getText().toString());
+                                        infos.put("tele",tele.getText().toString());
+                                        infos.put("pass",password.getText().toString());
+                                        sharedModel.register(infos, new SharedModel.SignUpCallBack() {
+                                            @Override
+                                            public void onSuccess(String message) {
+                                                LoadingDialogBuilder.closeDialog();
+                                                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+                                                finish();
+                                            }
+
+                                            @Override
+                                            public void onErr(String message) {
+                                                LoadingDialogBuilder.closeDialog();
+                                                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+                                            }
+                                        });
+                                    }
+                                });
+
+                            }
+
                         }
                     }
                 }

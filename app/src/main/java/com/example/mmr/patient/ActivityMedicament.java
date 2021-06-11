@@ -5,8 +5,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -20,6 +22,7 @@ public class ActivityMedicament extends AppCompatActivity {
 
     RecyclerView recyclerView;
     private RequestQueue queue;
+    TextView emplty;
     PatientSessionManager sessionManager;
     Vector<Medicament> medicaments=new Vector<>();
     String cin;
@@ -37,6 +40,11 @@ public class ActivityMedicament extends AppCompatActivity {
             cin=sessionManager.getCinPatient();
         }
         recyclerView=findViewById(R.id.medicament_list);
+
+        emplty=findViewById(R.id.empty_view_medicament);
+        recyclerView.setVisibility(View.GONE);
+        emplty.setVisibility(View.VISIBLE);
+
         sessionManager=new PatientSessionManager(this);
         queue = VolleySingleton.getInstance(this).getRequestQueue();
         new SharedModel(this,queue).getMedicaments(cin, new SharedModel.LoadHomeInfoCallBack() {
@@ -49,6 +57,14 @@ public class ActivityMedicament extends AppCompatActivity {
                 recyclerView.setAdapter(medListAdapter);
                 // Attach the adapter to the recyclerview to populate items
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                if (medicaments.isEmpty()) {
+                    recyclerView.setVisibility(View.GONE);
+                    emplty.setVisibility(View.VISIBLE);
+                }
+                else {
+                    recyclerView.setVisibility(View.VISIBLE);
+                    emplty.setVisibility(View.GONE);
+                }
             }
 
             @Override

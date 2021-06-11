@@ -71,6 +71,10 @@ public class PatientSessionManager {
         return preferences.getString(IMG_PATIENT, "");
     }
 
+    public void setImgPatient(String img) {
+        editor.putString(IMG_PATIENT,img);
+        editor.apply();
+    }
     public String getNomPatient() {
         gson=new Gson();
         return preferences.getString(NOM_PATIENT, "");

@@ -75,6 +75,7 @@ public class MedicLogin extends AppCompatActivity {
                             public void onSuccess(Medcin medcin) {
                                 sessionManager.login();
                                 sessionManager.setMedic(medcin);
+                                sessionManager.setImgMedcin(medcin.getPhoto());
                                 startActivity(new Intent(getApplicationContext(), MedicHome.class));
                                 finish();
                             }
