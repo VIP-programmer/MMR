@@ -40,7 +40,6 @@
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
                     android:maxLines="1"
-                    android:text="ZT2727"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
 
@@ -66,7 +65,6 @@
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
                     android:maxLines="1"
-                    android:text="dahman"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
 
@@ -92,7 +90,6 @@
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
                     android:maxLines="1"
-                    android:text="iliass"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
 
@@ -118,7 +115,6 @@
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
                     android:maxLines="1"
-                    android:text="iliassdahman@gmail.com"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
 
@@ -144,7 +140,6 @@
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
                     android:maxLines="1"
-                    android:text="doar ayla beni ouanjel tafraoute"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
 
@@ -170,7 +165,6 @@
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
                     android:maxLines="1"
-                    android:text="taounate"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
 
@@ -196,7 +190,6 @@
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
                     android:maxLines="1"
-                    android:text="0658648723"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
 
@@ -222,7 +215,6 @@
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
                     android:maxLines="1"
-                    android:text="21"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
 
@@ -277,8 +269,7 @@
                             android:id="@+id/male"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="13dp"
-                            android:checked="true"/>
+                            android:layout_marginRight="13dp" />
 
                         <RadioButton
                             android:id="@+id/female"
@@ -363,7 +354,6 @@
                 android:padding="15dp"
                 android:textSize="@dimen/reg_edit_text"
                 android:maxLines="1"
-                android:text="11111111"
                 android:inputType="textPassword" />
             </RelativeLayout>
             <RelativeLayout
@@ -403,7 +393,6 @@
                 android:padding="15dp"
                 android:textSize="@dimen/reg_edit_text"
                 android:maxLines="1"
-                android:text="11111111"
                 android:inputType="textPassword" />
             </RelativeLayout>
             <android.widget.Button
