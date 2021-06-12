@@ -30,6 +30,7 @@ import com.example.mmr.Config;
 import com.example.mmr.R;
 import com.example.mmr.VolleySingleton;
 import com.example.mmr.shared.LoadImage;
+import com.example.mmr.shared.LoadingDialogBuilder;
 import com.example.mmr.shared.SharedModel;
 import com.yalantis.ucrop.UCrop;
 
@@ -342,14 +343,17 @@ public class ProfileFragment extends Fragment {
         Map<String,String> infos=new HashMap<>();
         infos.put("cin",cin);
         infos.put("image",image);
+        LoadingDialogBuilder.startDialog(getActivity());
         new SharedModel(getContext(),queue).UploadProfileImg(infos,new SharedModel.SignUpCallBack() {
             @Override
             public void onSuccess(String message) {
+                LoadingDialogBuilder.closeDialog();
                 Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onErr(String message) {
+                LoadingDialogBuilder.closeDialog();
                 Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
             }
         });
