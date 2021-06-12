@@ -11,13 +11,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.RequestQueue;
 import com.example.mmr.R;
+import com.example.mmr.VolleySingleton;
+import com.example.mmr.shared.LoadingDialogBuilder;
+import com.example.mmr.shared.SharedModel;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -25,10 +32,18 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.ViewHolder>{
     // Store a member variable for the meetings
     private Vector<Meetings.Meeting> mList;
+    RequestQueue queue;
+    Context context;
+    Boolean isMed;
+    String cin;
 
     // Pass in the meeting array into the constructor
-    public MeetingListAdapter(Vector<Meetings.Meeting> mList) {
+    public MeetingListAdapter(Vector<Meetings.Meeting> mList,Context context,String cin,Boolean isMed) {
         this.mList = mList;
+        this.context=context;
+        this.isMed=isMed;
+        this.cin=cin;
+        queue= VolleySingleton.getInstance(context).getRequestQueue();
     }
 
     @NonNull
@@ -73,7 +88,50 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
                 intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,cal.getTimeInMillis());
                 intent.putExtra(CalendarContract.Events.ALL_DAY, false);// periodicity
                 intent.putExtra(CalendarContract.Events.DESCRIPTION,"Visite avec Dr."+med.getDocName());
-                v.getContext().startActivity(intent);
+
+                LoadingDialogBuilder.startDialog(context);
+                Map<String,String> infos=new HashMap<>();
+                if (isMed){
+
+                    infos.put("cinMed",cin);
+                    infos.put("rend",med.getCinWith());
+                    new SharedModel(context,queue).saveMeetingMed(infos, new SharedModel.SignUpCallBack() {
+                        @Override
+                        public void onSuccess(String message) {
+
+                            Toast.makeText(context,message,Toast.LENGTH_LONG).show();
+                            LoadingDialogBuilder.closeDialog();
+                            v.getContext().startActivity(intent);
+                        }
+
+                        @Override
+                        public void onErr(String message) {
+
+                            Toast.makeText(context,message,Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }else {
+                    infos.put("rend",med.getCinWith());
+                    infos.put("cinPat",cin);
+                    new SharedModel(context,queue).saveMeetingPat(infos, new SharedModel.SignUpCallBack() {
+                        @Override
+                        public void onSuccess(String message) {
+
+                            Toast.makeText(context,message,Toast.LENGTH_LONG).show();
+                            LoadingDialogBuilder.closeDialog();
+                            v.getContext().startActivity(intent);
+                        }
+
+                        @Override
+                        public void onErr(String message) {
+
+                            Toast.makeText(context,message,Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+
+
+
             }
         });
     }

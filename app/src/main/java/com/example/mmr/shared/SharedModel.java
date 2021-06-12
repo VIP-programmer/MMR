@@ -208,6 +208,92 @@ public class SharedModel {
         request.setTag("TAG");
         queue.add(request);
     }
+    public void saveMeetingMed(Map<String,String> infos, SignUpCallBack callBack){
+
+        String url = Config.URL+"/Model/medcin/save_meet.php";
+
+        request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    Log.i("TAG", "onResponse: "+response);
+                    JSONObject json = new JSONObject(response);
+                    Boolean error = json.getBoolean("error");
+                    if (!error){
+                        callBack.onSuccess("Enregeistré");
+                    }else{
+                        Log.i("tagconvertstr", "["+response+"]");
+                        String messages = json.getString("messages");
+                        callBack.onErr(messages);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error instanceof NetworkError) {
+                    Log.d("TAG", "onErrorResponse: " + error.getMessage());
+                    callBack.onErr("Impoussible de se connecter");
+                }else if (error instanceof VolleyError)
+                    callBack.onErr("Une erreur s'est produite");
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                return infos;
+            }
+        };
+        request.setTag("TAG");
+        queue.add(request);
+    }
+    public void saveMeetingPat(Map<String,String> infos, SignUpCallBack callBack){
+
+        String url = Config.URL+"/Model/patient/save_meet.php";
+
+        request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    Log.i("TAG", "onResponse: "+response);
+                    JSONObject json = new JSONObject(response);
+                    Boolean error = json.getBoolean("error");
+                    if (!error){
+                        callBack.onSuccess("Enregeistré");
+                    }else{
+                        Log.i("tagconvertstr", "["+response+"]");
+                        String messages = json.getString("messages");
+                        callBack.onErr(messages);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error instanceof NetworkError) {
+                    Log.d("TAG", "onErrorResponse: " + error.getMessage());
+                    callBack.onErr("Impoussible de se connecter");
+                }else if (error instanceof VolleyError)
+                    callBack.onErr("Une erreur s'est produite");
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                return infos;
+            }
+        };
+        request.setTag("TAG");
+        queue.add(request);
+    }
     public void addMeet(Map<String,String> infos, SignUpCallBack callBack){
 
         String url = Config.URL+"/Model/medcin/add_meet.php";
@@ -981,7 +1067,8 @@ public class SharedModel {
                     for (int i = 0; i < meetArray.length(); i++) {
                         meetings.addmeeting(new Meetings.Meeting(meetArray.getJSONObject(i).getString("date_rend"),
                                 meetArray.getJSONObject(i).getString("heur"),
-                                meetArray.getJSONObject(i).getString("nom")+" "+meetArray.getJSONObject(i).getString("prenom")
+                                meetArray.getJSONObject(i).getString("nom")+" "+meetArray.getJSONObject(i).getString("prenom"),
+                                meetArray.getJSONObject(i).getString("id_rend")
                         ));
                     }
                     vector.add(meetings);
@@ -1028,7 +1115,8 @@ public class SharedModel {
                     for (int i = 0; i < meetArray.length(); i++) {
                         meetings.addmeeting(new Meetings.Meeting(meetArray.getJSONObject(i).getString("date_rend"),
                                 meetArray.getJSONObject(i).getString("heur"),
-                                meetArray.getJSONObject(i).getString("nom")+" "+meetArray.getJSONObject(i).getString("prenom")
+                                meetArray.getJSONObject(i).getString("nom")+" "+meetArray.getJSONObject(i).getString("prenom"),
+                                meetArray.getJSONObject(i).getString("id_rend")
                         ));
                     }
                     vector.add(meetings);

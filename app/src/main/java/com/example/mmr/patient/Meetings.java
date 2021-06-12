@@ -31,13 +31,23 @@ public class Meetings {
         private int month;
         private String year;
         private String docName;
+        private String cinWith;
 
-        public Meeting(String date, String hour, String docName) {
+        public Meeting(String date, String hour, String docName,String cinWith) {
             day=extractDay(date);
             month=extractMonth(date);
             year = extractYear(date);
             this.hour = hour;
             this.docName = docName;
+            this.cinWith = cinWith;
+        }
+
+        public String getCinWith() {
+            return cinWith;
+        }
+
+        public void setCinWith(String cinWith) {
+            this.cinWith = cinWith;
         }
 
         private String extractYear(String date) {
@@ -59,10 +69,12 @@ public class Meetings {
         }
 
         public int getHourOfMeeting(){
-            return Integer.parseInt(hour.substring(0,2));
+            String s=hour.substring(0,hour.indexOf(":"));
+            return Integer.parseInt(s);
         }
         public int getMinuteOfMeeting(){
-            return Integer.parseInt(hour.substring(hour.lastIndexOf(":"+1)));
+            String s=hour.substring(hour.lastIndexOf(":")+1);
+            return Integer.parseInt(s);
         }
 
         public String getMonthName() {

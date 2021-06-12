@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.CalendarContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,7 +90,7 @@ public class CalendarFragment extends Fragment {
             public void onSuccess(Vector<Object> vector) {
                 meetings=(Meetings) vector.get(0);
                 // Create adapter passing in the sample user data
-                MeetingListAdapter medListAdapter = new MeetingListAdapter(meetings.getMeeetList());
+                MeetingListAdapter medListAdapter = new MeetingListAdapter(meetings.getMeeetList(), getActivity(),cin,false);
                 // Attach the adapter to the recyclerview to populate items
                 rvMeets.setAdapter(medListAdapter);
                 // Set layout manager to position the items

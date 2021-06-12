@@ -55,7 +55,7 @@ public class MedicMeetsList extends AppCompatActivity {
             public void onSuccess(Vector<Object> vector) {
                 meetings=(Meetings) vector.get(0);
                 // Create adapter passing in the sample user data
-                MeetingListAdapter medListAdapter = new MeetingListAdapter(meetings.getMeeetList());
+                MeetingListAdapter medListAdapter = new MeetingListAdapter(meetings.getMeeetList(),MedicMeetsList.this,sessionManager.getCinMedcin(),true);
                 // Attach the adapter to the recyclerview to populate items
                 rvMeets.setAdapter(medListAdapter);
                 // Set layout manager to position the items
