@@ -340,7 +340,6 @@ public class MedicProfileFragment extends Fragment {
                 }
                 uploadImage(ImageToString(bitmap),cin);
                 profile.setImageBitmap(bitmap);
-                sessionManager.setImgMedcin(Config.URL+"/Data/images/profile/"+sessionManager.getCinMedcin()+".jpg");
             }
         }
         if (requestCode == 3) {
@@ -414,6 +413,7 @@ public class MedicProfileFragment extends Fragment {
             @Override
             public void onSuccess(String message) {
                 LoadingDialogBuilder.closeDialog();
+                sessionManager.setImgMedcin(Config.URL+"/Data/images/profile/"+sessionManager.getCinMedcin()+".jpg");
                 Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
             }
 

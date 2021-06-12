@@ -307,7 +307,7 @@ public class ProfileFragment extends Fragment {
                 uploadImage(ImageToString(bitmap),cin);
                 profile.setImageBitmap(bitmap);
 
-                sessionManager.setImgPatient(Config.URL+"/Data/images/profile/"+sessionManager.getCinPatient()+".jpg");
+
             }
         }
     }
@@ -348,6 +348,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onSuccess(String message) {
                 LoadingDialogBuilder.closeDialog();
+                sessionManager.setImgPatient(Config.URL+"/Data/images/profile/"+sessionManager.getCinPatient()+".jpg");
                 Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
             }
 
