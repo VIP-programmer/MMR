@@ -142,8 +142,9 @@ public class MedicRendezVousFragment extends Fragment {
                 NumberPicker minute = dialog.findViewById(R.id.pickerMinutes);
                 final Boolean[] isSelected = {false};
                 hour.setMaxValue(23);
-                minute.setDisplayedValues(new String[]{"00","30"});
+                minute.setMaxValue(59);
                 hour.setMinValue(0);
+                minute.setMinValue(0);
                 picker.setOnDateSelectedListener(new LazyDatePicker.OnDateSelectedListener() {
                     @Override
                     public void onDateSelected(Boolean dateSelected) {
