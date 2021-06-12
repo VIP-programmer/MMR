@@ -223,28 +223,6 @@
                                 android:layout_marginLeft="5dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Horaire de travail"
-                                android:fontFamily="@font/fredoka"
-                                android:textSize="20dp"
-                                android:textColor="@android:color/black"
-                                />
-                            <TextView
-                                android:id="@+id/doc_working_hours"
-                                android:layout_marginTop="5dp"
-                                android:layout_marginLeft="5dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Wed-Sat 08:00-16:00"
-                                android:fontFamily="@font/lusitana_regular"
-                                android:textSize="18dp"
-                                android:textColor="@android:color/black"
-                                />
-
-                            <TextView
-                                android:layout_marginTop="20dp"
-                                android:layout_marginLeft="5dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
                                 android:text="Statistiques"
                                 android:fontFamily="@font/fredoka"
                                 android:textSize="20dp"

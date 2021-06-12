@@ -33,6 +33,7 @@ import com.example.mmr.patient.PatientSessionManager;
 import com.example.mmr.patient.Positions;
 import com.example.mmr.patient.ProfileFragment;
 import com.example.mmr.shared.LoadImage;
+import com.example.mmr.shared.LoadingDialogBuilder;
 import com.example.mmr.shared.SharedModel;
 import com.google.gson.Gson;
 import com.yalantis.ucrop.UCrop;
@@ -408,14 +409,17 @@ public class MedicProfileFragment extends Fragment {
         Map<String,String> infos=new HashMap<>();
         infos.put("cin",cin);
         infos.put("image",image);
+        LoadingDialogBuilder.startDialog(getActivity());
         new SharedModel(getContext(),queue).UploadProfileImg(infos,new SharedModel.SignUpCallBack() {
             @Override
             public void onSuccess(String message) {
+                LoadingDialogBuilder.closeDialog();
                 Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onErr(String message) {
+                LoadingDialogBuilder.closeDialog();
                 Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
             }
         });

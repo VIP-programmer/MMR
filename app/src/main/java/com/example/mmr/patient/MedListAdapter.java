@@ -90,7 +90,7 @@ public class MedListAdapter extends RecyclerView.Adapter<MedListAdapter.ViewHold
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent(v.getContext(), ProfilePatient.class);
+                    Intent intent=new Intent(v.getContext(), ProfileMed.class);
                     intent.putExtra("cin",cin);
                     v.getContext().startActivity(intent);
                 }

@@ -158,7 +158,7 @@ public class ProfilePatient extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Map<String,String> infos=new HashMap<String,String>();
-                        Dialog dialog = new Dialog(getApplicationContext());
+                        Dialog dialog = new Dialog(ProfilePatient.this);
                         dialog.setContentView(R.layout.dialog_add_rendez_vous);
                         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                         Button mActionOk = dialog.findViewById(R.id.add_meet);
@@ -168,8 +168,9 @@ public class ProfilePatient extends AppCompatActivity {
                         NumberPicker minute = dialog.findViewById(R.id.pickerMinutes);
                         final Boolean[] isSelected = {false};
                         hour.setMaxValue(23);
-                        minute.setDisplayedValues(new String[]{"00","30"});
                         hour.setMinValue(0);
+                        minute.setMaxValue(23);
+                        minute.setMinValue(0);
                         picker.setOnDateSelectedListener(new LazyDatePicker.OnDateSelectedListener() {
                             @Override
                             public void onDateSelected(Boolean dateSelected) {

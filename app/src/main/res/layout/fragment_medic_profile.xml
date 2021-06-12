@@ -115,6 +115,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
+                        android:maxLines="1"
                         android:inputType="textEmailAddress"
                         />
                 </LinearLayout>
@@ -137,6 +138,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
+                        android:maxLines="1"
                         android:inputType="text"
                         />
                 </LinearLayout>
@@ -159,6 +161,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
+                        android:maxLines="1"
                         android:inputType="text"
                         />
                 </LinearLayout>
@@ -182,6 +185,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="phone"
                         android:singleLine="true"
+                        android:maxLines="1"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -203,6 +207,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
+                        android:maxLines="1"
                         android:inputType="textPostalAddress"
                         />
                 </LinearLayout>
@@ -254,6 +259,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
+                        android:maxLines="1"
                         android:inputType="textPassword"
                         />
                 </LinearLayout>
@@ -277,6 +283,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
+                        android:maxLines="1"
                         android:inputType="textPassword"
                         />
                 </LinearLayout>
