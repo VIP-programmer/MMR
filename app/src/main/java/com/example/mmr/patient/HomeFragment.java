@@ -68,6 +68,7 @@ public class HomeFragment extends Fragment {
     private TextView more;
     TextView empltyNotes;
     TextView empltyMeds;
+    private PatientSessionManager sessionManager;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -116,15 +117,16 @@ public class HomeFragment extends Fragment {
         rvNotes.setVisibility(View.GONE);
         empltyMeds.setVisibility(View.VISIBLE);
         empltyNotes.setVisibility(View.VISIBLE);
+        sessionManager=new PatientSessionManager(getContext());
 
         name=view.findViewById(R.id.name);
         more=view.findViewById(R.id.more);
         profile=view.findViewById(R.id.profile_image);
         //loading profile image
-        if (!img.equals("local"))
-            new LoadImage(profile,getContext()).execute(img);
+        if (!sessionManager.getImgPatient().equals("local"))
+            new LoadImage(profile,getContext()).execute(sessionManager.getImgPatient());
         queue = VolleySingleton.getInstance(getActivity()).getRequestQueue();
-        name.setText(nom+" "+prenom);
+        name.setText(sessionManager.getNomPatient()+" "+sessionManager.getPrenomPatient());
 
         more.setOnClickListener(new View.OnClickListener() {
             @Override

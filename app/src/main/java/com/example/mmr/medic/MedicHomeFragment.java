@@ -41,6 +41,7 @@ public class MedicHomeFragment extends Fragment {
     private LinearLayout notes;
     private TextView name;
     private CircleImageView profile;
+    private MedicSessionManager sessionManager;
 
     public MedicHomeFragment() {
         // Required empty public constructor
@@ -85,11 +86,12 @@ public class MedicHomeFragment extends Fragment {
         notes=view.findViewById(R.id.voir_notes);
         profile=view.findViewById(R.id.medic_home_profile_image);
         name=view.findViewById(R.id.medic_home_name);
+        sessionManager=new MedicSessionManager(getContext());
 
         //loading profile image
-        if (!img.equals("local"))
-            new LoadImage(profile,getContext()).execute(img);
-        name.setText(nom+" "+prenom);
+        if (!sessionManager.getImgMedcin().equals("local"))
+            new LoadImage(profile,getContext()).execute(sessionManager.getImgMedcin());
+        name.setText(sessionManager.getNomMedcin()+" "+sessionManager.getPrenomMedcin());
         patients.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

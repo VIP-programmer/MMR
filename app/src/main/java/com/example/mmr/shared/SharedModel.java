@@ -1245,6 +1245,64 @@ public class SharedModel {
         request.setTag("TAG");
         queue.add(request);
     }
+    public void getMedVisites(String cin, LoadVisitCallBack callBack){
+
+        String url = Config.URL+"/Model/medcin/my_visites.php";
+
+        request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    Log.i("TAG", "onResponse: "+response);
+                    Vector<Visite> obj = new Vector<>();
+                    //Vector<Notes.Note> notes = new Vector<>();
+                    JSONArray jsonArray = new JSONArray(response);
+                    Log.i("TAG", "onResponse tani : "+jsonArray.length());
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        Log.i("TAG", "onResponse tani tani: "+i);
+                        Visite visite= new Visite(jsonArray.getJSONObject(i).getString("nom")+" "+jsonArray.getJSONObject(i).getString("prenom"),
+                                jsonArray.getJSONObject(i).getString("date_visit")
+                        );
+                        if (jsonArray.getJSONObject(i).getBoolean("hasAnalyse"))
+                            visite.setAnalyse(jsonArray.getJSONObject(i).getString("intitule_analyse"));
+                        if (jsonArray.getJSONObject(i).getBoolean("hasAllergie"))
+                            visite.setAllergie(jsonArray.getJSONObject(i).getString("intitule_allergie"));
+                        if (jsonArray.getJSONObject(i).getBoolean("hasOrd")){
+                            JSONArray medicamentsArray = jsonArray.getJSONObject(i).getJSONArray("medicaments");
+                            for (int j = 0; j < medicamentsArray.length(); j++) {
+                                visite.addMedicament(medicamentsArray.getJSONObject(j).getString("intitule_medicament"));
+                            }
+                        }
+
+                        obj.add(visite);
+                    }
+                    callBack.onSuccess(obj);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error instanceof NetworkError) {
+                    Log.d("TAG", "onErrorResponse: " + error.getMessage());
+                    callBack.onErr("Impoussible de se connecter");
+                }else if (error instanceof VolleyError)
+                    callBack.onErr("Une erreur s'est produite");
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map= new HashMap<String, String>();
+                map.put("cin",cin);
+                return map;
+            }
+        };
+        request.setTag("TAG");
+        queue.add(request);
+    }
     public void getAllergies(String cin, LoadHomeInfoCallBack callBack){
 
         String url = Config.URL+"/Model/patient/my_allergies.php";

@@ -152,9 +152,9 @@ public class MedicProfileFragment extends Fragment {
         editCoord=view.findViewById(R.id.doc_profile_edit_pos);
         about=view.findViewById(R.id.doc_profile_about);
         queue = VolleySingleton.getInstance(getActivity()).getRequestQueue();
-        name.setText(nom+" "+prenom);
-        if (!img.equals("local"))
-            new LoadImage(profile,getContext()).execute(img);
+        name.setText(sessionManager.getNomMedcin()+" "+sessionManager.getPrenomMedcin());
+        if (!sessionManager.getImgMedcin().equals("local"))
+            new LoadImage(profile,getContext()).execute(sessionManager.getImgMedcin());
         passLayout.setVisibility(View.GONE);
         confLayout.setVisibility(View.GONE);
         setModeModify(false);
@@ -163,8 +163,8 @@ public class MedicProfileFragment extends Fragment {
             @Override
             public void onSuccess(Vector<Object> vector) {
                 Medcin medcin=(Medcin) vector.get(0);
-                inputNom.setText(nom);
-                inputPrenom.setText(prenom);
+                inputNom.setText(medcin.getNom());
+                inputPrenom.setText(medcin.getPrenom());
                 adresse.setText(medcin.getAdresse());
                 email.setText(medcin.getEmail());
                 tele.setText(medcin.getTele());
@@ -283,7 +283,7 @@ public class MedicProfileFragment extends Fragment {
                         new SharedModel(getContext(),queue).updateMedic(infos, new SharedModel.SignUpCallBack() {
                             @Override
                             public void onSuccess(String message) {
-
+                                sessionManager.setMedic(inputNom.getText().toString(),inputPrenom.getText().toString());
                                 Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                                 setModeModify(false);
                             }
@@ -413,6 +413,7 @@ public class MedicProfileFragment extends Fragment {
             @Override
             public void onSuccess(String message) {
                 LoadingDialogBuilder.closeDialog();
+                name.setText(sessionManager.getNomMedcin()+" "+sessionManager.getPrenomMedcin());
                 sessionManager.setImgMedcin(Config.URL+"/Data/images/profile/"+sessionManager.getCinMedcin()+".jpg");
                 Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
             }

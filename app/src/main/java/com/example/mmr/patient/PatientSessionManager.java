@@ -40,6 +40,13 @@ public class PatientSessionManager {
 
     }
 
+    public void setPatient(String nom,String prenom){
+        gson= new Gson();
+        editor.putString(NOM_PATIENT,nom);
+        editor.putString(PRENOM_PATIENT,prenom);
+        editor.apply();
+
+    }
     public void login(){
         editor.putBoolean(IS_LOGGED,true);
         editor.apply();

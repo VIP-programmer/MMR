@@ -43,14 +43,14 @@ public class MedicVisitList extends AppCompatActivity {
         else {
             cin=sessionManager.getCinMedcin();
         }
-        recyclerView=findViewById(R.id.visit_list);
+        recyclerView=findViewById(R.id.doc_visit_list);
 
         emplty=findViewById(R.id.empty_view_visit);
         recyclerView.setVisibility(View.GONE);
         emplty.setVisibility(View.VISIBLE);
 
         queue = VolleySingleton.getInstance(this).getRequestQueue();
-        new SharedModel(this,queue).getVisites(cin, new SharedModel.LoadVisitCallBack() {
+        new SharedModel(this,queue).getMedVisites(cin, new SharedModel.LoadVisitCallBack() {
             @Override
             public void onSuccess(Vector<Visite> vector) {
                 visites.addAll(vector);

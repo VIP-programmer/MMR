@@ -153,10 +153,10 @@ public class ProfileFragment extends Fragment {
         confLayout=view.findViewById(R.id.layout_pass_conf);
         queue = VolleySingleton.getInstance(getActivity()).getRequestQueue();
 
-        name.setText(nom+" "+prenom);
+        name.setText(sessionManager.getNomPatient()+" "+sessionManager.getPrenomPatient());
         Log.i("TAG", "this is image: "+img);
         if (!img.equals("local"))
-            new LoadImage(profile,getContext()).execute(img);
+            new LoadImage(profile,getContext()).execute(sessionManager.getImgPatient());
         passLayout.setVisibility(View.GONE);
         confLayout.setVisibility(View.GONE);
         setModeModify(false);
@@ -164,8 +164,8 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onSuccess(Vector<Object> vector) {
                 Patient patient=(Patient) vector.get(0);
-                inputNom.setText(nom);
-                inputPrenom.setText(prenom);
+                inputNom.setText(patient.getNom());
+                inputPrenom.setText(patient.getPrenom());
                 adresse.setText(patient.getAdresse());
                 email.setText(patient.getEmail());
                 ville.setText(patient.getVille());
@@ -249,6 +249,7 @@ public class ProfileFragment extends Fragment {
                             @Override
                             public void onSuccess(String message) {
 
+                                sessionManager.setPatient(inputNom.getText().toString(),inputPrenom.getText().toString());
                                 Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                                 setModeModify(false);
                             }
@@ -348,6 +349,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onSuccess(String message) {
                 LoadingDialogBuilder.closeDialog();
+                name.setText(sessionManager.getNomPatient()+" "+sessionManager.getPrenomPatient());
                 sessionManager.setImgPatient(Config.URL+"/Data/images/profile/"+sessionManager.getCinPatient()+".jpg");
                 Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
             }
