@@ -1,6 +1,7 @@
 package com.example.mmr.medic;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -52,6 +53,7 @@ public class MedicNoteList extends AppCompatActivity {
                 NoteListAdapter noteListAdapter = new NoteListAdapter(notes.getNotes());
                 // Attach the adapter to the recyclerview to populate items
                 recyclerView.setAdapter(noteListAdapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 if (notes.getNotes().isEmpty()) {
                     recyclerView.setVisibility(View.GONE);
                     emplty.setVisibility(View.VISIBLE);
