@@ -250,6 +250,7 @@ public class ProfileFragment extends Fragment {
                             public void onSuccess(String message) {
 
                                 sessionManager.setPatient(inputNom.getText().toString(),inputPrenom.getText().toString());
+                                name.setText(sessionManager.getNomPatient()+" "+sessionManager.getPrenomPatient());
                                 Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                                 setModeModify(false);
                             }
@@ -349,7 +350,6 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onSuccess(String message) {
                 LoadingDialogBuilder.closeDialog();
-                name.setText(sessionManager.getNomPatient()+" "+sessionManager.getPrenomPatient());
                 sessionManager.setImgPatient(Config.URL+"/Data/images/profile/"+sessionManager.getCinPatient()+".jpg");
                 Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
             }

@@ -284,6 +284,7 @@ public class MedicProfileFragment extends Fragment {
                             @Override
                             public void onSuccess(String message) {
                                 sessionManager.setMedic(inputNom.getText().toString(),inputPrenom.getText().toString());
+                                name.setText(sessionManager.getNomMedcin()+" "+sessionManager.getPrenomMedcin());
                                 Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                                 setModeModify(false);
                             }
@@ -413,7 +414,7 @@ public class MedicProfileFragment extends Fragment {
             @Override
             public void onSuccess(String message) {
                 LoadingDialogBuilder.closeDialog();
-                name.setText(sessionManager.getNomMedcin()+" "+sessionManager.getPrenomMedcin());
+
                 sessionManager.setImgMedcin(Config.URL+"/Data/images/profile/"+sessionManager.getCinMedcin()+".jpg");
                 Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
             }
