@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.example.mmr.R;
 
 public class Welcome extends AppCompatActivity {
-    public static int SPLASH_SCREEN =5000;
+    public static int SPLASH_SCREEN =2000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
