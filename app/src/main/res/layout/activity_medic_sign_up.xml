@@ -40,7 +40,6 @@
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
                     android:maxLines="1"
-                    android:text="ee"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
             <RelativeLayout
@@ -65,7 +64,6 @@
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
                     android:maxLines="1"
-                    android:text="ee"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
 
@@ -91,7 +89,6 @@
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
                     android:maxLines="1"
-                    android:text="ee"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
 
@@ -116,7 +113,6 @@
                     android:layout_alignParentRight="true"
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
-                    android:text="ee"
                     android:maxLines="1"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
@@ -143,7 +139,6 @@
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
                     android:maxLines="1"
-                    android:text="ee"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
 
@@ -169,7 +164,6 @@
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
                     android:maxLines="1"
-                    android:text="ee"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
 
@@ -195,7 +189,6 @@
                     android:background="@drawable/input_shape"
                     android:padding="15dp"
                     android:maxLines="1"
-                    android:text="ee"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
 
@@ -222,7 +215,6 @@
                     android:padding="15dp"
                     android:inputType="phone"
                     android:maxLines="1"
-                    android:text="22"
                     android:textSize="@dimen/reg_edit_text" />
             </RelativeLayout>
 
@@ -317,7 +309,6 @@
                     android:padding="15dp"
                     android:textSize="@dimen/reg_edit_text"
                     android:maxLines="1"
-                    android:text="eeeeeeee"
                     android:inputType="textPassword" />
             </RelativeLayout>
             <RelativeLayout
@@ -357,7 +348,6 @@
                     android:padding="10dp"
                     android:textSize="@dimen/reg_edit_text"
                     android:maxLines="1"
-                    android:text="eeeeeeee"
                     android:inputType="textPassword"
                     />
             </RelativeLayout>

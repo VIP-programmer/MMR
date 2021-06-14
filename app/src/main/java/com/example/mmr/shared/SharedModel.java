@@ -1020,8 +1020,8 @@ public class SharedModel {
                     patient.setVille(json.getString("ville"));
                     patient.setAge(json.getInt("age"));
                     patient.setEmail(json.getString("email"));
-                    patient.setEmail(json.getString("nom"));
-                    patient.setEmail(json.getString("prenom"));
+                    patient.setNom(json.getString("nom"));
+                    patient.setPrenom(json.getString("prenom"));
                     patient.setTele(json.getString("tele"));
                     patient.setSang(json.getInt("id_sang"));
                     patient.setAssurance(json.getInt("id_assur"));
